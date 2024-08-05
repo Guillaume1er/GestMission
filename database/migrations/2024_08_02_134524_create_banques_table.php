@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('banques', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
+            $table->string('sigle');
+            $table->string('nom');
+            $table->longText('agence');
             $table->timestamps();
         });
     }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('typeinterventions', function (Blueprint $table) {
             $table->id();
+            $table->string('typeIntervention');
+            $table->longText('description');
+            $table->boolean('livretBord');
             $table->timestamps();
         });
     }

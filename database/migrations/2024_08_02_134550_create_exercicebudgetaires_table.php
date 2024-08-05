@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('exercicebudgetaires', function (Blueprint $table) {
             $table->id();
+            $table->integer('exerciceBudgetaire');
+            $table->integer('nombreTotalMission');
+            $table->boolean('clotureExercice');
             $table->timestamps();
         });
     }

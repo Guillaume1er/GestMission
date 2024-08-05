@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
+            $table->string('referenceIntervention');
+            $table->integer('numeroIntervention');
+            $table->date('datePrevue');
+            $table->date('dateIntervention');
+            $table->longText('objetIntervention');
+            $table->integer('kilometrageIntervention');
+            $table->longText('pannesSurvenues');
+            $table->decimal('coutGlobal');
+            $table->boolean('validationIntervention');
+            $table->foreignId('vehicule_id');
+            $table->foreignId('typeIntervention_id');
+            $table->foreignId('typeIntervention_id');
+            $table->foreignId('responsableIntervention_id');
             $table->timestamps();
         });
     }

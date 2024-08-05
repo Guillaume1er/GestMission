@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('responsableinterventions', function (Blueprint $table) {
             $table->id();
+            $table->string('nomResponsable');
             $table->timestamps();
         });
     }
