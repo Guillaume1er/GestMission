@@ -233,72 +233,24 @@
                                     <span class="item-name">Responsables intervention</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="{{ route('responsables-intervention') }}">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor">
+                                                </circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> B </i>
+                                    <span class="item-name">Lieux missions</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button"
-                            aria-expanded="false" aria-controls="horizontal-menu">
-                            <i class="icon">
-
-                                <svg width="20" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="icon-20">
-                                    <path opacity="0.4"
-                                        d="M10.0833 15.958H3.50777C2.67555 15.958 2 16.6217 2 17.4393C2 18.2559 2.67555 18.9207 3.50777 18.9207H10.0833C10.9155 18.9207 11.5911 18.2559 11.5911 17.4393C11.5911 16.6217 10.9155 15.958 10.0833 15.958Z"
-                                        fill="currentColor"></path>
-                                    <path opacity="0.4"
-                                        d="M22.0001 6.37867C22.0001 5.56214 21.3246 4.89844 20.4934 4.89844H13.9179C13.0857 4.89844 12.4102 5.56214 12.4102 6.37867C12.4102 7.1963 13.0857 7.86 13.9179 7.86H20.4934C21.3246 7.86 22.0001 7.1963 22.0001 6.37867Z"
-                                        fill="currentColor"></path>
-                                    <path
-                                        d="M8.87774 6.37856C8.87774 8.24523 7.33886 9.75821 5.43887 9.75821C3.53999 9.75821 2 8.24523 2 6.37856C2 4.51298 3.53999 3 5.43887 3C7.33886 3 8.87774 4.51298 8.87774 6.37856Z"
-                                        fill="currentColor"></path>
-                                    <path
-                                        d="M21.9998 17.3992C21.9998 19.2648 20.4609 20.7777 18.5609 20.7777C16.6621 20.7777 15.1221 19.2648 15.1221 17.3992C15.1221 15.5325 16.6621 14.0195 18.5609 14.0195C20.4609 14.0195 21.9998 15.5325 21.9998 17.3992Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                            </i>
-                            <span class="item-name">Gestion des missions</span>
-                            <i class="right-icon">
-                                <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </i>
-                        </a>
-                        <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar-menu">
-
-                            <li class="nav-item">
-                                <a class="nav-link " href="{{ route('vehicules') }}">
-                                    <i class="icon">
-                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
-                                            viewBox="0 0 24 24" fill="currentColor">
-                                            <g>
-                                                <circle cx="12" cy="12" r="8" fill="currentColor">
-                                                </circle>
-                                            </g>
-                                        </svg>
-                                    </i>
-                                    <i class="sidenav-mini-icon"> B </i>
-                                    <span class="item-name">Véhicules</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="{{ route('interventions') }}">
-                                    <i class="icon">
-                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
-                                            viewBox="0 0 24 24" fill="currentColor">
-                                            <g>
-                                                <circle cx="12" cy="12" r="8" fill="currentColor">
-                                                </circle>
-                                            </g>
-                                        </svg>
-                                    </i>
-                                    <i class="sidenav-mini-icon"> B </i>
-                                    <span class="item-name">Interventions</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> --}}
+                   
                     <li>
                         <hr class="hr-horizontal">
                     </li>
@@ -788,20 +740,7 @@
                                     <p>Cette application gère tout ce qui est mission au sein de l'ABSSA avec
                                         l'implication des véhicules.</p>
                                 </div>
-                                <div>
-                                    <a href="" class="btn btn-link btn-soft-light">
-                                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M11.8251 15.2171H12.1748C14.0987 15.2171 15.731 13.985 16.3054 12.2764C16.3887 12.0276 16.1979 11.7713 15.9334 11.7713H14.8562C14.5133 11.7713 14.2362 11.4977 14.2362 11.16C14.2362 10.8213 14.5133 10.5467 14.8562 10.5467H15.9005C16.2463 10.5467 16.5263 10.2703 16.5263 9.92875C16.5263 9.58722 16.2463 9.31075 15.9005 9.31075H14.8562C14.5133 9.31075 14.2362 9.03619 14.2362 8.69849C14.2362 8.35984 14.5133 8.08528 14.8562 8.08528H15.9005C16.2463 8.08528 16.5263 7.8088 16.5263 7.46728C16.5263 7.12575 16.2463 6.84928 15.9005 6.84928H14.8562C14.5133 6.84928 14.2362 6.57472 14.2362 6.23606C14.2362 5.89837 14.5133 5.62381 14.8562 5.62381H15.9886C16.2483 5.62381 16.4343 5.3789 16.3645 5.13113C15.8501 3.32401 14.1694 2 12.1748 2H11.8251C9.42172 2 7.47363 3.92287 7.47363 6.29729V10.9198C7.47363 13.2933 9.42172 15.2171 11.8251 15.2171Z"
-                                                fill="currentColor"></path>
-                                            <path opacity="0.4"
-                                                d="M19.5313 9.82568C18.9966 9.82568 18.5626 10.2533 18.5626 10.7823C18.5626 14.3554 15.6186 17.2627 12.0005 17.2627C8.38136 17.2627 5.43743 14.3554 5.43743 10.7823C5.43743 10.2533 5.00345 9.82568 4.46872 9.82568C3.93398 9.82568 3.5 10.2533 3.5 10.7823C3.5 15.0873 6.79945 18.6413 11.0318 19.1186V21.0434C11.0318 21.5715 11.4648 22.0001 12.0005 22.0001C12.5352 22.0001 12.9692 21.5715 12.9692 21.0434V19.1186C17.2006 18.6413 20.5 15.0873 20.5 10.7823C20.5 10.2533 20.066 9.82568 19.5313 9.82568Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                        Announcements
-                                    </a>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -834,7 +773,7 @@
                                         <div class="progress-widget">
                                             <div id="circle-progress-01"
                                                 class="text-center circle-progress-01 circle-progress circle-progress-primary"
-                                                data-min-value="0" data-max-value="100" data-value="90"
+                                                data-min-value="0" data-max-value="100" data-value="0"
                                                 data-type="percent">
                                                 <svg class="card-slie-arrow icon-24" width="24"
                                                     viewBox="0 0 24 24">
@@ -843,8 +782,8 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <p class="mb-2">Total Sales</p>
-                                                <h4 class="counter">$560K</h4>
+                                                <p class="mb-2">Banques</p>
+                                                <h4 class="counter">0</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -863,8 +802,8 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <p class="mb-2">Total Profit</p>
-                                                <h4 class="counter">$185K</h4>
+                                                <p class="mb-2">Marques</p>
+                                                <h4 class="counter">0</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -883,8 +822,8 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <p class="mb-2">Total Cost</p>
-                                                <h4 class="counter">$375K</h4>
+                                                <p class="mb-2">Types véhicule</p>
+                                                <h4 class="counter">0</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -903,8 +842,8 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <p class="mb-2">Revenue</p>
-                                                <h4 class="counter">$742K</h4>
+                                                <p class="mb-2">Types intervention</p>
+                                                <h4 class="counter">0</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -923,8 +862,8 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <p class="mb-2">Net Income</p>
-                                                <h4 class="counter">$150K</h4>
+                                                <p class="mb-2">Exercices budgetaire</p>
+                                                <h4 class="counter">0</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -943,8 +882,8 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <p class="mb-2">Today</p>
-                                                <h4 class="counter">$4600</h4>
+                                                <p class="mb-2">Responsable intervention</p>
+                                                <h4 class="counter">0</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -963,8 +902,8 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <p class="mb-2">Members</p>
-                                                <h4 class="counter">11.2M</h4>
+                                                <p class="mb-2">Lieux mission</p>
+                                                <h4 class="counter">0</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -982,7 +921,7 @@
                             <div class="card" data-aos="fade-up" data-aos-delay="800">
                                 <div class="flex-wrap card-header d-flex justify-content-between align-items-center">
                                     <div class="header-title">
-                                        <h4 class="card-title">$855.8K</h4>
+                                        <h4 class="card-title">0</h4>
                                         <p class="mb-0">Gross Sales</p>
                                     </div>
                                     <div class="d-flex align-items-center align-self-center">
@@ -1109,7 +1048,7 @@
                         </div>
                         <div class="col-md-12 col-lg-12">
                             <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="300">
-                                <div class="flex-wrap ">
+                                <div class="flex-wrap mr-2 ml-2">
                                     @yield('content')
                                     {{-- <div class="">
                   </div> --}}
@@ -1427,21 +1366,7 @@
    </div> --}}
             </div>
         </div>
-        <div class="btn-download">
-            <a class="btn btn-success px-3 py-2"
-                href="https://iqonic.design/product/admin-templates/hope-ui-admin-free-open-source-bootstrap-admin-template/"
-                target="_blank">
-                <svg class="icon-24" width="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path opacity="0.4"
-                        d="M17.554 7.29614C20.005 7.29614 22 9.35594 22 11.8876V16.9199C22 19.4453 20.01 21.5 17.564 21.5L6.448 21.5C3.996 21.5 2 19.4412 2 16.9096V11.8773C2 9.35181 3.991 7.29614 6.438 7.29614H7.378L17.554 7.29614Z"
-                        fill="currentColor"></path>
-                    <path
-                        d="M12.5464 16.0374L15.4554 13.0695C15.7554 12.7627 15.7554 12.2691 15.4534 11.9634C15.1514 11.6587 14.6644 11.6597 14.3644 11.9654L12.7714 13.5905L12.7714 3.2821C12.7714 2.85042 12.4264 2.5 12.0004 2.5C11.5754 2.5 11.2314 2.85042 11.2314 3.2821L11.2314 13.5905L9.63742 11.9654C9.33742 11.6597 8.85043 11.6587 8.54843 11.9634C8.39743 12.1168 8.32142 12.3168 8.32142 12.518C8.32142 12.717 8.39743 12.9171 8.54643 13.0695L11.4554 16.0374C11.6004 16.1847 11.7964 16.268 12.0004 16.268C12.2054 16.268 12.4014 16.1847 12.5464 16.0374Z"
-                        fill="currentColor"></path>
-                </svg>
-            </a>
-        </div>
+        
         <!-- Footer Section Start -->
         <footer class="footer">
             <div class="footer-body">

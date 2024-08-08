@@ -29,11 +29,17 @@ return new class extends Migration
             $table->string('etatMission');
             $table->integer('nbrVehicule');
             $table->string('typeVehicule');
-            $table->interger('nbrTotalNuite');
-            $table->interger('nbrTotalRepas');
+            $table->integer('nbrTotalNuite');
+            $table->integer('nbrTotalRepas');
             $table->decimal('montantTotalNuite');
             $table->decimal('montantTotalRepas');
             $table->decimal('montantTotalMission');
+
+            $table->foreignId('organisateur_id')
+                ->references('id')
+                ->on('organisations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

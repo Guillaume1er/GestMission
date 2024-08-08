@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->decimal('montantNuite');
-            $table->decimal('montantNuite');
+            $table->decimal('montantRepas');
             $table->timestamps();
         });
     }

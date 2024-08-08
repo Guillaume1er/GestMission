@@ -13,19 +13,35 @@ return new class extends Migration
     {
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
-            $table->string('referenceIntervention');
-            $table->integer('numeroIntervention');
-            $table->date('datePrevue');
+            $table->string('referenceIntervention')->unique();
+            $table->integer('numeroIntervention')->unique();
+            $table->date('datePrevue')->nullable();
             $table->date('dateIntervention');
             $table->longText('objetIntervention');
             $table->integer('kilometrageIntervention');
-            $table->longText('pannesSurvenues');
-            $table->decimal('coutGlobal');
+            $table->longText('pannesSurvenues')->nullable();
+            $table->longText('reparationEffectue')->nullable();
+            $table->decimal('coutGlobal')->nullable();
             $table->boolean('validationIntervention');
-            $table->foreignId('vehicule_id');
-            $table->foreignId('typeIntervention_id');
-            $table->foreignId('typeIntervention_id');
-            $table->foreignId('responsableIntervention_id');
+
+            $table->foreignId('vehicule_id')
+                ->references('id')
+                ->on('vehicules')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            
+            $table->foreignId('typeIntervention_id')
+                ->references('id')
+                ->on('typeinterventions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            
+            $table->foreignId('responsableIntervention_id')
+                ->references('id')
+                ->on('responsableinterventions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+                
             $table->timestamps();
         });
     }

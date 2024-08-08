@@ -1,4 +1,4 @@
-@extends('layouts/dashboard')
+@extends('layouts/dashboard_sans_sta')
 
 @section('content')
 
@@ -8,43 +8,17 @@
             <h4 class="card-title">Liste des utilisateurs</h4>
         </div>
         <div class="">
-
-            {{-- <button type="button" class="btn btn-primary">
+            <a type="button" class="btn btn-primary" href="{{ route('show-user') }}">
                 <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M7.33 2H16.66C20.06 2 22 3.92 22 7.33V16.67C22 20.06 20.07 22 16.67 22H7.33C3.92 22 2 20.06 2 16.67V7.33C2 3.92 3.92 2 7.33 2ZM12.82 12.83H15.66C16.12 12.82 16.49 12.45 16.49 11.99C16.49 11.53 16.12 11.16 15.66 11.16H12.82V8.34C12.82 7.88 12.45 7.51 11.99 7.51C11.53 7.51 11.16 7.88 11.16 8.34V11.16H8.33C8.11 11.16 7.9 11.25 7.74 11.4C7.59 11.56 7.5 11.769 7.5 11.99C7.5 12.45 7.87 12.82 8.33 12.83H11.16V15.66C11.16 16.12 11.53 16.49 11.99 16.49C12.45 16.49 12.82 16.12 12.82 15.66V12.83Z"
                         fill="currentColor"></path>
                 </svg>
                 Ajouter
-            </button> --}}
+            </a>
         </div>
     </div>
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+    
 
     <div class="card-body px-0">
 
@@ -61,13 +35,13 @@
             </div>
         @endif
 
-        @if (session('status'))
+        @if (session('success'))
             <div class="alert alert-success d-flex align-items-center" role="alert">
                 <svg class="flex-shrink-0 bi me-2 icon-24" width="24" height="24">
                     <use xlink:href="#check-circle-fill"></use>
                 </svg>
                 <div>
-                    {{ session('status') }}
+                    {{ session('success') }}
                 </div>
             </div>
         @endif
@@ -94,7 +68,7 @@
                             <td>
                                 <div class="flex align-items-center list-user-action">
                                     <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" data-original-title="Modifier" href="#"
+                                        data-bs-placement="top" data-original-title="Modifier" href="{{ route('consulter-user', $user->id) }}"
                                         aria-label="Modifier" data-bs-original-title="Modifier">
                                         <span class="btn-inner">
                                             <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
@@ -114,8 +88,8 @@
                                         </span>
                                     </a>
                                     <a class="btn btn-sm btn-icon btn-danger" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" href="#" aria-label="Supprimer"
-                                        data-bs-original-title="Supprimer">
+                                        data-bs-placement="top" aria-label="Supprimer"
+                                        data-bs-original-title="Supprimer" onclick="return confirm ('Voulez-vous vraiment supprimer ?')" href="{{ route('delete-user', $user->id) }}">
                                         <span class="btn-inner">
                                             <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg" stroke="currentColor">

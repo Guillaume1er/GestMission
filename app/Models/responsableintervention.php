@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class responsableintervention extends Model
+class Responsableintervention extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nom',
+        'nomResponsable',
     ];
+
+    public function intervention() {
+        return $this->belongsTo(Intervention::class);
+    }
 }

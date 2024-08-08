@@ -16,6 +16,24 @@ return new class extends Migration
             $table->integer('qteCarburantAffecte');
             $table->integer('kilometrageDepart');
             $table->integer('kilometrageFinMission');
+
+            $table->foreignId('mission_id')
+                ->references('id')
+                ->on('missions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+                
+            $table->foreignId('lieuMission_id')
+                ->references('id')
+                ->on('lieumissions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+                
+            $table->foreignId('vehicule_id')
+                ->references('id')
+                ->on('vehicules')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

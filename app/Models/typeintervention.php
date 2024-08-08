@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class typeintervention extends Model
+class Typeintervention extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'typeIntervention',
         'description',
-        'livretBord',
+        'livretBord', 
     ];
 
-    public function intervention() {
-        return $this->belongsTo(Intervention::class);
-    }
+    
+
 }

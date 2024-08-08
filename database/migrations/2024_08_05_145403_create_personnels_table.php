@@ -17,9 +17,22 @@ return new class extends Migration
             $table->string('numeroMatricule');
             $table->string('civilite');
             $table->integer('contact');
-            $table->email('email');
-            $table->adresse('adresse');
+            $table->string('email');
+            $table->string('adresse');
             $table->integer('numIfu')->nullable();
+
+            $table->foreignId('rang_id')
+                ->references('id')
+                ->on('rangs')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('indice_id')
+                ->references('id')
+                ->on('indices')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

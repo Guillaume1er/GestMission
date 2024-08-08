@@ -9,13 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up(): void 
     {
         Schema::create('typeinterventions', function (Blueprint $table) {
             $table->id();
             $table->string('typeIntervention');
-            $table->longText('description');
-            $table->boolean('livretBord');
+            $table->longText('description')->nullable();
+            $table->boolean('livretBord')->default('0');
             $table->timestamps();
         });
     }

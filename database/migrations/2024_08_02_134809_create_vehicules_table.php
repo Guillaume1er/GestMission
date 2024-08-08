@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends Migration 
 {
     /**
      * Run the migrations.
@@ -14,21 +14,35 @@ return new class extends Migration
         Schema::create('vehicules', function (Blueprint $table) {
             $table->id();
             $table->string('plaqueVehicule');
-            $table->integer('kilometrageDepart');
+            $table->integer('kilometrageDepart')->nullable();
             $table->string('responsableVehicule');
             $table->integer('contactResponsable');
             $table->string('etatVehicule');
-            $table->boolean('autorisationSortie');
-            $table->date('dateAutorisation');
-            $table->date('dateEnregistrementVehicule');
-            $table->string('immatriculation');
-            $table->boolean('vehiculePool');
-            $table->longText('motifDesautorisation');
-            $table->date('dateDesautorisation');
-            $table->integer('kilometrageActuel');
-            $table->integer('kilometrageAlerte');
+            $table->boolean('autorisationSortie')->default(false);
+            $table->date('dateAutorisation')->nullable('');
+            $table->timestamp('dateEnregistrementVehicule')->nullable();
+            $table->string('immatriculation'); 
+            $table->boolean('vehiculePool') ->default(false);
+            $table->longText('motifDesautorisation')->nullable('');
+            $table->date('dateDesautorisation')->nullable('');
+            $table->integer('kilometrageActuel')->nullable('');
+            $table->integer('kilometrageAlerte')->nullable('');
             $table->date('dateDerniereMission');
             $table->date('dateAcquisition');
+            $table->string('statut')->default('Bon');
+            
+            $table->foreignId('typeVehicule_id')
+                ->references('id')
+                ->on('typevehicules')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('marque_id')
+                ->references('id')
+                ->on('marques')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
