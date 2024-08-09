@@ -14,6 +14,6 @@ class Marque extends Model
     ];
 
     public function vehicule() {
-        return $this->belongsTo(Vehicule::class);
+        return $this->hasMany(Vehicule::class, 'marque_id');
     }
 }

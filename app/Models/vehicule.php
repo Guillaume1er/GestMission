@@ -33,16 +33,17 @@ class Vehicule extends Model
 
 
 
-    public function intervention() {
-        return $this->belongsTo(Intervention::class);
+    public function interventions()
+    {
+        return $this->hasMany(Intervention::class, 'vehicule_id'); 
     }
 
     public function typeVehicule() {
-        return $this->hasMany(TypeVehicule::class);
+        return $this->belongsTo(TypeVehicule::class,'typeVehicule_id');
     }
     
     public function marque() {
-        return $this->hasMany(Marque::class);
+        return $this->belongsTo(Marque::class, 'marque_id');
     }
 
     

@@ -13,7 +13,8 @@ class Responsableintervention extends Model
         'nomResponsable',
     ];
 
-    public function intervention() {
-        return $this->belongsTo(Intervention::class);
+    public function interventions()
+    {
+        return $this->hasMany(Intervention::class, 'responsableIntervention_id'); // Spécifiez la clé étrangère
     }
 }

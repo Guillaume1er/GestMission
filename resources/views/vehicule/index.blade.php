@@ -137,8 +137,8 @@
                             {{-- <td>{{ $vehicule->kilometrageActuel }}</td>
                             <td>{{ $vehicule->kilometrageAlerte }}</td> --}}
                             {{-- <td>{{ $vehicule->dateDerniereMission }}</td> --}}
-                            <td>{{ $vehicule->typeVehicule_id }}</td>
-                            <td>{{ $vehicule->marque_id }}</td>
+                            <td>{{ $vehicule->typeVehicule->typeVehicule ?? '-' }}</td>
+                            <td>{{ $vehicule->marque->marque ?? '-' }}</td>
                             <td>
                                 <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip"
                                     data-bs-placement="top" data-original-title="Modifier" aria-label="Modifier"

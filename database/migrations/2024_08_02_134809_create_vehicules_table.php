@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('contactResponsable');
             $table->string('etatVehicule');
             $table->boolean('autorisationSortie')->default(false);
-            $table->date('dateAutorisation')->nullable('');
+            $table->date('dateAutorisation')->nullable()->change();
             $table->timestamp('dateEnregistrementVehicule')->nullable();
             $table->string('immatriculation'); 
             $table->boolean('vehiculePool') ->default(false);

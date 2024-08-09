@@ -11,19 +11,21 @@ use Illuminate\Http\Request;
 class VehiculeController extends Controller
 {
     public function index() {
-        $vehicules = Vehicule::orderBy('created_at', 'desc')->get();
+        $vehicules = Vehicule::with(['typeVehicule', 'marque'])
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view('vehicule.index', compact('vehicules'));
     }
 
     public function show() {
         $marques = Marque::all();
         $vehicules = Typevehicule::all();
+        
         return view('vehicule.add', compact('marques', 'vehicules'));
     }
 
     public function consulter(Request $request, $id) {
-        $marques = Marque::all();
-        $vehicules = Typevehicule::all();
+       
         $vehicule = Vehicule::find($id);
 
         if (!$vehicule) {
@@ -44,18 +46,18 @@ class VehiculeController extends Controller
             'contactResponsable' =>  ['required', 'string'],
             'etatVehicule' =>  ['required', 'string'],
             // 'autorisationSortie' => ['nullable', 'boolean'],
-             'dateAutorisation' => ['nullable','date'],
+             'dateAutorisation' => ['nullable'],
             // 'dateEnregistrementVehicule' => ['date'],                
             'immatriculation' =>  ['required', 'string'],
             'vehiculePool' => ['nullable' , 'boolean'],
              'motifDesautorisation' => ['nullable' , 'string'],
-             'dateDesautorisation' =>  ['nullable', 'date'],
+             'dateDesautorisation' =>  ['nullable'],
             // 'kilometrageActuel' =>  ['required', 'integer'],
             // 'kilometrageAlerte' =>  ['required', 'integer'],
             // 'dateDerniereMission' =>  ['required', 'date'],
             'dateAcquisition' =>  ['required', 'date'],
-            'typeVehicule_id' =>  ['required', 'integer'],
-            'marque_id' =>  ['required', 'integer'],
+            'typeVehicule_id' =>  ['required', 'exists:typevehicules,id'],
+            'marque_id' =>  ['required', 'exists:marques,id'],
         ]);
 
         // if ($request->validate->fails()) {

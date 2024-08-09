@@ -27,18 +27,17 @@ class Intervention extends Model
 
     public function typeIntervention()
     {
-        return $this->hasMany(Typeintervention::class);
+        return $this->belongsTo(Typeintervention::class, 'typeIntervention_id');
     }
 
     public function responsableIntervention()
     {
-        return $this->hasMany(Responsableintervention::class);
+        return $this->belongsTo(Responsableintervention::class, 'responsableIntervention_id'); 
     }
     public function vehicule()
     {
-        return $this->hasMany(Vehicule::class);
+        return $this->belongsTo(Vehicule::class, 'vehicule_id'); // Spécifiez la clé étrangère
     }
-
 
     // Génération du champ numeroIntervention et de referenceIntervention
     protected static function booted()
@@ -60,4 +59,6 @@ class Intervention extends Model
             $intervention->referenceIntervention = 'IT ' . $intervention->numeroIntervention . '-' . $currentYear;
         });
     }
+
+ 
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
-            $table->string('referenceIntervention')->unique();
             $table->integer('numeroIntervention')->unique();
+            $table->string('referenceIntervention')->unique();
             $table->date('datePrevue')->nullable();
             $table->date('dateIntervention');
             $table->longText('objetIntervention');

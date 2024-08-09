@@ -3,7 +3,7 @@
 @section('content')
     <div class="card-body">
         <div class="header-title">
-            <h4 class="card-title">Modifier le type d'intervention</h4>
+            <h4 class="card-title">Modifier une intervention</h4>
         </div> <br>
 
         @if ($errors->any())
@@ -30,38 +30,72 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('update-type-intervention', $typeintervention->id) }}">
+        <form method="POST" action="{{ route('update-intervention', $intervention->id) }}">
             @csrf
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="typeIntervention" class="form-label">Type d'intervention</label>
-                        <input type="text" required class="form-control" name="typeIntervention" value="{{$typeintervention->typeIntervention}}">
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" rows="4" name="description" value="description" >{{$typeintervention->description}}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <input class="form-check-input" type="checkbox" id="livretBord" value="1" name="livretBord" {{ $typeintervention->livretBord ? 'checked' : ''}}>
-                        <label class="form-check-label" for="livretBord">
-                            Livret de bord
-                        </label>
+                        <label for="datePrevue" class="form-label">Date prévue</label>
+                        <input class="form-control" type="date" name="datePrevue"
+                            value="{{ $intervention->datePrevue }}" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="dateIntervention" class="form-label">Date intervention</label>
+                        <input class="form-control" required type="date" name="dateIntervention"
+                            value="{{ $intervention->dateIntervention }}" />
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="objetIntervention" class="form-label">L'objet de l'intervention</label>
+                        <textarea class="form-control" required rows="4" name="objetIntervention">{{ $intervention->objetIntervention }}</textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="kilometrageIntervention" class="form-label">Kilométrage de l'intervention</label>
+                        <input class="form-control" required type="number" name="kilometrageIntervention"
+                            value="{{ $intervention->kilometrageIntervention }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="pannesSurvenues" class="form-label">Pannes survenues</label>
+                        <textarea class="form-control" required rows="4" name="pannesSurvenues">{{ $intervention->pannesSurvenues }}</textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="reparationsEffectuees" class="form-label">Reparations effectuées</label>
+                        <textarea class="form-control" required rows="4" name="reparationsEffectuees">{{ $intervention->reparationEffectue }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
 
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="coutGlobal" class="form-label">Coût global</label>
+                        <input class="form-control" type="number" name="coutGlobal"
+                            value="{{ $intervention->coutGlobal }}" />
+                    </div>
+                </div>
+
+            </div>
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
-        </form>
+
+    </div>
+
+    </form>
 
     </div>
 

@@ -71,12 +71,12 @@
             </div>
 
             <div class="row">
-                 {{-- <div class="col-lg-6">
+                  {{-- <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="dateAutorisation" class="form-label">Date d'autorisation du véhicule</label>
-                        <input type="date" class="form-control" id="dateAutorisation" name="dateAutorisation">
-                    </div>
-                </div>  --}}
+                        <input type="text" class="form-control" id="dateAutorisation" name="dateAutorisation">
+                    </div> --}}
+                </div>  
                 <div class="col-lg-6" >
                     <div class="mb-3">
                         <input type="hidden" class="form-control"  value="{{ now() }}"
