@@ -59,7 +59,7 @@ class TypeinterventionController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        //dd($request->all());
 
         $validated = $request->validate([
             'typeIntervention' => ['required', 'max:255'],

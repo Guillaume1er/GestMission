@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('lieumissions', function (Blueprint $table) {
             $table->id();
-            $table->string('departement');
             $table->string('commune');
             $table->string('distance');
             $table->boolean('nuite');
-            $table->timestamps();
+
+            $table->foreignId('departement_id')
+            ->references('id')
+            ->on('lieumission')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->timestamps(); 
         });
     }
 

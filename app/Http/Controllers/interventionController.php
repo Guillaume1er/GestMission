@@ -12,8 +12,7 @@ class interventionController extends Controller
 {
     public function index()
     {
-        $interventions = Intervention::with(['vehicule', 'responsableIntervention', 'typeIntervention'])
-        ->orderBy('created_at', 'desc')
+        $interventions = Intervention::orderBy('created_at', 'desc')
         ->get();
         return view('intervention.index', compact('interventions'));
     }

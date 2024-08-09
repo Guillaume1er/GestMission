@@ -34,6 +34,7 @@ class Intervention extends Model
     {
         return $this->belongsTo(Responsableintervention::class, 'responsableIntervention_id'); 
     }
+    
     public function vehicule()
     {
         return $this->belongsTo(Vehicule::class, 'vehicule_id'); // Spécifiez la clé étrangère

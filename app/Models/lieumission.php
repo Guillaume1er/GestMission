@@ -10,10 +10,9 @@ class Lieumission extends Model
     use HasFactory;
 
     protected $fillable =[
-        'departement',
-        'commune',
         'distance',
         'nuite',
+        'departement_id'
     ];
 
     public function detailMission() {
@@ -23,5 +22,9 @@ class Lieumission extends Model
     
     public function vehiculeMission() {
         return $this->belongsTo(Vehiculemission::class);
+    }
+
+    public function departement() {
+        return $this->belongsTo(Departement::class);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BanqueController;
+use App\Http\Controllers\ExercicebudgetaireController;
 use App\Http\Controllers\IndiceController;
 use App\Http\Controllers\interventionController;
 use App\Http\Controllers\LieuMissionController;
@@ -48,12 +49,15 @@ Route::middleware('auth')->prefix('marque')->group(function () {
     Route::get('/delete/{id}', [marqueController::class, 'delete'])->name('delete-marque');
 });
 
+
+// CREUD Type Banque
 Route::middleware('auth')->prefix('banque')->group(function () {
     Route::get('/liste', [BanqueController::class, 'index'])->name('banques');
     Route::post('/create', [BanqueController::class, 'store'])->name('create-banque');
-    Route::get('/show/{id}', [BanqueController::class, 'show'])->name('show-banque');
+    Route::get('/show', [BanqueController::class, 'show'])->name('show-banque');
+    Route::get('/consulter/{id}', [BanqueController::class, 'consulter'])->name('consulter-banque');
     Route::post('/update/{id}', [BanqueController::class, 'update'])->name('update-banque');
-    Route::post('/delete/{id}', [BanqueController::class, 'delete'])->name('delete-banque');
+    Route::get('/delete/{id}', [BanqueController::class, 'delete'])->name('delete-banque');
 });
    // CREUD Type Véhicule
 Route::middleware('auth')->prefix('type-vehicule')->group(function () {
@@ -105,12 +109,14 @@ Route::middleware('auth')->prefix('intervention')->group(function () {
     Route::get('/delete/{id}', [interventionController::class, 'delete'])->name('delete-intervention');
 });
 
+// CREUD  Budgetaire
 Route::middleware('auth')->prefix('exercice-budgetaire')->group(function () {
-    Route::get('/liste', [interventionController::class, 'index'])->name('exercices-budgetaire');
-    Route::post('/create', [interventionController::class, 'store'])->name('create-exercice-budgetaire');
-    Route::get('/show/{id}', [interventionController::class, 'show'])->name('show-exercice-budgetaire');
-    Route::post('/update/{id}', [interventionController::class, 'update'])->name('update-exercice-budgetaire');
-    Route::post('/delete/{id}', [interventionController::class, 'delete'])->name('delete-exercice-budgetaire');
+    Route::get('/liste', [ExercicebudgetaireController::class, 'index'])->name('exercices-budgetaire');
+    Route::post('/create', [ExercicebudgetaireController::class, 'store'])->name('create-exercice-budgetaire');
+    Route::get('/show', [ExercicebudgetaireController::class, 'show'])->name('show-exercice-budgetaire');
+    Route::get('/consulter/{id}', [ExercicebudgetaireController::class, 'consulter'])->name('consulter-exercice-budgetaire');
+    Route::post('/update/{id}', [ExercicebudgetaireController::class, 'update'])->name('update-exercice-budgetaire');
+    Route::get('/delete/{id}', [ExercicebudgetaireController::class, 'delete'])->name('delete-exercice-budgetaire');
 });
 
 // CRED USER
@@ -164,11 +170,12 @@ Route::middleware('auth')->prefix('mission')->group(function () {
 });
 
 Route::middleware('auth')->prefix('lieu-mission')->group(function () {
-    Route::get('/liste', [LieuMissionController::class, 'index'])->name('lieu-missions');
+    Route::get('/liste', [LieuMissionController::class, 'index'])->name('lieux-mission');
     Route::post('/create', [LieuMissionController::class, 'store'])->name('create-lieu-mission');
-    Route::get('/show/{id}', [LieuMissionController::class, 'show'])->name('show-lieu-mission');
+    Route::get('/show', [LieuMissionController::class, 'show'])->name('show-lieu-mission');
+    Route::get('/consulter/{id}', [LieuMissionController::class, 'consulter'])->name('consulter-lieu-mission');
     Route::post('/update/{id}', [LieuMissionController::class, 'update'])->name('update-lieu-mission');
-    Route::post('/delete/{id}', [LieuMissionController::class, 'delete'])->name('delete-lieu-mission');
+    Route::get('/delete/{id}', [LieuMissionController::class, 'delete'])->name('delete-lieu-mission');
 });
 
 Route::middleware('auth')->prefix('detail-mission')->group(function () {
