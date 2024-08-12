@@ -21,6 +21,7 @@ class LieuMissionController extends Controller
     public function show()
     {
         $villes = Ville::all();
+        $departements = Departement::all();
 
         return view('lieu_mission.add', compact('departements','villes'));
     }
