@@ -20,38 +20,58 @@ class LieuMissionController extends Controller
 
     public function show()
     {
-        $departements = Departement::all();
         $villes = Ville::all();
 
         return view('lieu_mission.add', compact('departements','villes'));
     }
 
+
+    public function getVilles($departement)
+    {
+        // Récupérer les villes du département
+        $villes = Ville::where('departement_id', $departement)->pluck('nomVille', 'id');
+
+        // Retourner les villes au format JSON
+        return response()->json($villes);
+    }
+
+
     public function consulter(Request $request, $id)
     {
+        $departements = Departement::all();
+
         $lieumission = Lieumission::find($id);
 
         if (!$lieumission) {
             return redirect()->route('lieux-mission')
                             ->with('error', 'Lieu mission non trouvé.');
         }
-        return view('lieu_mission.update', compact('lieumission'));
+        return view('lieu_mission.update', compact('lieumission', 'departements'));
     }
 
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        //  dd($request->all());
 
         $validated = $request->validate([
-            'nomDepartement' => ['required', 'max:255'],
-            'nomVille' => ['nullable', 'max:255'],
-            'distance' => ['boolean'],
+            'departement_id' => ['required', 'max:255'],
+            'commune' => ['string', 'max:255'],
+            'distance' => ['integer'],
         ]);
 
         $lieumission = new Lieumission();
-        $lieumission->nomDepartement = $request->nomDepartement;
-        $lieumission->nomVille = $request->nomVille;
+
+        $lieumission->departement_id = $request->departement_id;
+        $lieumission->commune = $request->commune;
         $lieumission->distance = $request->distance;
+        $lieumission->nuite = $request->nuite;
+
+        if($lieumission->nuite) {
+            $lieumission->nuite = true;
+        } else {
+            $lieumission->nuite = false;
+        }
 
         $lieumission->save();
 
@@ -61,12 +81,12 @@ class LieuMissionController extends Controller
 
     public function update(Request $request, $id)
     {
-        //dd($request->all());
+        // dd($request->all());
 
         $validated = $request->validate([
-           'nomDepartement' => ['required', 'max:255'],
-            'nomVille' => ['nullable', 'max:255'],
-            'distance' => ['boolean'],
+            'departement_id' => ['required', 'max:255'],
+            'commune' => ['string', 'max:255'],
+            'distance' => ['integer'],
         ]);
 
         $lieumission = Lieumission::find($id);
@@ -76,9 +96,10 @@ class LieuMissionController extends Controller
                 ->with('error', 'Lieu mission non trouvé.');
         }
 
-        $lieumission->nomDepartement = $request->nomDepartement;
-        $lieumission->nomVille = $request->nomVille;
+        $lieumission->departement_id = $request->departement_id;
+        $lieumission->commune = $request->commune;
         $lieumission->distance = $request->distance;
+        $lieumission->nuite = $request->nuite;
 
         $lieumission->update();
 

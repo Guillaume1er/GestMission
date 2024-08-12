@@ -11,6 +11,7 @@ class Ville extends Model
 
     protected $fillable =[
         'nomVille',
+        'departement_id',
     ];
 
     public function departement() {

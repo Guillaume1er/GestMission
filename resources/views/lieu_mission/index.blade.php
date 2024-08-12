@@ -65,7 +65,7 @@
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Nuite
                         </th>
-                        
+
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;">Actions
                         </th>
@@ -75,10 +75,10 @@
                     @foreach ($lieumissions as $lieumission)
                     <tr class="odd">
                         <td class="sorting_1">{{$loop->index +1}}</td>
-                        <td>{{$lieumission->nomDepartement}}</td>
-                        <td>{{$lieumission->nomVille}}</td>
+                        <td>{{$lieumission->departement->nomDepartement}}</td>
+                        <td>{{$lieumission->commune}}</td>
                         <td>{{$lieumission->distance}}</td>
-                        <td>{{$lieumission->nuite}}</td>
+                        <td>{{$lieumission->nuite ? 'Oui' : 'Non'}}</td>
                         <td>
                             <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-original-title="Modifier" aria-label="Modifier" data-bs-original-title="Modifier" href="{{ route('consulter-lieu-mission', $lieumission->id) }}">
@@ -122,7 +122,7 @@
                     </tr>
                     @endforeach
                 </tbody>
-                
+
             </table>
         </div>
 

@@ -16,8 +16,6 @@ use App\Http\Controllers\typeinterventionController;
 use App\Http\Controllers\TypevehiculeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehiculeController;
-use App\Models\Organisateur;
-use App\Models\typeintervention;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -176,6 +174,7 @@ Route::middleware('auth')->prefix('lieu-mission')->group(function () {
     Route::get('/consulter/{id}', [LieuMissionController::class, 'consulter'])->name('consulter-lieu-mission');
     Route::post('/update/{id}', [LieuMissionController::class, 'update'])->name('update-lieu-mission');
     Route::get('/delete/{id}', [LieuMissionController::class, 'delete'])->name('delete-lieu-mission');
+    Route::get('/villes/{departement}', [LieuMissionController::class, 'getVilles'])->name('getVilles');
 });
 
 Route::middleware('auth')->prefix('detail-mission')->group(function () {
