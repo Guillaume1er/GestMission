@@ -86,7 +86,7 @@
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Coût
-                            global
+                            global (F CFA)
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Type
@@ -116,7 +116,7 @@
                             <td>{{ $intervention->kilometrageIntervention }}</td>
                             <td>{{ $intervention->pannesSurvenues }}</td>
                             <td>{{ $intervention->reparationEffectue ?? '-' }}</td>
-                            <td>{{ $intervention->coutGlobal ? number_format($intervention->coutGlobal, 2) : '-' }}</td>
+                            <td>{{ number_format($intervention->coutGlobal, 0, ',', ' ') }}</td>
                             <td>{{ $intervention->typeIntervention->typeIntervention ?? '-' }}</td>
                             <td>{{ $intervention->responsableIntervention->nomResponsable ?? '-' }}</td>
                             <td>{{ $intervention->vehicule->plaqueVehicule ?? '-' }}</td>

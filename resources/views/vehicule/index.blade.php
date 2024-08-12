@@ -73,10 +73,10 @@
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Etat
                             véhicule
                         </th>
-                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date
                             autorisation
-                        </th> 
+                        </th>
                         {{-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date
                             enregistrement véhicule
@@ -89,7 +89,7 @@
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Motif
                             désautorisation
                         </th> --}}
-                        
+
                         {{-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;">
                             Kilométrage actuelle
@@ -114,9 +114,16 @@
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Marque
                             véhicule
                         </th>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                        aria-label="Position: activate to sort column ascending" style="width: 388.266px;">Statut
+                        </th>
+
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;">Actions
                         </th>
+
+
                     </tr>
                 </thead>
                 <tbody>
@@ -139,6 +146,8 @@
                             {{-- <td>{{ $vehicule->dateDerniereMission }}</td> --}}
                             <td>{{ $vehicule->typeVehicule->typeVehicule ?? '-' }}</td>
                             <td>{{ $vehicule->marque->marque ?? '-' }}</td>
+                            <td>{{$vehicule->statut }}</td> 
+                           
                             <td>
                                 <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip"
                                     data-bs-placement="top" data-original-title="Modifier" aria-label="Modifier"
@@ -184,16 +193,6 @@
                         </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th rowspan="1" colspan="1">Name</th>
-                        <th rowspan="1" colspan="1">Position</th>
-                        <th rowspan="1" colspan="1">Office</th>
-                        <th rowspan="1" colspan="1">Age</th>
-                        <th rowspan="1" colspan="1">Start date</th>
-                        <th rowspan="1" colspan="1">Salary</th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
 

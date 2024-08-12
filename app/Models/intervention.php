@@ -11,7 +11,7 @@ class Intervention extends Model
 
     protected $fillable = [
         'referenceIntervention',
-        'numeroIntervention',
+        'numeroIntervention', 
         'datePrevue',
         'dateIntervention',
         'objetIntervention',

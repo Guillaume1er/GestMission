@@ -35,7 +35,7 @@ class Vehicule extends Model
 
     public function interventions()
     {
-        return $this->hasMany(Intervention::class, 'vehicule_id'); 
+        return $this->hasMany(Intervention::class); 
     }
 
     public function typeVehicule() {

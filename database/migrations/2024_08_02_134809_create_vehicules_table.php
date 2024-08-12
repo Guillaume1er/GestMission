@@ -19,15 +19,15 @@ return new class extends Migration
             $table->integer('contactResponsable');
             $table->string('etatVehicule');
             $table->boolean('autorisationSortie')->default(false);
-            $table->date('dateAutorisation')->nullable()->change();
+            $table->date('dateAutorisation')->nullable();
             $table->timestamp('dateEnregistrementVehicule')->nullable();
             $table->string('immatriculation'); 
             $table->boolean('vehiculePool') ->default(false);
-            $table->longText('motifDesautorisation')->nullable('');
-            $table->date('dateDesautorisation')->nullable('');
-            $table->integer('kilometrageActuel')->nullable('');
-            $table->integer('kilometrageAlerte')->nullable('');
-            $table->date('dateDerniereMission');
+            $table->longText('motifDesautorisation')->nullable();
+            $table->date('dateDesautorisation')->nullable();
+            $table->integer('kilometrageActuel')->nullable();
+            $table->integer('kilometrageAlerte')->nullable();
+            $table->date('dateDerniereMission')->nullable();
             $table->date('dateAcquisition');
             $table->string('statut')->default('Bon');
             

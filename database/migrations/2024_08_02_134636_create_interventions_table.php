@@ -21,8 +21,9 @@ return new class extends Migration
             $table->integer('kilometrageIntervention');
             $table->longText('pannesSurvenues')->nullable();
             $table->longText('reparationEffectue')->nullable();
-            $table->decimal('coutGlobal')->nullable();
+            $table->decimal('coutGlobal')->default(0);
             $table->boolean('validationIntervention');
+            $table->string('statut')->default('bon');
 
             $table->foreignId('vehicule_id')
                 ->references('id')

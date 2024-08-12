@@ -21,6 +21,59 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
+                        <label for="marque_id" class="form-label">Marque du vehicule</label>
+                        <select class="form-select" required name="marque_id" id="marque_id">
+                            <option value="">Sélectionner une marque</option>
+                            @foreach ($marques as $marque)
+                                <option value="{{ $marque->id }}">{{ $marque->marque }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="typeVehicule_id" class="form-label">Type de véhicule</label>
+                        <select class="form-select" required name="typeVehicule_id" id="typeVehicule_id">
+                            <option value="">Sélectionner un type de véhicule</option>
+                            @foreach ($vehicules as $vehicule)
+                                <option value="{{ $vehicule->id }}"> {{ $vehicule->typeVehicule }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <input class="form-check-input" type="checkbox" id="vehiculePool" value="1"
+                            name="vehiculePool">
+                        <label class="form-check-label" for="vehiculePool">
+                            Véhicule Pool ?
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="dateAcquisition" class="form-label">Date d'acquisition du véhicule</label>
+                        <input type="date" class="form-control" id="dateAcquisition" name="dateAcquisition">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="immatriculation" class="form-label">Immatriculation</label>
+                        <input type="text" class="form-control" id="immatriculation" name="immatriculation">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
                         <label for="plaqueVehicule" class="form-label">Plaque du véhicule</label>
                         <input type="text" id="plaqueVehicule" required class="form-control" name="plaqueVehicule">
                     </div>
@@ -88,21 +141,6 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="dateAcquisition" class="form-label">Date d'acquisition du véhicule</label>
-                        <input type="date" class="form-control" id="dateAcquisition" name="dateAcquisition">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="immatriculation" class="form-label">Immatriculation</label>
-                        <input type="text" class="form-control" id="immatriculation" name="immatriculation">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="mb-3">
                         <input class="form-check-input" type="checkbox" id="vehiculePool" value="1"
                             name="vehiculePool">
                         <label class="form-check-label" for="vehiculePool">
@@ -147,32 +185,6 @@
                     </div>
                 </div>
             </div> --}}
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="marque_id" class="form-label">Marque du vehicule</label>
-                        <select class="form-select" required name="marque_id" id="marque_id">
-                            @foreach ($marques as $marque)
-                                <option value="">Sélectionner une marque</option>
-                                <option value="{{ $marque->id }}">{{ $marque->marque }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="typeVehicule_id" class="form-label">Type de véhicule</label>
-                        <select class="form-select" required name="typeVehicule_id" id="typeVehicule_id">
-                            @foreach ($vehicules as $vehicule)
-                                <option value="">Sélectionner un type de véhicule</option>
-                                <option value="{{ $vehicule->id }}"> {{ $vehicule->typeVehicule }} </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
 
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Ajouter</button>

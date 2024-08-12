@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Intervention;
 use App\Models\Marque;
 use App\Models\Typevehicule;
 use App\Models\Vehicule;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class VehiculeController extends Controller
@@ -14,6 +14,7 @@ class VehiculeController extends Controller
         $vehicules = Vehicule::with(['typeVehicule', 'marque'])
         ->orderBy('created_at', 'desc')
         ->get();
+        
         return view('vehicule.index', compact('vehicules'));
     }
 
