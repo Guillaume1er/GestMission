@@ -47,18 +47,6 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <input class="form-check-input" type="checkbox" id="vehiculePool" value="1"
-                            name="vehiculePool">
-                        <label class="form-check-label" for="vehiculePool">
-                            Véhicule Pool ?
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="mb-3">
                         <label for="dateAcquisition" class="form-label">Date d'acquisition du véhicule</label>
                         <input type="date" class="form-control" id="dateAcquisition" name="dateAcquisition">
                     </div>
@@ -108,8 +96,8 @@
                     <div class="mb-3">
                         <label for="etatVehicule" class="form-label">Etat du véhicule</label>
                         <select class="form-select" required name="etatVehicule" id="etatVehicule">
-                            <option value="bon" selected>Neuf</option>
-                            <option value="mauvais">Occasion</option>
+                            <option value="Neuf" selected>Neuf</option>
+                            <option value="Occasion">Occasion</option>
                         </select>
                     </div>
                 </div>

@@ -106,7 +106,7 @@ class interventionController extends Controller
         'pannesSurvenues' => ['nullable', 'string'],
         'reparationEffectue' => ['nullable', 'string'],
         'coutGlobal' => ['nullable', 'numeric'],
-       
+        'statut' => 'required|string|in:bon,mauvais',
         ]);
 
         $intervention = Intervention::find($id);
@@ -123,12 +123,26 @@ class interventionController extends Controller
         $intervention->pannesSurvenues = $request->pannesSurvenues;
         $intervention->reparationEffectue = $request->reparationEffectue;
         $intervention->coutGlobal = $request->coutGlobal;
-       
+        $intervention->validationIntervention = $request->validationIntervention;
+        $intervention->vehicule_id = $request->vehicule_id;
+        $intervention->typeIntervention_id = $request->typeIntervention_id;
+        $intervention->responsableIntervention_id = $request->responsableIntervention_id;
+        $intervention->statut = $request->statut;
 
-       
+        if($intervention->validationIntervention) {
+            $intervention->validationIntervention = true;
+        } else {
+            $intervention->validationIntervention = false;
+        }
 
         $intervention->update();
 
+        // Mettre à jour le statut du véhicule associé
+        $vehicule = Vehicule::find($intervention->vehicule_id);
+        if ($vehicule) {
+            $vehicule->statut = $validated['statut'];
+            $vehicule->save();
+        }
 
         return redirect()->route('interventions')
             ->with('success', 'Intervention modifiée avec succès.');

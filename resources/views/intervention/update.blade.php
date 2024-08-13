@@ -33,6 +33,35 @@
         <form method="POST" action="{{ route('update-intervention', $intervention->id) }}">
             @csrf
 
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="responsableIntervention_id" class="form-label">Responsable intervention du
+                            vehicule</label>
+                        <select class="form-select" required name="responsableIntervention_id"
+                            id="responsableIntervention_id">
+                            <option selected>Sélectionner un responsable d'intervention</option>
+                            @foreach ($responsableInterventions as $responsableIntervention)
+                                <option value="{{ $responsableIntervention->id }}" {{ $responsableIntervention ? 'selected' : '' }}>
+                                    {{ $responsableIntervention->nomResponsable }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="vehicule_id" class="form-label">Véhicule</label>
+                        <select class="form-select" required name="vehicule_id" id="vehicule_id">
+                            <option selected>Sélectionner un véhicule</option>
+                            @foreach ($vehicules as $vehicule)
+                                <option value="{{ $vehicule->id }}" {{ $vehicule->id ? 'selected' : '' }}>{{ $vehicule->plaqueVehicule }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="row" >
                 <div class="col-lg-6">
                     <div class="mb-3">
@@ -79,7 +108,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="kilometrageIntervention" class="form-label">Kilométrage de l'intervention</label>
+                        <label for="kilometrageIntervention" class="form-label">Kilométrage de l'intervention (Km)</label>
                         <input class="form-control" required type="number" name="kilometrageIntervention"
                             value="{{ $intervention->kilometrageIntervention }}" {{ $intervention->validationIntervention ? '' : '' }}/>
                     </div>
@@ -114,6 +143,17 @@
                             <option value="bon" {{ $intervention->status === 'bon' ? 'selected' : '' }}>Bon</option>
                             <option value="mauvais" {{ $intervention->status === 'mauvais' ? 'selected' : '' }}>Mauvais</option>
                         </select> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <input class="form-check-input" type="checkbox" id="validationIntervention" value="1"
+                            name="validationIntervention">
+                        <label class="form-check-label" for="validationIntervention">
+                            Validation intervention
+                        </label>
                     </div>
                 </div>
             </div>         

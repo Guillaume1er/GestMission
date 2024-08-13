@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Intervention;
 use App\Models\Marque;
 use App\Models\Typevehicule;
 use App\Models\Vehicule;
@@ -24,10 +23,14 @@ class VehiculeController extends Controller
         
         return view('vehicule.add', compact('marques', 'vehicules'));
     }
-
+    
     public function consulter(Request $request, $id) {
+        $marques = Marque::all();
+        $vehicules = Typevehicule::all();
        
         $vehicule = Vehicule::find($id);
+
+        // dd($vehicule);
 
         if (!$vehicule) {
             return redirect()->route('vehicules')
@@ -39,7 +42,7 @@ class VehiculeController extends Controller
    
 
     public function store(Request $request) {
-        //  dd($request->all());
+        //   dd($request->all());
         $validated = $request->validate([
             'plaqueVehicule' => ['required', 'string'],
             'kilometrageDepart' => ['required', 'integer'],
@@ -70,7 +73,6 @@ class VehiculeController extends Controller
         
 
         $vehicule = new Vehicule();
-        $date = date('d/m/Y');
         $vehicule->plaqueVehicule = $request->plaqueVehicule;
         $vehicule->kilometrageDepart = $request->kilometrageDepart;
         $vehicule->responsableVehicule = $request->responsableVehicule;
@@ -110,24 +112,24 @@ class VehiculeController extends Controller
         // dd($request->all());   
 
         $validated = $request->validate([
-            'plaqueVehicule' => ['required', 'string'],
-            'kilometrageDepart' => ['required', 'string'],
+           'plaqueVehicule' => ['required', 'string'],
+            'kilometrageDepart' => ['required', 'integer'],
             'responsableVehicule' =>  ['required', 'string'],
             'contactResponsable' =>  ['required', 'string'],
             'etatVehicule' =>  ['required', 'string'],
-            'autorisationSortie' => ['boolean'],
-            'dateAutorisation' => ['required','date'],
-            'dateEnregistrementVehicule' => ['required','date'],
+            // 'autorisationSortie' => ['nullable', 'boolean'],
+             'dateAutorisation' => ['nullable'],
+            // 'dateEnregistrementVehicule' => ['date'],                
             'immatriculation' =>  ['required', 'string'],
-            'vehiculePool' => ['boolean'],
-            'motifDesautorisation' => ['required',],
-            'dateDesautorisation' =>  ['required', 'date'],
-            'kilometrageActuel' =>  ['required'],
-            'kilometrageAlerte' =>  ['required'],
-            'dateDerniereMission' =>  ['required', 'date'],
+            'vehiculePool' => ['nullable' , 'boolean'],
+             'motifDesautorisation' => ['nullable' , 'string'],
+             'dateDesautorisation' =>  ['nullable'],
+            // 'kilometrageActuel' =>  ['required', 'integer'],
+            // 'kilometrageAlerte' =>  ['required', 'integer'],
+            // 'dateDerniereMission' =>  ['required', 'date'],
             'dateAcquisition' =>  ['required', 'date'],
-            'typeVehicule_id' =>  ['required', 'string'],
-            'marque_id' =>  ['required', 'string'],
+            'typeVehicule_id' =>  ['required', 'exists:typevehicules,id'],
+            'marque_id' =>  ['required', 'exists:marques,id'],
         ]);
 
         $vehicule = Vehicule::find($id);
@@ -141,20 +143,22 @@ class VehiculeController extends Controller
         $vehicule->kilometrageDepart = $request->kilometrageDepart;
         $vehicule->responsableVehicule = $request->responsableVehicule;
         $vehicule->contactResponsable = $request->contactResponsable;
-        $vehicule->etatVehicule = $request->etatVehicule;
-        $vehicule->autorisationSortie = $request->autorisationSortie;
-        $vehicule->dateAutorisation = $request->dateAutorisation;
-        $vehicule->dateEnregistrementVehicule = $request->dateEnregistrementVehicule;
+        $vehicule->etatVehicule = $request->etatVehicule ;
+        // $vehicule->autorisationSortie = $request->autorisationSortie;
+         $vehicule->dateAutorisation = $request->dateAutorisation;
+        // $request->dateEnregistrementVehicule = date('Y-m-d');
+        $vehicule->dateEnregistrementVehicule = $request->input('dateEnregistrementVehicule') ?? now();
         $vehicule->immatriculation = $request->immatriculation;
         $vehicule->vehiculePool = $request->vehiculePool;
-        $vehicule->motifDesautorisation = $request->motifDesautorisation;
+         $vehicule->motifDesautorisation = $request->motifDesautorisation;
         $vehicule->dateDesautorisation = $request->dateDesautorisation;
-        $vehicule->kilometrageActuel = $request->kilometrageActuel;
-        $vehicule->kilometrageAlerte = $request->kilometrageAlerte;
-        $vehicule->dateDerniereMission = $request->dateDerniereMission;
+        // $vehicule->kilometrageActuel = $request->kilometrageActuel;
+        // $vehicule->kilometrageAlerte = $request->kilometrageAlerte;
+        // $vehicule->dateDerniereMission = $request->dateDerniereMission;
         $vehicule->dateAcquisition = $request->dateAcquisition;
         $vehicule->typeVehicule_id = $request->typeVehicule_id;
         $vehicule->marque_id = $request->marque_id;
+
 
         if($vehicule->autorisationSortie){
             $vehicule->autorisationSortie = true ;
