@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Intervention;
 use App\Models\Responsableintervention;
 use App\Models\Typeintervention;
+use App\Models\Typevehicule;
 use App\Models\Vehicule;
 use Illuminate\Http\Request;
 
@@ -107,6 +108,8 @@ class interventionController extends Controller
         'reparationEffectue' => ['nullable', 'string'],
         'coutGlobal' => ['nullable', 'numeric'],
         'statut' => 'required|string|in:bon,mauvais',
+        // 'contactResponsable' => 'integer|max:255',
+        // 'typeVehicule_id' => 'integer',
         ]);
 
         $intervention = Intervention::find($id);
@@ -128,6 +131,8 @@ class interventionController extends Controller
         $intervention->typeIntervention_id = $request->typeIntervention_id;
         $intervention->responsableIntervention_id = $request->responsableIntervention_id;
         $intervention->statut = $request->statut;
+        // $intervention->typeVehicule_id = $request->typeVehicule_id;
+        // $intervention->contactResponsable = $request->contactResponsable;
 
         if($intervention->validationIntervention) {
             $intervention->validationIntervention = true;
@@ -143,6 +148,21 @@ class interventionController extends Controller
             $vehicule->statut = $validated['statut'];
             $vehicule->save();
         }
+
+        // Mettre à jour le contact du responsable
+        $vehicule = Vehicule::find($intervention->vehicule_id);
+        if ($vehicule) {
+            $vehicule->contactResponsable = $validated['contactResponsable'];
+            $vehicule->save();
+        }
+
+        // Mettre à jour le contact du responsable dans la table `vehicules`
+        // $vehicule = $intervention->vehicule;
+        // $vehicule->contactResponsable = $request->input('contactResponsable');
+        // $vehicule->typeVehicule_id = $request->input('typeVehicule_id');
+        // $vehicule->save();
+
+        
 
         return redirect()->route('interventions')
             ->with('success', 'Intervention modifiée avec succès.');

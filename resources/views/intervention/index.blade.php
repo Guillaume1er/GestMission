@@ -120,6 +120,7 @@
                             <td>{{ $intervention->typeIntervention->typeIntervention ?? '-' }}</td>
                             <td>{{ $intervention->responsableIntervention->nomResponsable ?? '-' }}</td>
                             <td>{{ $intervention->vehicule->plaqueVehicule ?? '-' }}</td>
+                            {{-- <td>{{ $intervention->vehicule->typeVehicule->typeVehicule }}</td> --}}
 
                             <td>
                                 <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip"
