@@ -81,7 +81,7 @@
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="plaqueVehicule" class="form-label">Plaque du véhicule</label>
-                        <input type="text" id="plaqueVehicule" required class="form-control" name="plaqueVehicule" value="{{$vehicule->plaqueVehicule}}">
+                        <input type="number" id="plaqueVehicule" required class="form-control" name="plaqueVehicule" value="{{$vehicule->plaqueVehicule}}">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -114,8 +114,8 @@
                     <div class="mb-3">
                         <label for="etatVehicule" class="form-label">Etat du véhicule</label>
                         <select class="form-select" required name="etatVehicule" id="etatVehicule">
-                            <option value="Neuf" {{$vehicule->Neuf ? 'delected' : ''}}>Neuf</option>
-                            <option value="Occasion" {{$vehicule->Occasion ? 'delected' : ''}}>Occasion</option>
+                            <option value="Neuf" {{$vehicule->Neuf ? 'selected' : ''}}>Neuf</option>
+                            <option value="Occasion" {{$vehicule->Occasion ? 'selected' : ''}}>Occasion</option>
                         </select>
                     </div>
                 </div>

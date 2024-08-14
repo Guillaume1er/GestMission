@@ -16,7 +16,7 @@ return new class extends Migration
             $table->longText('nomPrenomsPersonnel');
             $table->string('numeroMatricule');
             $table->string('civilite');
-            $table->integer('contact');
+            $table->string('contact');
             $table->string('email');
             $table->string('adresse');
             $table->integer('numIfu')->nullable();

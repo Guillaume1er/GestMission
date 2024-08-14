@@ -12,10 +12,10 @@ class Indice extends Model
     protected $fillable =[
         'code',
         'montantNuite',
-        'montantNuite',
+        'montantRepas',
     ];
 
     public function personnel () {
-        return $this->belongsTo(Personnel::class);
+        return $this->hasMany(Personnel::class, 'indice_id');
     }
 }

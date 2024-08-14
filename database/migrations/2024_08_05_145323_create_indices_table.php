@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('indices', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->decimal('montantNuite');
-            $table->decimal('montantRepas');
+            $table->decimal('montantNuite')->default(0);
+            $table->decimal('montantRepas')->default(0);
             $table->timestamps();
         });
     }

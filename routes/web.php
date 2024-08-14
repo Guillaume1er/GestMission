@@ -132,29 +132,32 @@ Route::middleware('auth')->prefix('utilisateur')->group(function () {
     Route::post('/update/{id}', [UserController::class, 'update'])->name('update-user');
     Route::get('/delete/{id}', [UserController::class, 'delete'])->name('delete-user');
 });
-
+// CRED INDICE
 Route::middleware('auth')->prefix('indice')->group(function () {
     Route::get('/liste', [IndiceController::class, 'index'])->name('indices');
     Route::post('/create', [IndiceController::class, 'store'])->name('create-indice');
-    Route::get('/show/{id}', [IndiceController::class, 'show'])->name('show-indice');
+    Route::get('/show', [IndiceController::class, 'show'])->name('show-indice');
+    Route::get('/consulter/{id}', [IndiceController::class, 'consulter'])->name('consulter-indice');
     Route::post('/update/{id}', [IndiceController::class, 'update'])->name('update-indice');
-    Route::post('/delete/{id}', [IndiceController::class, 'delete'])->name('delete-indice');
+    Route::get('/delete/{id}', [IndiceController::class, 'delete'])->name('delete-indice');
 });
-
+// CRED RANG
 Route::middleware('auth')->prefix('rang')->group(function () {
     Route::get('/liste', [RangController::class, 'index'])->name('rangs');
     Route::post('/create', [RangController::class, 'store'])->name('create-rang');
-    Route::get('/show/{id}', [IndiceController::class, 'show'])->name('show-rang');
+    Route::get('/show', [RangController::class, 'show'])->name('show-rang');
+    Route::get('/consulter/{id}', [RangController::class, 'consulter'])->name('consulter-rang');
     Route::post('/update/{id}', [RangController::class, 'update'])->name('update-rang');
     Route::get('/delete/{id}', [RangController::class, 'delete'])->name('delete-rang');
 });
-
+// CRED PERSONNEL
 Route::middleware('auth')->prefix('personnel')->group(function () {
     Route::get('/liste', [PersonnelController::class, 'index'])->name('personnels');
     Route::post('/create', [PersonnelController::class, 'store'])->name('create-personnel');
-    Route::get('/show/{id}', [PersonnelController::class, 'show'])->name('show-personnel');
+    Route::get('/show', [PersonnelController::class, 'show'])->name('show-personnel');
+    Route::get('/consulter', [PersonnelController::class, 'consulter'])->name('consulter-personnel');
     Route::post('/update/{id}', [PersonnelController::class, 'update'])->name('update-personnel');
-    Route::post('/delete/{id}', [PersonnelController::class, 'delete'])->name('delete-personnel');
+    Route::get('/delete/{id}', [PersonnelController::class, 'delete'])->name('delete-personnel');
 });
 
 Route::middleware('auth')->prefix('organisateur')->group(function () {
@@ -162,7 +165,7 @@ Route::middleware('auth')->prefix('organisateur')->group(function () {
     Route::post('/create', [OrganisateurController::class, 'store'])->name('create-organisateur');
     Route::get('/show/{id}', [OrganisateurController::class, 'show'])->name('show-organisateur');
     Route::post('/update/{id}', [OrganisateurController::class, 'update'])->name('update-organisateur');
-    Route::post('/delete/{id}', [OrganisateurController::class, 'delete'])->name('delete-organisateur');
+    Route::get('/delete/{id}', [OrganisateurController::class, 'delete'])->name('delete-organisateur');
 });
 
 Route::middleware('auth')->prefix('mission')->group(function () {
@@ -170,7 +173,7 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::post('/create', [MissionController::class, 'store'])->name('create-mission');
     Route::get('/show/{id}', [MissionController::class, 'show'])->name('show-mission');
     Route::post('/update/{id}', [MissionController::class, 'update'])->name('update-mission');
-    Route::post('/delete/{id}', [MissionController::class, 'delete'])->name('delete-mission');
+    Route::get('/delete/{id}', [MissionController::class, 'delete'])->name('delete-mission');
 });
 
 Route::middleware('auth')->prefix('lieu-mission')->group(function () {

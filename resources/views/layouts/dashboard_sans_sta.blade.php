@@ -248,6 +248,52 @@
                                     <span class="item-name">Lieux missions</span>
                                 </a>
                             </li>
+                             <li class="nav-item">
+                                <a class="nav-link " href="{{ route('personnels') }}">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor">
+                                                </circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> B </i>
+                                    <span class="item-name">Personnel</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="{{ route('rangs') }}">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor">
+                                                </circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> B </i>
+                                    <span class="item-name">Rang</span>
+                                </a>
+                            </li>  
+                            <li class="nav-item">
+                                <a class="nav-link " href="{{ route('indices') }}">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor">
+                                                </circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> B </i>
+                                    <span class="item-name">Indice</span>
+                                </a>
+                            </li>
+                            
                         </ul>
                     </li>
                     {{-- <li class="nav-item">
@@ -812,7 +858,7 @@
                                     <p>Cette application gère tout ce qui est mission au sein de l'ABSSA avec
                                         l'implication des véhicules.</p>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -834,48 +880,48 @@
             </div> <!-- Nav Header Component End -->
             <!--Nav End-->
         </div>
-       
-                <div class="col-md-12 col-lg-12 mt-4">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="300">
-                                <div class="flex-wrap mr-2 ml-2">
 
-                                    @yield('content')
+        <div class="col-md-12 col-lg-12 mt-4">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex-wrap mr-2 ml-2">
 
-                                </div>
+                            @yield('content')
 
-                            </div>
                         </div>
-                       
-                        <!-- Footer Section Start -->
-                        <footer class="footer">
-                            <div class="footer-body">
-                                <ul class="left-panel list-inline mb-0 p-0">
-                                    <li class="list-inline-item"><a
-                                            href="../dashboard/extra/privacy-policy.html">Privacy Policy</a>
-                                    </li>
-                                    <li class="list-inline-item"><a
-                                            href="../dashboard/extra/terms-of-service.html">Terms of Use</a>
-                                    </li>
-                                </ul>
-                                <div class="right-panel">
-                                    ©
-                                    <script>
-                                        document.write(new Date().getFullYear())
-                                    </script> Hope UI, Made with
-                                    <span class="">
-                                        <svg class="icon-15" width="15" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M15.85 2.50065C16.481 2.50065 17.111 2.58965 17.71 2.79065C21.401 3.99065 22.731 8.04065 21.62 11.5806C20.99 13.3896 19.96 15.0406 18.611 16.3896C16.68 18.2596 14.561 19.9196 12.28 21.3496L12.03 21.5006L11.77 21.3396C9.48102 19.9196 7.35002 18.2596 5.40102 16.3796C4.06102 15.0306 3.03002 13.3896 2.39002 11.5806C1.26002 8.04065 2.59002 3.99065 6.32102 2.76965C6.61102 2.66965 6.91002 2.59965 7.21002 2.56065H7.33002C7.61102 2.51965 7.89002 2.50065 8.17002 2.50065H8.28002C8.91002 2.51965 9.52002 2.62965 10.111 2.83065H10.17C10.21 2.84965 10.24 2.87065 10.26 2.88965C10.481 2.96065 10.69 3.04065 10.89 3.15065L11.27 3.32065C11.3618 3.36962 11.4649 3.44445 11.554 3.50912C11.6104 3.55009 11.6612 3.58699 11.7 3.61065C11.7163 3.62028 11.7329 3.62996 11.7496 3.63972C11.8354 3.68977 11.9247 3.74191 12 3.79965C13.111 2.95065 14.46 2.49065 15.85 2.50065ZM18.51 9.70065C18.92 9.68965 19.27 9.36065 19.3 8.93965V8.82065C19.33 7.41965 18.481 6.15065 17.19 5.66065C16.78 5.51965 16.33 5.74065 16.18 6.16065C16.04 6.58065 16.26 7.04065 16.68 7.18965C17.321 7.42965 17.75 8.06065 17.75 8.75965V8.79065C17.731 9.01965 17.8 9.24065 17.94 9.41065C18.08 9.58065 18.29 9.67965 18.51 9.70065Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                    </span> by <a href="https://iqonic.design/">IQONIC Design</a>.
-                                </div>
-                            </div>
-                        </footer>
-                        <!-- Footer Section End -->
+
+                    </div>
+                </div>
+
+                <!-- Footer Section Start -->
+                <footer class="footer">
+                    <div class="footer-body">
+                        <ul class="left-panel list-inline mb-0 p-0">
+                            <li class="list-inline-item"><a href="../dashboard/extra/privacy-policy.html">Privacy
+                                    Policy</a>
+                            </li>
+                            <li class="list-inline-item"><a href="../dashboard/extra/terms-of-service.html">Terms of
+                                    Use</a>
+                            </li>
+                        </ul>
+                        <div class="right-panel">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> Hope UI, Made with
+                            <span class="">
+                                <svg class="icon-15" width="15" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M15.85 2.50065C16.481 2.50065 17.111 2.58965 17.71 2.79065C21.401 3.99065 22.731 8.04065 21.62 11.5806C20.99 13.3896 19.96 15.0406 18.611 16.3896C16.68 18.2596 14.561 19.9196 12.28 21.3496L12.03 21.5006L11.77 21.3396C9.48102 19.9196 7.35002 18.2596 5.40102 16.3796C4.06102 15.0306 3.03002 13.3896 2.39002 11.5806C1.26002 8.04065 2.59002 3.99065 6.32102 2.76965C6.61102 2.66965 6.91002 2.59965 7.21002 2.56065H7.33002C7.61102 2.51965 7.89002 2.50065 8.17002 2.50065H8.28002C8.91002 2.51965 9.52002 2.62965 10.111 2.83065H10.17C10.21 2.84965 10.24 2.87065 10.26 2.88965C10.481 2.96065 10.69 3.04065 10.89 3.15065L11.27 3.32065C11.3618 3.36962 11.4649 3.44445 11.554 3.50912C11.6104 3.55009 11.6612 3.58699 11.7 3.61065C11.7163 3.62028 11.7329 3.62996 11.7496 3.63972C11.8354 3.68977 11.9247 3.74191 12 3.79965C13.111 2.95065 14.46 2.49065 15.85 2.50065ZM18.51 9.70065C18.92 9.68965 19.27 9.36065 19.3 8.93965V8.82065C19.33 7.41965 18.481 6.15065 17.19 5.66065C16.78 5.51965 16.33 5.74065 16.18 6.16065C16.04 6.58065 16.26 7.04065 16.68 7.18965C17.321 7.42965 17.75 8.06065 17.75 8.75965V8.79065C17.731 9.01965 17.8 9.24065 17.94 9.41065C18.08 9.58065 18.29 9.67965 18.51 9.70065Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </span> by <a href="https://iqonic.design/">IQONIC Design</a>.
+                        </div>
+                    </div>
+                </footer>
+                <!-- Footer Section End -->
     </main>
     <a class="btn btn-fixed-end btn-warning btn-icon btn-setting" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasExample" role="button" aria-controls="offcanvasExample">
@@ -950,30 +996,27 @@
                         </button>
                     </div>
                     <div class="grid-cols-5 mb-4 d-grid gap-x-2">
-                        <div class="btn btn-border bg-transparent" data-value="theme-color-blue"
-                            data-info="#573BFF" data-setting="color-mode1" data-name="color"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title=""
-                            data-bs-original-title="Theme-1">
+                        <div class="btn btn-border bg-transparent" data-value="theme-color-blue" data-info="#573BFF"
+                            data-setting="color-mode1" data-name="color" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="" data-bs-original-title="Theme-1">
                             <svg class="customizer-btn icon-32" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24" width="32">
                                 <circle cx="12" cy="12" r="10" fill="#00C3F9" />
                                 <path d="M2,12 a1,1 1 1,0 20,0" fill="#573BFF" />
                             </svg>
                         </div>
-                        <div class="btn btn-border bg-transparent" data-value="theme-color-gray"
-                            data-info="#FD8D00" data-setting="color-mode1" data-name="color"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title=""
-                            data-bs-original-title="Theme-2">
+                        <div class="btn btn-border bg-transparent" data-value="theme-color-gray" data-info="#FD8D00"
+                            data-setting="color-mode1" data-name="color" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="" data-bs-original-title="Theme-2">
                             <svg class="customizer-btn icon-32" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24" width="32">
                                 <circle cx="12" cy="12" r="10" fill="#91969E" />
                                 <path d="M2,12 a1,1 1 1,0 20,0" fill="#FD8D00" />
                             </svg>
                         </div>
-                        <div class="btn btn-border bg-transparent" data-value="theme-color-red"
-                            data-info="#366AF0" data-setting="color-mode1" data-name="color"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title=""
-                            data-bs-original-title="Theme-3">
+                        <div class="btn btn-border bg-transparent" data-value="theme-color-red" data-info="#366AF0"
+                            data-setting="color-mode1" data-name="color" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="" data-bs-original-title="Theme-3">
                             <svg class="customizer-btn icon-32" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24" width="32">
                                 <circle cx="12" cy="12" r="10" fill="#DB5363" />
@@ -990,10 +1033,9 @@
                                 <path d="M2,12 a1,1 1 1,0 20,0" fill="#6410F1" />
                             </svg>
                         </div>
-                        <div class="btn btn-border bg-transparent" data-value="theme-color-pink"
-                            data-info="#25C799" data-setting="color-mode1" data-name="color"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title=""
-                            data-bs-original-title="Theme-5">
+                        <div class="btn btn-border bg-transparent" data-value="theme-color-pink" data-info="#25C799"
+                            data-setting="color-mode1" data-name="color" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="" data-bs-original-title="Theme-5">
                             <svg class="customizer-btn icon-32" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24" width="32">
                                 <circle cx="12" cy="12" r="10" fill="#E586B3" />
@@ -1205,8 +1247,6 @@
 
     <!-- App Script -->
     <script src="{{ asset('assets/js/hope-ui.js') }}" defer></script>
-
-
 </body>
 
 </html>

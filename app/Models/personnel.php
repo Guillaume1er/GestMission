@@ -22,11 +22,11 @@ class Personnel extends Model
     ];
 
     public function rang() {
-        return $this->hasMany(Rang::class);
+        return $this->belongsTo(Rang::class, 'rang_id');
     }
 
     public function indice() {
-        return $this->hasMany(Indice::class);
+        return $this->belongsTo(Indice::class, 'indice_id');
     }
     
     public function detailMission() {

@@ -24,7 +24,7 @@ class VehiculeController extends Controller
         return view('vehicule.add', compact('marques', 'vehicules'));
     }
     
-    public function consulter(Request $request, $id) {
+    public function consulter($id) {
         $marques = Marque::all();
         $vehicules = Typevehicule::all();
        
