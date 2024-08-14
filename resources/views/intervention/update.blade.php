@@ -33,7 +33,7 @@
         <form method="POST" action="{{ route('update-intervention', $intervention->id) }}">
             @csrf
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="responsableIntervention_id" class="form-label">Responsable intervention du
@@ -60,9 +60,9 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="row" >
+            {{-- <div class="row" >
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="responsableIntervention" class="form-label">Contact du responsable intervention</label>
@@ -81,9 +81,9 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="row" >
+            {{-- <div class="row" >
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="datePrevue" class="form-label">Date prévue</label>
@@ -98,7 +98,7 @@
                             value="{{ $intervention->dateIntervention }}" {{ $intervention->validationIntervention ? '' : '' }}/>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row" >
                 <div class="col-lg-6">
                     <div class="mb-3">
@@ -108,27 +108,27 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="kilometrageIntervention" class="form-label">Kilométrage de l'intervention (Km)</label>
-                        <input class="form-control" required type="number" name="kilometrageIntervention"
-                            value="{{ $intervention->kilometrageIntervention }}" {{ $intervention->validationIntervention ? '' : '' }}/>
-                    </div>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="pannesSurvenues" class="form-label">Pannes survenues</label>
-                        <textarea class="form-control" required rows="4" name="pannesSurvenues" {{ $intervention->validationIntervention ? '' : '' }}>{{ $intervention->pannesSurvenues }}</textarea>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
                         <label for="reparationEffectue" class="form-label">Reparations effectuées</label>
                         <textarea class="form-control" required rows="4" name="reparationEffectue" {{ $intervention->validationIntervention ? '' : '' }}>{{ $intervention->reparationEffectue }}</textarea>
                     </div>
                 </div>
+                {{-- <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="kilometrageIntervention" class="form-label">Kilométrage de l'intervention (Km)</label>
+                        <input class="form-control" required type="number" name="kilometrageIntervention"
+                            value="{{ $intervention->kilometrageIntervention }}" {{ $intervention->validationIntervention ? '' : '' }}/>
+                    </div>
+                </div> --}}
             </div>
             <div class="row" >
+                {{-- <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="pannesSurvenues" class="form-label">Pannes survenues</label>
+                        <textarea class="form-control" required rows="4" name="pannesSurvenues" {{ $intervention->validationIntervention ? '' : '' }}>{{ $intervention->pannesSurvenues }}</textarea>
+                    </div>
+                </div> --}}
+            </div>
+            {{-- <div class="row" >
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="coutGlobal" class="form-label">Coût global (F CFA)</label>
@@ -136,22 +136,22 @@
                             value="{{ $intervention->coutGlobal }}" {{ $intervention->validationIntervention ? '' : '' }}/>
                     </div>
                 </div>
+            </div> --}}
+            <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="statut">Statut :</label>
                         <select class="form-select" name="statut" id="statut" {{ $intervention->validationIntervention ? '' : '' }}>
-                            <option value="bon" {{ $intervention->status === 'bon' ? 'selected' : '' }}>Bon</option>
-                            <option value="mauvais" {{ $intervention->status === 'mauvais' ? 'selected' : '' }}>Mauvais</option>
+                            <option value="bon" {{ $intervention->statut === 'bon' ? 'selected' : '' }}>Bon</option>
+                            <option value="mauvais" {{ $intervention->statut === 'mauvais' ? 'selected' : '' }}>Mauvais</option>
                         </select> 
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-6">
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <input class="form-check-input" type="checkbox" id="validationIntervention" value="1"
                             name="validationIntervention">
-                        <label class="form-check-label" for="validationIntervention">
+                        <label class="form-check-label" for="validationIntervention" {{ $intervention->validationIntervention ? 'checked' : '' }}>
                             Validation intervention
                         </label>
                     </div>

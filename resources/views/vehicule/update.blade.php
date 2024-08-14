@@ -41,11 +41,10 @@
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="marque_id" class="form-label">Marque du vehicule</label>
-                        <select class="form-select" required name="marque_id" id="marque_id">
+                        <select class="form-select" required name="marque_id" id="marque_id" {{ $vehicule->autorisationSortie ? 'disabled' : '' }}>
                             <option value="">Sélectionner une marque</option>
                             @foreach ($marques as $marque)
                                 <option value="{{ $marque->id }}" {{$marque->id ? 'selected' : ''}} >{{ $marque->marque }}</option>
-                                
                             @endforeach
                         </select>
                     </div>
@@ -87,7 +86,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="kilometrageDepart" class="form-label">Kilométrage de départ</label>
+                        <label for="kilometrageDepart" class="form-label">Kilométrage de départ (Km)</label>
                         <input type="number"  class="form-control" id="kilometrageDepart" name="kilometrageDepart" value="{{$vehicule->kilometrageDepart}}">
                     </div>
                 </div>

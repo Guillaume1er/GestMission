@@ -57,7 +57,7 @@ Route::middleware('auth')->prefix('banque')->group(function () {
     Route::post('/update/{id}', [BanqueController::class, 'update'])->name('update-banque');
     Route::get('/delete/{id}', [BanqueController::class, 'delete'])->name('delete-banque');
 });
-   // CREUD Type Véhicule
+// CREUD Type Véhicule
 Route::middleware('auth')->prefix('type-vehicule')->group(function () {
     Route::get('/liste', [TypevehiculeController::class, 'index'])->name('types-vehicule');
     Route::post('/create', [TypevehiculeController::class, 'store'])->name('create-type-vehicule');
@@ -67,7 +67,7 @@ Route::middleware('auth')->prefix('type-vehicule')->group(function () {
     Route::get('/delete/{id}', [TypevehiculeController::class, 'delete'])->name('delete-type-vehicule');
 });
 
-// CREUD Type Véhicule
+// CREUD Véhicule
 Route::middleware('auth')->prefix('vehicule')->group(function () {
     Route::get('/liste', [VehiculeController::class, 'index'])->name('vehicules');
     Route::post('/create', [VehiculeController::class, 'store'])->name('create-vehicule');
@@ -75,6 +75,12 @@ Route::middleware('auth')->prefix('vehicule')->group(function () {
     Route::get('/consulter/{id}', [VehiculeController::class, 'consulter'])->name('consulter-vehicule');
     Route::post('/update/{id}', [VehiculeController::class, 'update'])->name('update-vehicule');
     Route::get('/delete/{id}', [VehiculeController::class, 'delete'])->name('delete-vehicule');
+
+    Route::get('/{vehicule}/autorisation', [VehiculeController::class, 'showAutorisationForm'])->name('vehicule.autorisation');
+    Route::post('/{vehicule}/autorisation', [VehiculeController::class, 'autoriser'])->name('vehicule.autoriser');
+
+    Route::get('/{vehicule}/desautorisation', [VehiculeController::class, 'showAutorisationForm'])->name('vehicule.desautorisation');
+    Route::post('/{vehicule}/desautorisation', [VehiculeController::class, 'desautoriser'])->name('vehicule.desautoriser');
 });
 
 // CREUD Type intervention
@@ -191,4 +197,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

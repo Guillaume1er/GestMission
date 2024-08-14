@@ -57,6 +57,22 @@
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Plaque
                             véhicule
                         </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Type
+                            véhicule
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Marque
+                            véhicule
+                        </th>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;">
+                            Immatriculation
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;">Statut
+                        </th>
                         {{-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Kilométrage
                             départ
@@ -81,10 +97,6 @@
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date
                             enregistrement véhicule
                         </th> --}}
-                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;">
-                            Immatriculation
-                        </th>
                         {{-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Motif
                             désautorisation
@@ -106,18 +118,6 @@
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> date
                             dernière mission
                         </th> --}}
-                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Type
-                            véhicule
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Marque
-                            véhicule
-                        </th>
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                        aria-label="Position: activate to sort column ascending" style="width: 388.266px;">Statut
-                        </th>
 
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;">Actions
@@ -131,6 +131,10 @@
                         <tr class="odd">
                             <td class="sorting_1">{{ $loop->index + 1 }}</td>
                             <td>{{ $vehicule->plaqueVehicule }}</td>
+                            <td>{{ $vehicule->typeVehicule->typeVehicule ?? '-' }}</td>
+                            <td>{{ $vehicule->marque->marque ?? '-' }}</td>
+                            <td>{{ $vehicule->immatriculation }}</td>
+                            <td>{{ $vehicule->statut }}</td>
                             {{-- <td>{{ $vehicule->kilometrageDepart }}</td> --}}
                             <td>{{ $vehicule->responsableVehicule }}</td>
                             <td>{{ $vehicule->contactResponsable }}</td>
@@ -138,17 +142,39 @@
                             {{-- <td>{{ $vehicule->dateAutorisation }}</td> --}}
                             {{-- <td>{{ $vehicule->dateEnregistrementVehicule }}</td> --}}
                             <td>{{ $vehicule->dateAcquisition }} </td>
-                            <td>{{ $vehicule->immatriculation }}</td>
                             {{-- <td>{{ $vehicule->motifDesautorisation }}</td> --}}
                             {{-- <td>{{ $vehicule->dateDesautorisation }}</td> --}}
                             {{-- <td>{{ $vehicule->kilometrageActuel }}</td>
                             <td>{{ $vehicule->kilometrageAlerte }}</td> --}}
                             {{-- <td>{{ $vehicule->dateDerniereMission }}</td> --}}
-                            <td>{{ $vehicule->typeVehicule->typeVehicule ?? '-' }}</td>
-                            <td>{{ $vehicule->marque->marque ?? '-' }}</td>
-                            <td>{{$vehicule->statut }}</td> 
-                           
+
                             <td>
+                                <a class="btn btn-sm btn-icon {{ $vehicule->autorisationSortie ? 'btn-success' : 'btn-danger' }}"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="{{ $vehicule->autorisationSortie ? 'Cliquez pour désautoriser' : 'Cliquez pour autoriser' }}"
+                                    aria-label="{{ $vehicule->autorisationSortie ? 'Autorisation de sortie' : 'Désautorisation de sortie' }}"
+                                    href="{{ $vehicule->autorisationSortie ? route('vehicule.desautorisation', $vehicule->id) : route('vehicule.autorisation', $vehicule->id) }}">
+                                    <span class="btn-inner">
+                                        @if ($vehicule->autorisationSortie)
+                                            <!-- Icône d'autorisation -->
+                                            <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M10 17.5L4.5 12L6.086 10.414L10 14.328L17.914 6.414L19.5 8L10 17.5Z"
+                                                    fill="currentColor" />
+                                            </svg>
+                                        @else
+                                            <!-- Icône de désautorisation -->
+                                            <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12 10.5858L16.2929 6.29289L17.7071 7.70711L13.4142 12L17.7071 16.2929L16.2929 17.7071L12 13.4142L7.70711 17.7071L6.29289 16.2929L10.5858 12L6.29289 7.70711L7.70711 6.29289L12 10.5858Z"
+                                                    fill="currentColor" />
+                                            </svg>
+                                        @endif
+                                    </span>
+                                </a>
+
                                 <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip"
                                     data-bs-placement="top" data-original-title="Modifier" aria-label="Modifier"
                                     data-bs-original-title="Modifier"

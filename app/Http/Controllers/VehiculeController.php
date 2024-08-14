@@ -98,7 +98,7 @@ class VehiculeController extends Controller
         if($vehicule->vehiculePool){
             $vehicule->vehiculePool = true ;
         } else {
-            $vehicule->vehiculePool = false ;
+            $vehicule->vehiculePool = false ; 
         } 
         
         $vehicule->save();
@@ -178,6 +178,51 @@ class VehiculeController extends Controller
         return redirect()->route('vehicules')
                          ->with('success', 'Vehicule modifié avec succès.');
     }
+
+
+    public function showAutorisationForm(Vehicule $vehicule)
+    {
+        return view('vehicule.autorisation', compact('vehicule'));
+    }
+
+    // Traite la soumission du formulaire d'autorisation
+    public function autoriser(Request $request, Vehicule $vehicule)
+    {
+        $request->validate([
+            'kilometrageDepart' => 'required|integer',
+            'dateAutorisation' => 'required|date',
+        ]);
+
+        $vehicule->update([
+            'kilometrageDepart' => $request->kilometrageDepart,
+            'dateAutorisation' => $request->dateAutorisation,
+            'autorisationSortie' => true,
+        ]);
+
+        return redirect()->route('vehicules')->with('success', 'Autorisation enregistrée avec succès.');
+    }
+
+
+
+    // Traite la soumission du formulaire de désautorisation
+    public function desautoriser(Request $request, Vehicule $vehicule)
+    {
+        $request->validate([
+            'motifDesautorisation' => 'required|string|max:255',
+            'dateDesautorisation' => 'required|date',
+        ]);
+
+        $vehicule->update([
+            'motifDesautorisation' => $request->motifDesautorisation,
+            'dateDesautorisation' => $request->dateDesautorisation,
+            'autorisationSortie' => false,
+        ]);
+
+        return redirect()->route('vehicules')->with('success', 'Désautorisation enregistrée avec succès.');
+    }
+
+
+
 
     public function delete($id)
     {

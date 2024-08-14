@@ -97,19 +97,12 @@ class interventionController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        //dd($request->all());
 
         $validated = $request->validate([
-        'datePrevue' => ['nullable', 'date'],
-        'dateIntervention' => ['required', 'date'],
         'objetIntervention' => ['required', 'string'],
-        'kilometrageIntervention' => ['nullable', 'integer'],
-        'pannesSurvenues' => ['nullable', 'string'],
         'reparationEffectue' => ['nullable', 'string'],
-        'coutGlobal' => ['nullable', 'numeric'],
         'statut' => 'required|string|in:bon,mauvais',
-        // 'contactResponsable' => 'integer|max:255',
-        // 'typeVehicule_id' => 'integer',
         ]);
 
         $intervention = Intervention::find($id);
@@ -119,18 +112,18 @@ class interventionController extends Controller
                 ->with('error', 'Intervention non trouvée.');
         }
 
-        $intervention->datePrevue = $request->datePrevue;
-        $intervention->dateIntervention = $request->dateIntervention;
+        // $intervention->datePrevue = $request->datePrevue;
+        // $intervention->dateIntervention = $request->dateIntervention;
         $intervention->objetIntervention = $request->objetIntervention;
-        $intervention->kilometrageIntervention = $request->kilometrageIntervention;
-        $intervention->pannesSurvenues = $request->pannesSurvenues;
         $intervention->reparationEffectue = $request->reparationEffectue;
-        $intervention->coutGlobal = $request->coutGlobal;
-        $intervention->validationIntervention = $request->validationIntervention;
-        $intervention->vehicule_id = $request->vehicule_id;
-        $intervention->typeIntervention_id = $request->typeIntervention_id;
-        $intervention->responsableIntervention_id = $request->responsableIntervention_id;
         $intervention->statut = $request->statut;
+        $intervention->validationIntervention = $request->validationIntervention;
+        // $intervention->kilometrageIntervention = $request->kilometrageIntervention;
+        // $intervention->pannesSurvenues = $request->pannesSurvenues;
+        // $intervention->coutGlobal = $request->coutGlobal;
+        // $intervention->vehicule_id = $request->vehicule_id;
+        // $intervention->typeIntervention_id = $request->typeIntervention_id;
+        // $intervention->responsableIntervention_id = $request->responsableIntervention_id;
         // $intervention->typeVehicule_id = $request->typeVehicule_id;
         // $intervention->contactResponsable = $request->contactResponsable;
 
@@ -142,7 +135,7 @@ class interventionController extends Controller
 
         $intervention->update();
 
-        // Mettre à jour le statut du véhicule associé
+        //Mettre à jour le statut du véhicule associé
         $vehicule = Vehicule::find($intervention->vehicule_id);
         if ($vehicule) {
             $vehicule->statut = $validated['statut'];
@@ -150,11 +143,11 @@ class interventionController extends Controller
         }
 
         // Mettre à jour le contact du responsable
-        $vehicule = Vehicule::find($intervention->vehicule_id);
-        if ($vehicule) {
-            $vehicule->contactResponsable = $validated['contactResponsable'];
-            $vehicule->save();
-        }
+        // $vehicule = Vehicule::find($intervention->vehicule_id);
+        // if ($vehicule) {
+        //     $vehicule->contactResponsable = $validated['contactResponsable'];
+        //     $vehicule->save();
+        // }
 
         // Mettre à jour le contact du responsable dans la table `vehicules`
         // $vehicule = $intervention->vehicule;
