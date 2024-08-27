@@ -248,7 +248,7 @@
                                     <span class="item-name">Lieux missions</span>
                                 </a>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link " href="{{ route('personnels') }}">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
@@ -277,7 +277,7 @@
                                     <i class="sidenav-mini-icon"> B </i>
                                     <span class="item-name">Rang</span>
                                 </a>
-                            </li>  
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="{{ route('indices') }}">
                                     <i class="icon">
@@ -293,9 +293,26 @@
                                     <span class="item-name">Indice</span>
                                 </a>
                             </li>
-                            
+                            <li class="nav-item">
+                                <a class="nav-link " href="{{ route('organisateurs') }}">
+                                    <i class="icon">
+                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <g>
+                                                <circle cx="12" cy="12" r="8" fill="currentColor">
+                                                </circle>
+                                            </g>
+                                        </svg>
+                                    </i>
+                                    <i class="sidenav-mini-icon"> B </i>
+                                    <span class="item-name">Organisateurs</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
+
+
                     {{-- <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button"
                             aria-expanded="false" aria-controls="horizontal-menu">
@@ -364,8 +381,6 @@
                         <hr class="hr-horizontal">
                     </li>
 
-
-                    <li class="nav-item">
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-icons" role="button"
                             aria-expanded="false" aria-controls="sidebar-icons">
@@ -428,6 +443,7 @@
                     </li>
 
                     <li class="nav-item">
+
                         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-maps" role="button"
                             aria-expanded="false" aria-controls="sidebar-maps">
                             <i class="icon">
@@ -452,7 +468,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="sidebar-maps" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                                <a class="nav-link " href="#">
+                                <a class="nav-link" href="{{ route('missions') }}">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
                                             viewBox="0 0 24 24" fill="currentColor">
@@ -482,7 +498,6 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('users') }}">
@@ -519,6 +534,7 @@
                 <!-- Sidebar Menu End -->
 
             </div>
+
         </div>
         <div class="sidebar-footer"></div>
     </aside>

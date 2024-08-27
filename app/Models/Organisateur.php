@@ -14,7 +14,7 @@ class Organisateur extends Model
     ];
 
     public function mission() {
-        return $this->belongsTo(Mission::class);
+        return $this->hasMany(Mission::class,  'organisateur_id');
     }
    
 }

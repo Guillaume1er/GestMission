@@ -30,6 +30,6 @@ class Personnel extends Model
     }
     
     public function detailMission() {
-        return $this->belongsTo(Detailmission::class);
+        return $this->hasMany(Detailmission::class);
     }
 }

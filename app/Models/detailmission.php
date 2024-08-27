@@ -11,7 +11,7 @@ class Detailmission extends Model
 
     protected $fillable =[
 
-        'dateTraitementMission',
+        'dateTraitementMission', 
         'dateDepart',
         'dateRetour',
         'nbrJour',
@@ -37,11 +37,11 @@ class Detailmission extends Model
     ];
 
     public function personnel() {
-        return $this->hasMany(Personnel::class);
+        return $this->belongsTo(Personnel::class);
     }
     
     public function mission() {
-        return $this->hasMany(Mission::class);
+        return $this->belongsTo(Mission::class);
     }
     
     public function lieuMission() {

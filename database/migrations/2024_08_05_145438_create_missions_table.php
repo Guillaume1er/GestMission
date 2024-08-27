@@ -20,26 +20,30 @@ return new class extends Migration
             $table->date('dateMission');
             $table->date('dateDebutMission');
             $table->date('dateFinMission');
-            $table->string('imputation');
-            $table->string('previsionBBudgetaire');
-            $table->string('autorisateur1');
-            $table->string('autorisateur2');
-            $table->string('autorisateur3');
-            $table->string('observationMission');
-            $table->string('etatMission');
-            $table->integer('nbrVehicule');
-            $table->string('typeVehicule');
-            $table->integer('nbrTotalNuite');
-            $table->integer('nbrTotalRepas');
-            $table->decimal('montantTotalNuite');
-            $table->decimal('montantTotalRepas');
-            $table->decimal('montantTotalMission');
+            //$table->string('imputation');
+            //$table->string('previsionBBudgetaire');
+            $table->string('autorisateur1')->nullable();
+            $table->string('autorisateur2')->nullable();
+            $table->string('autorisateur3')->nullable();
+            $table->string('observationMission')->nullable();
+            $table->string('etatMission')->default('non demarrer');
+            $table->integer('nbrVehicule')->nullable();
+            //$table->string('typeMission');
+            $table->integer('nbrTotalNuite')->nullable();
+            $table->integer('nbrTotalRepas')->nullable();
+            $table->decimal('montantTotalNuite')->nullable();
+            $table->decimal('montantTotalRepas')->nullable();
+            $table->decimal('montantTotalMission')->nullable();
 
             $table->foreignId('organisateur_id')
-                ->references('id')
-                ->on('organisations')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            ->constrained('organisateurs') 
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+    
+        $table->foreignId('exerciceBudgetaire_id')
+            ->constrained('exercicebudgetaires') 
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

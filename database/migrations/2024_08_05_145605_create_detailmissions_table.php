@@ -13,26 +13,26 @@ return new class extends Migration
     {
         Schema::create('detailmissions', function (Blueprint $table) {
             $table->id();
-            $table->date('dateTraitementMission');
-            $table->date('dateDepart');
-            $table->date('dateRetour');
-            $table->integer('nbrJour');
-            $table->integer('nbrNuit');
-            $table->decimal('coutNuite');
-            $table->decimal('montantNuite');
-            $table->integer('nbrRepas');
-            $table->decimal('coutRepas');
-            $table->decimal('montantRepas');
-            $table->decimal('montantMission');
-            $table->decimal('montantAvance');
-            $table->decimal('montantReste');
-            $table->date('dateSignatureOm');
-            $table->string('refOm');
-            $table->decimal('montantPaye');
-            $table->longText('observation');
-            $table->date('dateDernierPayement');
-            $table->boolean('payementJustifie');
-            $table->string('etat');
+            $table->date('dateTraitementMission')->nullable();
+            $table->date('dateDepart')->nullable();
+            $table->date('dateRetour')->nullable();
+            $table->integer('nbrJour')->nullable();
+            $table->integer('nbrNuit')->nullable();
+            $table->decimal('coutNuite')->nullable();
+            $table->decimal('montantNuite')->nullable();
+            $table->integer('nbrRepas')->nullable();
+            $table->decimal('coutRepas')->nullable();
+            $table->decimal('montantRepas')->nullable();
+            $table->decimal('montantMission')->nullable();
+            $table->decimal('montantAvance')->nullable();
+            $table->decimal('montantReste')->nullable();
+            $table->date('dateSignatureOm')->nullable();
+            $table->string('refOm')->nullable();
+            $table->decimal('montantPaye')->nullable();
+            $table->longText('observation')->nullable();
+            $table->date('dateDernierPayement')->nullable();
+            $table->boolean('payementJustifie')->nullable();
+            $table->string('etat')->default('non demarrer');;
 
             $table->foreignId('mission_id')
                 ->references('id')

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard_sans_sta')
 
 @section('content')
-    <div class="card-body">
+    <div class="card-body container">
         <div class="header-title">
             <h4 class="card-title">Modifier une intervention</h4>
         </div> <br>

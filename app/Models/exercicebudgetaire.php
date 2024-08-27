@@ -14,4 +14,8 @@ class Exercicebudgetaire extends Model
         'nombreTotalMission',
         'clotureExercice',
     ];
+
+    public function exerciceBudgetaire () {
+        return $this->hasMany(Mission::class, 'exerciceBudgetaire_id');
+    }
 }

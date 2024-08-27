@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BanqueController;
+use App\Http\Controllers\DetailMissionController;
 use App\Http\Controllers\ExercicebudgetaireController;
 use App\Http\Controllers\IndiceController;
 use App\Http\Controllers\interventionController;
@@ -155,7 +156,7 @@ Route::middleware('auth')->prefix('personnel')->group(function () {
     Route::get('/liste', [PersonnelController::class, 'index'])->name('personnels');
     Route::post('/create', [PersonnelController::class, 'store'])->name('create-personnel');
     Route::get('/show', [PersonnelController::class, 'show'])->name('show-personnel');
-    Route::get('/consulter', [PersonnelController::class, 'consulter'])->name('consulter-personnel');
+    Route::get('/consulter/{id}', [PersonnelController::class, 'consulter'])->name('consulter-personnel');
     Route::post('/update/{id}', [PersonnelController::class, 'update'])->name('update-personnel');
     Route::get('/delete/{id}', [PersonnelController::class, 'delete'])->name('delete-personnel');
 });
@@ -168,13 +169,6 @@ Route::middleware('auth')->prefix('organisateur')->group(function () {
     Route::get('/delete/{id}', [OrganisateurController::class, 'delete'])->name('delete-organisateur');
 });
 
-Route::middleware('auth')->prefix('mission')->group(function () {
-    Route::get('/liste', [MissionController::class, 'index'])->name('missions');
-    Route::post('/create', [MissionController::class, 'store'])->name('create-mission');
-    Route::get('/show/{id}', [MissionController::class, 'show'])->name('show-mission');
-    Route::post('/update/{id}', [MissionController::class, 'update'])->name('update-mission');
-    Route::get('/delete/{id}', [MissionController::class, 'delete'])->name('delete-mission');
-});
 
 Route::middleware('auth')->prefix('lieu-mission')->group(function () {
     Route::get('/liste', [LieuMissionController::class, 'index'])->name('lieux-mission');
@@ -187,11 +181,35 @@ Route::middleware('auth')->prefix('lieu-mission')->group(function () {
 });
 
 Route::middleware('auth')->prefix('detail-mission')->group(function () {
-    Route::get('/liste', [LieuMissionController::class, 'index'])->name('detail-missions');
-    Route::post('/create', [LieuMissionController::class, 'store'])->name('create-detail-mission');
-    Route::get('/show/{id}', [LieuMissionController::class, 'show'])->name('show-detail-mission');
-    Route::post('/update/{id}', [LieuMissionController::class, 'update'])->name('update-detail-mission');
-    Route::post('/delete/{id}', [LieuMissionController::class, 'delete'])->name('delete-detail-mission');
+    Route::get('/{id}', [DetailMissionController::class, 'index'])->name('detail-missions');
+    Route::post('/create', [DetailMissionController::class, 'store'])->name('create-detail-mission');
+    Route::get('/show/{id}', [DetailMissionController::class, 'show'])->name('show-detail-mission');
+    Route::post('/update/{id}', [DetailMissionController::class, 'update'])->name('update-detail-mission');
+    Route::post('/delete/{id}', [DetailMissionController::class, 'delete'])->name('delete-detail-mission');
+});
+
+
+// CREUD ORGANISATEUR
+Route::middleware('auth')->prefix('organisateur')->group(function () {
+    Route::get('/liste', [organisateurController::class, 'index'])->name('organisateurs');
+    Route::post('/create', [organisateurController::class, 'store'])->name('create-organisateur');
+    Route::get('/show', [organisateurController::class, 'show'])->name('show-organisateur');
+    Route::get('/consulter/{id}', [organisateurController::class, 'consulter'])->name('consulter-organisateur');
+    Route::post('/update/{id}', [organisateurController::class, 'update'])->name('update-organisateur');
+    Route::get('/delete/{id}', [organisateurController::class, 'delete'])->name('delete-organisateur');
+});
+
+
+// CREUD MISSION
+Route::middleware('auth')->prefix('mission')->group(function () {
+    Route::get('/liste', [missionController::class, 'index'])->name('missions');
+    Route::post('/create', [missionController::class, 'store'])->name('create-mission');
+    Route::get('/show', [missionController::class, 'show'])->name('show-mission');
+    Route::get('/consulter/{id}', [missionController::class, 'consulter'])->name('consulter-mission');
+    Route::post('/update/{id}', [missionController::class, 'update'])->name('update-mission');
+    Route::get('/delete/{id}', [missionController::class, 'delete'])->name('delete-mission');
+   
+
 });
 
 Route::middleware('auth')->group(function () {

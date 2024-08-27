@@ -1,9 +1,9 @@
 @extends('layouts.dashboard_sans_sta')
 
 @section('content')
-    <div class="card-body">
+    <div class="card-body container">
         <div class="header-title">
-            <h4 class="card-title">Modifier le rang</h4>
+            <h4 class="card-title">Modifier l'organisateur</h4>
         </div> <br>
 
         @if ($errors->any())
@@ -30,16 +30,15 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('update-rang', $rang->id) }}">
+        <form method="POST" action="{{ route('update-organisateur', $organisateur->id) }}">
             @csrf
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="nomRang" class="form-label">Rang</label>
-                        <input type="text"  class="form-control" name="nomRang" value="{{$rang->nomRang}}">
+                        <label for="nomOrganisateur" class="form-label">Nom de l'organisateur</label>
+                        <input type="text" required class="form-control" name="nomOrganisateur" value="{{ old('nomOrganisateur', $organisateur->nomOrganisateur ?? '') }}">
                     </div>
                 </div>
-                
             </div>
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Enregistrer</button>

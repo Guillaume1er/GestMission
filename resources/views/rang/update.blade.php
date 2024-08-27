@@ -3,7 +3,7 @@
 @section('content')
     <div class="card-body container">
         <div class="header-title">
-            <h4 class="card-title">Modifier l'indice</h4>
+            <h4 class="card-title">Modifier le rang</h4>
         </div> <br>
 
         @if ($errors->any())
@@ -30,29 +30,16 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('update-indice', $indice->id) }}">
+        <form method="POST" action="{{ route('update-rang', $rang->id) }}">
             @csrf
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="code" class="form-label">Code</label>
-                        <input type="text" required class="form-control" value="{{ $indice->code }}" name="code">
+                        <label for="nomRang" class="form-label">Rang</label>
+                        <input type="text" required class="form-control" name="nomRang" value="{{$rang->nomRang}}">
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="montantNuite" class="form-label">Montant nuité</label>
-                        <input type="number" required class="form-control" value="{{ $indice->montantNuite }}" name="montantNuite">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="montantRepas" class="form-label">Montant Repas</label>
-                        <input type="number" required class="form-control" value="{{ $indice->montantRepas }}" name="montantRepas">
-                    </div>
-                </div>
-              
-               
+                
             </div>
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
