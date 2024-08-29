@@ -6,6 +6,7 @@ use App\Models\Exercicebudgetaire;
 use App\Models\Mission;
 use App\Models\Organisateur;
 use App\Models\Detailmission;
+use App\Models\Lieumission;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,11 @@ class MissionController extends Controller
     {
         $organisateurs = Organisateur::all();
         $exerciceBudgetaires = Exercicebudgetaire::all();
+
         $mission_id = Mission::find($id)->id;
+
+        // $detail_mission_id = Detailmission::where('mission_id', $id)->first();
+
         // $personnelsSelectionnes = $mission->detailMissions()->with('personnel.rang', 'personnel.indice')->get();
         // $personnelsSelect = Detailmission::where('mission_id', $mission);
 
@@ -57,6 +62,16 @@ class MissionController extends Controller
 
         return view('mission.update', compact('mission', 'organisateurs', 'exerciceBudgetaires', 'personnels', 'personnelsSelect'));
     }
+
+
+    public function detailMission($id) {
+        
+        $detail_mission_id = Detailmission::where('mission_id', $id)->first()->id;
+
+        // dd($detail_mission_id);
+
+        return view('detail_mission.index', compact('detail_mission_id'));
+    } 
 
 
 
@@ -88,9 +103,9 @@ class MissionController extends Controller
         ]);
 
         // Démarrer une transaction
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
-        try {
+        // try {
             $mission = new Mission();
             $mission->nomMission = $request->nomMission;
             $mission->objetMission = $request->objetMission;
@@ -128,17 +143,14 @@ class MissionController extends Controller
             }
 
             // Tout s'est bien passé, donc on valide la transaction
-            DB::commit();
+            // DB::commit();
 
             return redirect()->route('missions')
                 ->with('success', 'Mission créée avec succès.');
-        } catch (\Exception $e) {
-            // En cas d'erreur, on annule la transaction
-            DB::rollBack();
-
-            // Retourner l'erreur ou gérer comme souhaité
-            return redirect()->back()->withErrors('Une erreur est survenue lors de la création de la mission. Veuillez réessayer');
-        }
+        // } catch (\Exception $e) {
+        //     DB::rollBack();
+        // }
+        return redirect()->back()->withErrors('Une erreur est survenue lors de la création de la mission. Veuillez réessayer');
     }
 
 
@@ -251,4 +263,58 @@ class MissionController extends Controller
         return redirect()->route('missions')
             ->with('success', 'Mission supprimée avec succès.');
     }
+
+
+    public function validation($id) {
+        $personnels = Personnel::all();
+
+        $lieux_mission = Lieumission::all();
+
+        // Récupérer la mission avec les détails liés, y compris les personnels
+        $mission = Mission::with('detailMission.personnel')->findOrFail($id);
+
+        // Récupérer les personnels à partir des détails de la mission
+        $personnelsSelect = $mission->detailMission->map(function ($detailMission) {
+            return $detailMission->personnel;
+        });
+
+        // Récupérer la mission avec les détails liés, y compris les personnels
+        $mission = Mission::with('detailMission.personnel')->findOrFail($id);
+
+         // Récupérer les personnels à partir des détails de la mission
+         $personnelsSelect = $mission->detailMission->map(function ($detailMission) {
+            return $detailMission->personnel;
+        });
+
+        return view('mission.validation', compact('personnels', 'personnelsSelect', 'mission', 'lieux_mission'));
+    }
+
+
+    public function validationStore(Request $request, $id) {
+        // dd($request->all());
+
+        $mission = Mission::find($id);
+
+        foreach ($request->personnel_ids as $personnelId) {
+            $detailMission = Detailmission::where('mission_id', $mission->id)
+                                          ->where('personnel_id', $personnelId)
+                                          ->first();
+    
+            if ($detailMission) {
+                if (isset($request->dateDepart[$personnelId])) {
+                    $detailMission->dateDepart = $request->dateDepart[$personnelId];
+                }
+                if (isset($request->dateRetour[$personnelId])) {
+                    $detailMission->dateRetour = $request->dateRetour[$personnelId];
+                }
+                if (isset($request->lieuMission_id[$personnelId])) {
+                    $detailMission->lieuMission_id = $request->lieuMission_id[$personnelId];
+                }
+                $detailMission->save();
+            }
+        }
+    
+
+        return redirect()->route('missions', $id)->with('success', 'Mission validée avec succès.');
+    }  
 }

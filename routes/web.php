@@ -180,6 +180,7 @@ Route::middleware('auth')->prefix('lieu-mission')->group(function () {
     Route::get('/villes/{departement}', [LieuMissionController::class, 'getVilles'])->name('getVilles');
 });
 
+// DETAIL MISSION
 Route::middleware('auth')->prefix('detail-mission')->group(function () {
     Route::get('/{id}', [DetailMissionController::class, 'index'])->name('detail-missions');
     Route::post('/create', [DetailMissionController::class, 'store'])->name('create-detail-mission');
@@ -206,9 +207,12 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::post('/create', [missionController::class, 'store'])->name('create-mission');
     Route::get('/show', [missionController::class, 'show'])->name('show-mission');
     Route::get('/consulter/{id}', [missionController::class, 'consulter'])->name('consulter-mission');
+    Route::get('/consulter-detail-mission/{id}', [missionController::class, 'detailMission'])->name('details-mission');
     Route::post('/update/{id}', [missionController::class, 'update'])->name('update-mission');
     Route::get('/delete/{id}', [missionController::class, 'delete'])->name('delete-mission');
-   
+    Route::post('/traitement/{id}', [missionController::class, 'traitement'])->name('traitement-mission');
+    Route::get('/validation/{id}', [missionController::class, 'validation'])->name('validation-mission');
+    Route::post('/validation/{id}', [missionController::class, 'validationStore'])->name('validation-store');
 
 });
 

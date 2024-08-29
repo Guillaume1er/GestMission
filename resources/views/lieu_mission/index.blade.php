@@ -7,7 +7,7 @@
             <div class="header-title">
                 <h4 class="card-title">Liste des lieux mission</h4>
             </div>
-            <div class="">
+            <div class="mb-2">
                 <a type="button" class="btn btn-primary" href="{{ route('show-lieu-mission') }}">
                     <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -77,7 +77,7 @@
                         <td class="sorting_1">{{$loop->index +1}}</td>
                         <td>{{$lieumission->departement->nomDepartement}}</td>
                         <td>{{$lieumission->commune}}</td>
-                        <td>{{$lieumission->distance}}</td>
+                        <td>{{$lieumission->distance}} Km</td>
                         <td>{{$lieumission->nuite ? 'Oui' : 'Non'}}</td>
                         <td>
                             <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top"

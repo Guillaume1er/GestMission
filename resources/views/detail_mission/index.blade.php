@@ -85,6 +85,7 @@
                                                 <th>Nom et Prénoms</th>
                                                 <th>Indice</th>
                                                 <th>Rang</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>

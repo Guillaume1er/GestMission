@@ -54,28 +54,33 @@
                             style="width: 251.172px;">N°
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Exercice budgetaire
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Exercice
+                            budgetaire
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Numéro mission
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Numéro
+                            mission
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Référence mission
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Référence
+                            mission
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Nom mission
                         </th>
-                     
+
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date mission
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date début mission
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date début
+                            mission
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date fin mission
-                        </th>  
-                       
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Date fin
+                            mission
+                        </th>
+
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Organisateur
                         </th>
@@ -89,16 +94,74 @@
                     @foreach ($missions as $mission)
                         <tr class="odd">
                             <td class="sorting_1">{{ $loop->index + 1 }}</td>
-                            <td>{{ $mission->exerciceBudgetaire->exerciceBudgetaire  ?? 'Rang non défini'  }}</td>
+                            <td>{{ $mission->exerciceBudgetaire->exerciceBudgetaire ?? 'Rang non défini' }}</td>
                             <td>{{ $mission->numMission }}</td>
                             <td>{{ $mission->refMission }}</td>
                             <td>{{ $mission->nomMission }}</td>
                             <td>{{ $mission->dateMission }}</td>
                             <td>{{ $mission->dateDebutMission }}</td>
-                            <td>{{ $mission->dateFinMission}}</td>                   
-                            <td>{{ $mission->organisateur->nomOrganisateur?? 'Rang non défini'  }}</td>
-                            
+                            <td>{{ $mission->dateFinMission }}</td>
+                            <td>{{ $mission->organisateur->nomOrganisateur ?? 'Rang non défini' }}</td>
+
                             <td>
+                                <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" data-original-title="Validation" aria-label="Validation"
+                                    data-bs-original-title="Validation"
+                                    href="{{ route('validation-mission', $mission->id) }}">
+                                    <span class="btn-inner">
+                                        <!-- Icône de validation -->
+                                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9 16.2l-3.5-3.5L4 14.2l5 5L20 8.2l-1.5-1.5L9 16.2z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" data-original-title="Traitement" aria-label="Traitement"
+                                    data-bs-original-title="Traitement"
+                                    href="{{ route('detail-missions', $mission->id) }}">
+                                    <span class="btn-inner">
+                                        <!-- Icône de traitement -->
+                                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2V6" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M12 18V22" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M4.93 4.93L7.76 7.76" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16.24 16.24L19.07 19.07" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 12H6" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M18 12H22" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M4.93 19.07L7.76 16.24" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16.24 7.76L19.07 4.93" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" data-original-title="Détail mission"
+                                    aria-label="Détail mission" data-bs-original-title="Détail mission" href="#">
+                                    <span class="btn-inner">
+                                        <!-- Icône de détail -->
+                                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 20H6C4.9 20 4 19.1 4 18V6C4 4.9 4.9 4 6 4H18C19.1 4 20 4.9 20 6V12"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M12 11H18M12 8H18M12 14H18" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <circle cx="18" cy="18" r="3" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                    </span>
+                                </a>
                                 <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip"
                                     data-bs-placement="top" data-original-title="Modifier" aria-label="Modifier"
                                     data-bs-original-title="Modifier"

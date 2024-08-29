@@ -97,62 +97,6 @@
                 </div>
             </div>
 
-            {{-- <div class="row">
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="imputation" class="form-label">Imputation</label>
-                        <select class="form-control form-select" required name="imputation" id="imputation">
-                            <option>Sélectionner une imputation</option>
-                            <option value="imputation 1">imputation 1</option>
-                            <option value="imputation 2">imputation 2</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="previsionBBudgetaire" class="form-label">Prévision Budgetaire</label>
-                        <select class="form-control form-select" required name="previsionBBudgetaire"
-                            id="previsionBBudgetaire">
-                            <option>Sélectionner une prévision budgetaire</option>
-                            <option value="oui">Oui</option>
-                            <option value="non">Non</option>
-                        </select>
-                    </div>
-                </div>
-            </div> --}}
-
-            {{-- <div class="row">
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="autorisateur1" class="form-label">Autorisateur 1</label>
-                        <input type="text" class="form-control" name="autorisateur1"
-                            value="{{ old('autorisateur1') }}" />
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="autorisateur2" class="form-label">Autorisateur 2</label>
-                        <input required type="text" class="form-control" name="autorisateur2"
-                            value="{{ old('autorisateur2') }}" />
-                    </div>
-                </div>
-            </div> --}}
-            <div class="row">
-                {{-- <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="autorisateur3" class="form-label">Autorisateur 3</label>
-                        <input required type="text" class="form-control" name="autorisateur3"
-                            value="{{ old('autorisateur3') }}" />
-                    </div>
-                </div> --}}
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="observationMission" class="form-label">Observation mission</label>
-                        <input type="text" class="form-control" name="observationMission"
-                            value="{{ old('observationMission', $mission->observationMission ?? '') }}" />
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-6" hidden>
                     <div class="mb-3">
@@ -166,7 +110,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="row">
                 <div class="col-lg-6">

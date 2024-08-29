@@ -77,7 +77,7 @@ class LieuMissionController extends Controller
         $lieumission->save();
 
         return redirect()->route('lieux-mission')
-            ->with('success', 'Lieu mission créé avec succès.');
+            ->with('success', 'Lieu mission crée avec succès.');
     }
 
     public function update(Request $request, $id)
