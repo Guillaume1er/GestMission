@@ -9,8 +9,7 @@ class Detailmission extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
-
+    protected $fillable = [
         'dateTraitementMission', 
         'dateDepart',
         'dateRetour',
@@ -18,6 +17,7 @@ class Detailmission extends Model
         'nbrNuit',
         'coutNuite',
         'montantNuite',
+        'moyenDeDeplacement',
         'nbrRepas',
         'coutRepas',
         'montantRepas',
@@ -34,7 +34,10 @@ class Detailmission extends Model
         'mission_id',
         'lieuMission_id',
         'personnel_id',
+        'vehicule_id', 
+        'statut',      
     ];
+
 
     public function personnel() {
         return $this->belongsTo(Personnel::class);
@@ -45,6 +48,10 @@ class Detailmission extends Model
     }
     
     public function lieuMission() {
-        return $this->hasMany(Lieumission::class);
+        return $this->belongsTo(Lieumission::class);
+    }
+
+    public function vehicule() {
+        return $this->belongsTo(Vehicule::class);
     }
 }

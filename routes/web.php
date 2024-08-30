@@ -187,6 +187,14 @@ Route::middleware('auth')->prefix('detail-mission')->group(function () {
     Route::get('/show/{id}', [DetailMissionController::class, 'show'])->name('show-detail-mission');
     Route::post('/update/{id}', [DetailMissionController::class, 'update'])->name('update-detail-mission');
     Route::post('/delete/{id}', [DetailMissionController::class, 'delete'])->name('delete-detail-mission');
+    Route::post('/missions/detail/{id}/update', [DetailMissionController::class, 'update'])->name('detail-mission.update');
+    Route::post('/missions/{id}/store', [DetailMissionController::class, 'store'])->name('detail-mission.store');
+    // Route pour afficher le formulaire de validation
+    Route::get('/mission/{id}/validate', [DetailMissionController::class, 'showValidationForm'])->name('validation.form');
+
+    // Route pour gérer la soumission du formulaire et mettre à jour les détails de la mission
+    Route::post('/mission/validate', [DetailMissionController::class, 'updateDetailMission'])->name('validation.update');
+    Route::get('mission/mission/{id}/edit', [DetailMissionController::class, 'edit'])->name('detail-mission.edit');
 });
 
 
@@ -212,8 +220,12 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::get('/delete/{id}', [missionController::class, 'delete'])->name('delete-mission');
     Route::post('/traitement/{id}', [missionController::class, 'traitement'])->name('traitement-mission');
     Route::get('/validation/{id}', [missionController::class, 'validation'])->name('validation-mission');
-    Route::post('/validation/{id}', [missionController::class, 'validationStore'])->name('validation-store');
 
+    // Route pour afficher le formulaire de validation pour un personnel spécifique
+    Route::get('/detail/{id}', [MissionController::class, 'showValidationForm'])->name('detail-mission');
+
+    // Route pour valider la mission et enregistrer les informations
+    Route::post('/validation{id}', [MissionController::class, 'validateMission'])->name('validateMission');
 });
 
 Route::middleware('auth')->group(function () {

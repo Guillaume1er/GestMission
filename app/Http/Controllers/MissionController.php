@@ -8,6 +8,7 @@ use App\Models\Organisateur;
 use App\Models\Detailmission;
 use App\Models\Lieumission;
 use App\Models\Personnel;
+use App\Models\Vehicule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -317,4 +318,41 @@ class MissionController extends Controller
 
         return redirect()->route('missions', $id)->with('success', 'Mission validée avec succès.');
     }  
+
+    public function showValidationForm($id)
+    {
+        $detailMission = Detailmission::with('personnel')->findOrFail($id);
+        $vehicules = Vehicule::all();
+
+        return view('mission.detail', compact('detailMission', 'vehicules'));
+    }
+
+    // Méthode pour valider la mission et enregistrer les informations
+    public function validateMission(Request $request, $id)
+    {
+        // Validation des données du formulaire
+        $validatedData = $request->validate([
+            'ref_om' => 'required|string',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date',
+            'moyen_deplacement' => 'required|string',
+            'vehicule_id' => 'nullable|exists:vehicules,id',
+        ]);
+
+        // Trouver le détail de la mission
+        $detailMission = Detailmission::findOrFail($id);
+
+        // Mise à jour des informations de validation
+        $detailMission->update([
+            'ref_om' => $validatedData['ref_om'],
+            'date_debut' => $validatedData['date_debut'],
+            'date_fin' => $validatedData['date_fin'],
+            'moyen_deplacement' => $validatedData['moyen_deplacement'],
+            'vehicule_id' => $validatedData['vehicule_id'] ?? null,
+            'statut' => 'validé',
+        ]);
+
+        return redirect()->route('validation-mission', ['id' => $detailMission->mission_id])->with('success', 'Mission validée avec succès.');
+    }
 }
+

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Detailmission;
 use App\Models\Mission;
 use App\Models\Personnel;
+use App\Models\LieuMission;
+use App\Models\Vehicule;
 use Illuminate\Http\Request;
 
 class DetailMissionController extends Controller
@@ -22,8 +24,10 @@ class DetailMissionController extends Controller
             ->unique('id');
 
         // dd($personnels);
+        $lieux_mission = LieuMission::all(); // Liste des lieux de mission
+        $vehicules = Vehicule::all(); // Liste des véhicules
 
-        return view('detail_mission.index', compact('mission', 'personnels'));
+        return view('detail_mission.index', compact('mission', 'personnels', 'lieux_mission', 'vehicules'));
     }
     
 
@@ -77,5 +81,39 @@ class DetailMissionController extends Controller
 
             return redirect()->route('detail_mission.index')->with('success', 'Mission validée avec succès.');
                          
+    }
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'dateDepart' => ['required', 'date'],
+            'dateRetour' => ['required', 'date'],
+            'lieuMission_id' => ['nullable', 'exists:lieumissions,id'],
+            'moyenDeDeplacement' => ['nullable', 'string'],
+            'vehicule_id' => ['nullable', 'exists:vehicules,id'],
+            'refOm' => ['nullable', 'string'],
+            'dateTraitementMission' => ['nullable', 'date'],
+            'nbrJour' => ['nullable', 'numeric'],
+            'nbrNuit' => ['nullable', 'numeric'],
+            'coutNuite' => ['nullable', 'numeric'],
+            'montantNuite' => ['nullable', 'numeric'],
+            'nbrRepas' => ['nullable', 'numeric'],
+            'coutRepas' => ['nullable', 'numeric'],
+            'montantRepas' => ['nullable', 'numeric'],
+            'montantMission' => ['nullable', 'numeric'],
+            'montantAvance' => ['nullable', 'numeric'],
+            'montantReste' => ['nullable', 'numeric'],
+            'dateSignatureOm' => ['nullable', 'date'],
+            'montantPaye' => ['nullable', 'numeric'],
+            'observation' => ['nullable', 'string'],
+            'dateDernierPayement' => ['nullable', 'date'],
+            'payementJustifie' => ['nullable', 'string'],
+            'statut' => ['required', 'string'],
+        ]);
+
+        $detailMission = Detailmission::findOrFail($id);
+        $detailMission->update($validated);
+
+        return redirect()->route('detail-missions', ['id' => $detailMission->mission_id])
+                         ->with('success', 'Détails de la mission mis à jour avec succès.');
     }
 }

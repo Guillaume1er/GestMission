@@ -50,4 +50,8 @@ class Vehicule extends Model
     public function vehiculeMission() {
         return $this->belongsTo(Vehiculemission::class);
     }
+
+    public function detailMission() {
+        return $this->hasMany(Detailmission::class);
+    }
 }
