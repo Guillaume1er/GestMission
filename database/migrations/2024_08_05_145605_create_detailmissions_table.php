@@ -35,6 +35,13 @@ return new class extends Migration
             $table->boolean('payementJustifie')->nullable();
             $table->string('etat')->default('non demarrer');
             $table->string('statut')->default('non validé');
+            $table->date('dateValidation')->nullable();
+            $table->string('validateur')->nullable();
+            $table->string('annulateurTraitement')->nullable();
+            $table->date('dateAnnulerTraitement')->nullable();
+            $table->string('traiteurMission')->nullable();
+            $table->integer('volumeCarburant')->nullable();
+            $table->integer('distanceVehiculeMission')->nullable();
 
             $table->foreignId('mission_id')
                 ->references('id')

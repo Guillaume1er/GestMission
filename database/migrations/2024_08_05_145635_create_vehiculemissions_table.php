@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('qteCarburantAffecte');
             $table->integer('kilometrageDepart');
             $table->integer('kilometrageFinMission');
+            $table->integer('volumeConsommationPrcentKm');
 
             $table->foreignId('mission_id')
                 ->references('id')

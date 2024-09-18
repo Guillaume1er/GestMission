@@ -19,7 +19,6 @@
         <form method="POST" action="{{ route('create-intervention') }}">
             @csrf
             <div class="row">
-                
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="typeIntervention_id" class="form-label">Type intervention du vehicule</label>
@@ -67,7 +66,7 @@
                         <select class="form-select" name="statut" id="statut">
                             <option value="bon">Bon</option>
                             <option value="mauvais">Mauvais</option>
-                        </select>  
+                        </select>
                     </div>
                 </div>
             </div>
@@ -146,12 +145,11 @@
                     </div>
                 </div>
             </div>
-    </div>
 
-    <div class="text-end">
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-    </div>
-    </form>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
 
     </div>
 

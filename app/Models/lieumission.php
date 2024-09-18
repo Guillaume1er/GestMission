@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory; 
 use Illuminate\Database\Eloquent\Model;
 
 class Lieumission extends Model
@@ -17,7 +17,7 @@ class Lieumission extends Model
     ];
 
     public function detailMission() {
-        return $this->hasMany(Detailmission::class);
+        return $this->hasMany(Detailmission::class, 'detailMission_id');
     }
 
     

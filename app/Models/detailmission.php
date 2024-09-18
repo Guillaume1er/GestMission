@@ -48,7 +48,7 @@ class Detailmission extends Model
     }
     
     public function lieuMission() {
-        return $this->belongsTo(Lieumission::class);
+        return $this->belongsTo(Lieumission::class, 'lieuMission_id');
     }
 
     public function vehicule() {

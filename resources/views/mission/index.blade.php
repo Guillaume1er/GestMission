@@ -1,4 +1,4 @@
-@extends('layouts/dashboard_sans_sta')
+ @extends('layouts/dashboard_sans_sta')
 
 @section('content')
 
@@ -120,7 +120,7 @@
                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
                                     data-bs-placement="top" data-original-title="Traitement" aria-label="Traitement"
                                     data-bs-original-title="Traitement"
-                                    href="{{ route('detail-missions', $mission->id) }}">
+                                    href="{{ route('traitement-mission', $mission->id) }}">
                                     <span class="btn-inner">
                                         <!-- Icône de traitement -->
                                         <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"

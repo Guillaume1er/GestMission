@@ -3,7 +3,7 @@
 @section('content')
     <div class="card-body container">
         <div class="header-title mb-4">
-            <h4 class="card-title">Validation du personnel affecté à la mission</h4>
+            <h4 class="card-title">Traitement de la mission</h4>
         </div>
 
         @if ($errors->any())
@@ -30,54 +30,60 @@
             </div>
         @endif
 
-        <table class="table table-bordered table-sm" id="personnelTable">
+        <table id="personnelTable" class="table table-bordered table-sm" data-toggle="data-table">
+
             <thead>
                 <tr>
-                    <th style="width: 20%; padding: 0.2rem;">Nom et Prénoms</th>
-                    <th style="width: 10%; padding: 0.2rem;">Indice</th>
-                    <th style="width: 10%; padding: 0.2rem;">Rang</th>
-                    <th style="width: 10%; padding: 0.2rem;">Date départ</th>
+                    <th style="width: 20%; padding: 0.2rem;">Nom</th>
+                    <th style="width: 15%; padding: 0.2rem;">Date Départ</th>
                     <th style="width: 15%; padding: 0.2rem;">Date retour</th>
-                    <th style="width: 60%; padding: 0.2rem;">Lieu mission</th>
-                    <th style="width: 60%; padding: 0.2rem;">Etat</th>
-                    <th style="width: 60%; padding: 0.2rem;">Statut</th>
+                    <th style="width: 10%; padding: 0.2rem;">Nombre nuité</th>
+                    <th style="width: 10%; padding: 0.2rem;">Montant nuité</th>
+                    <th style="width: 15%; padding: 0.2rem;">Nombre Repas</th>
+                    <th style="width: 15%; padding: 0.2rem;">Montant Repas</th>
+                    <th style="width: 15%; padding: 0.2rem;">Montant Mission</th>
+                    <th style="width: 60%; padding: 0.2rem;">Etat </th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach ($detailMission_personnel as $personnel)
                     <tr>
                         <td>{{ $personnel->personnel->nomPrenomsPersonnel }}</td>
-                        <td>{{ $personnel->personnel->indice->code ?? 'Non défini' }}</td>
-                        <td>{{ $personnel->personnel->rang->nomRang ?? 'Non défini' }}</td>
                         <td>{{ date('d/m/Y', strtotime($personnel->dateDepart)) }}</td>
                         <td>{{ date('d/m/Y', strtotime($personnel->dateRetour)) }}</td>
-                        <td>{{ $personnel->lieuMission->commune ?? '' }}</td>
-                        <td>
-                            @if ($personnel->statut === "validé")
-                                <span class="btn-sm status-btn">Validé</span>
-                            @else
-                                <span class="btn-sm status-btn">Non validé</span>
-                            @endif
+                        <td class="text-center">{{ $personnel->nbrNuit }}</td>
+                        <td>{{ number_format($personnel->montantNuite, 0, ',', ' ') }} FCFA</td>
+                        <td class="text-center">{{ $personnel->nbrRepas }}</td>
+                        <td>{{ number_format($personnel->montantRepas, 0, ',', ' ') }} FCFA</td>
+                        <td>{{ number_format($personnel->montantMission, 0, ',', ' ') }} FCFA</td>
 
-                        </td>
+                        {{-- <td>
+                            <span class="btn-sm status-btn">
+                                
+                            </span>
+                        </td> --}}
                         <td>
-                            <a class="btn btn-sm btn-icon {{ $personnel->statut == 'validé' ? 'btn-success' : 'btn-warning' }}"
+                            <a class="btn btn-sm btn-icon {{ $personnel->dateTraitementMission !== null ? 'btn-success' : 'btn-warning' }}"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="{{ $personnel->statut == 'validé' ? 'Personnel validé' : 'Cliquez pour valider' }}"
+                                title="{{ $personnel->dateTraitementMission !== null ? 'Cliquez pour annuler' : 'Cliquer pour traiter' }}"
                                 aria-label=""
-                                href="{{ $personnel->statut === 'validé' ? route('show-validated-details', $personnel->personnel_id) : route('detail-mission', $personnel->personnel_id) }}">
-                            
+                                onclick="return confirm('{{ $personnel->dateTraitementMission == '' ? 'Voulez-vous vraiment valider le traitement ?' : 'Voulez-vous vraiment annuler le traitement ?' }}')"
+                                href="{{ $personnel->dateTraitementMission == '' ? route('traitement-mission-personnel', $personnel->personnel_id) : route('traitement-mission-personnel-annuler', $personnel->personnel_id)}}">
+
                                 <span class="btn-inner">
-                                    @if ($personnel->statut == 'validé')
+                                    @if ($personnel->dateTraitementMission !== null && $personnel->dateAnnulerTraitement == null)
                                         <!-- Icône d'autorisation -->
-                                        <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <!-- First validation checkmark -->
-                                            <path d="M10 12.5L4.5 7L6.086 5.414L10 9.328L17.914 1.414L19.5 3L10 12.5Z" fill="currentColor" />
-                                            
+                                            <path d="M10 12.5L4.5 7L6.086 5.414L10 9.328L17.914 1.414L19.5 3L10 12.5Z"
+                                                fill="currentColor" />
+
                                             <!-- Second validation checkmark placed below the first one -->
-                                            <path d="M10 22.5L4.5 17L6.086 15.414L10 19.328L17.914 11.414L19.5 13L10 22.5Z" fill="currentColor" />
+                                            <path d="M10 22.5L4.5 17L6.086 15.414L10 19.328L17.914 11.414L19.5 13L10 22.5Z"
+                                                fill="currentColor" />
                                         </svg>
-                                          
                                     @else
                                         <!-- Icône de désautorisation -->
                                         <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
@@ -89,6 +95,7 @@
                                 </span>
                             </a>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>

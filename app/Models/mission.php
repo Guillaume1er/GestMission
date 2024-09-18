@@ -72,4 +72,12 @@ class Mission extends Model
             $intervention->refMission = 'MI ' . $intervention->numMission . '-' . $currentYear;
         });
     }
+    public static function boot()
+{
+    parent::boot();
+
+    static::deleting(function ($mission) {
+        $mission->detailMission()->delete(); // Supprime tous les détails liés
+    });
+}
 }

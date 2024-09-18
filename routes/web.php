@@ -218,14 +218,14 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::get('/consulter-detail-mission/{id}', [missionController::class, 'detailMission'])->name('details-mission');
     Route::post('/update/{id}', [missionController::class, 'update'])->name('update-mission');
     Route::get('/delete/{id}', [missionController::class, 'delete'])->name('delete-mission');
-    Route::post('/traitement/{id}', [missionController::class, 'traitement'])->name('traitement-mission');
+    Route::get('/traitement/{id}', [missionController::class, 'traitement'])->name('traitement-mission');
     Route::get('/validation/{id}', [missionController::class, 'validation'])->name('validation-mission');
-
-    // Route pour afficher le formulaire de validation pour un personnel spécifique
     Route::get('/detail/{id}', [MissionController::class, 'showValidationForm'])->name('detail-mission');
+    Route::post('/validation/{id}', [MissionController::class, 'validateMission'])->name('validateMission');
+    Route::get('/traitement-personnel/{id}', [MissionController::class, 'traitementMission'])->name('traitement-mission-personnel');
+    Route::get('/traitement-personnel-annuler/{id}', [MissionController::class, 'traitementMissionAnnuler'])->name('traitement-mission-personnel-annuler');
+    Route::get('/show_details/{id}', [MissionController::class, 'showValidatedDetails'])->name('show-validated-details');
 
-    // Route pour valider la mission et enregistrer les informations
-    Route::post('/validation{id}', [MissionController::class, 'validateMission'])->name('validateMission');
 });
 
 Route::middleware('auth')->group(function () {
