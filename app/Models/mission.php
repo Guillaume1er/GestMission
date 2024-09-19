@@ -44,7 +44,7 @@ class Mission extends Model
     }
 
     public function detailMission() {
-        return $this->hasMany(Detailmission::class);
+        return $this->hasMany(Detailmission::class, 'mission_id');
     }
 
     public function vehiculeMission() {

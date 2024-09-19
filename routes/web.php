@@ -223,8 +223,10 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::get('/detail/{id}', [MissionController::class, 'showValidationForm'])->name('detail-mission');
     Route::post('/validation/{id}', [MissionController::class, 'validateMission'])->name('validateMission');
     Route::get('/traitement-personnel/{id}', [MissionController::class, 'traitementMission'])->name('traitement-mission-personnel');
-    Route::get('/traitement-personnel-annuler/{id}', [MissionController::class, 'traitementMissionAnnuler'])->name('traitement-mission-personnel-annuler');
+    Route::get('/validation-personnel-annuler/{id}', [MissionController::class, 'AnnulerValidation'])->name('validation-mission-personnel-annuler');
     Route::get('/show_details/{id}', [MissionController::class, 'showValidatedDetails'])->name('show-validated-details');
+    Route::get('/deplacement/{mission_id}', [MissionController::class, 'showVehicules'])->name('show-vehicules');
+
 
 });
 

@@ -44,10 +44,10 @@ class Detailmission extends Model
     }
     
     public function mission() {
-        return $this->belongsTo(Mission::class);
+        return $this->belongsTo(Mission::class, 'mission_id');
     }
     
-    public function lieuMission() {
+    public function lieuMission() { 
         return $this->belongsTo(Lieumission::class, 'lieuMission_id');
     }
 

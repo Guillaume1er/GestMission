@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('commune');
             $table->string('distance');
             $table->boolean('nuite');
-            $table->integer('nombreRepas');
+            $table->integer('nombreRepas')->default('1');
 
             $table->foreignId('departement_id')
             ->references('id')

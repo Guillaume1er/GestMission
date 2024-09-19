@@ -54,18 +54,20 @@
                         <td>{{ $personnel->lieuMission->commune ?? '' }}</td>
                         <td>
                             @if ($personnel->statut === "validé")
-                                <span class="btn-sm status-btn">Validé</span>
+                                <span class="btn-sm status-btn">Validée</span>
+                            @elseif ($personnel->statut === "non validé")
+                                <span class="btn-sm status-btn">Non validée</span>
                             @else
-                                <span class="btn-sm status-btn">Non validé</span>
+                                <span class="btn-sm status-btn">Non Traitée</span>
                             @endif
 
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-icon {{ $personnel->statut == 'validé' ? 'btn-success' : 'btn-warning' }}"
+                            <a class="btn btn-sm btn-icon {{ $personnel->statut == 'validé' ? 'btn-success' : ($personnel->statut == 'non traité' ? 'btn-primary' : 'btn-danger') }}"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="{{ $personnel->statut == 'validé' ? 'Personnel validé' : 'Cliquez pour valider' }}"
+                                title="{{ $personnel->statut == 'validé' ? 'Cliquez pour annuler' : 'Cliquez pour valider' }}"
                                 aria-label=""
-                                href="{{ $personnel->statut === 'validé' ? route('show-validated-details', $personnel->personnel_id) : route('detail-mission', $personnel->personnel_id) }}">
+                                href="{{ $personnel->statut === 'validé' ? route('validation-mission-personnel-annuler', $personnel->personnel_id) : route('detail-mission', $personnel->personnel_id) }}">
                             
                                 <span class="btn-inner">
                                     @if ($personnel->statut == 'validé')

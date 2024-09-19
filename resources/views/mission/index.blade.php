@@ -145,8 +145,8 @@
                                     </span>
                                 </a>
                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" data-original-title="Détail mission"
-                                    aria-label="Détail mission" data-bs-original-title="Détail mission" href="#">
+                                    data-bs-placement="top" data-original-title="Deplacement"
+                                    aria-label="Déplacement" data-bs-original-title="Deplacement" href="{{ route('show-vehicules', ['mission_id' => $mission->id]) }}">
                                     <span class="btn-inner">
                                         <!-- Icône de détail -->
                                         <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"

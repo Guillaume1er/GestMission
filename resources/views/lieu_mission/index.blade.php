@@ -63,6 +63,9 @@
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Distance
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Nombre repas
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;"> Nuite
                         </th>
 
@@ -78,6 +81,7 @@
                         <td>{{$lieumission->departement->nomDepartement}}</td>
                         <td>{{$lieumission->commune}}</td>
                         <td>{{$lieumission->distance}} Km</td>
+                        <td>{{$lieumission->nombreRepas}}</td>
                         <td>{{$lieumission->nuite ? 'Oui' : 'Non'}}</td>
                         <td>
                             <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top"

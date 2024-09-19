@@ -48,19 +48,29 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="mb-3">
                         <label for="distance" class="form-label">Distance</label>
                         <input class="form-control" type="number" name="distance" value="{{ $lieumission->distance }}" />
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-2">
                     <div class="mb-3">
                         <input class="form-check-input" type="checkbox" id="nuite" value="1" name="nuite"
                             {{ $lieumission->nuite ? 'checked' : '' }}>
                         <label class="form-check-label" for="nuite">
                             Nuité
                         </label>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="nombreRepas" class="form-label">Nombre de repas</label>
+                        <select class="form-select" required name="nombreRepas" id="nombreRepas">
+                            <option selected disabled>Sélectionnez le nombre de repas</option>
+                            <option value="1" {{ old('nombreRepas', $lieumission->nombreRepas) == 1 ? 'selected' : '' }}>Un repas (1)</option>
+                            <option value="2" {{ old('nombreRepas', $lieumission->nombreRepas) == 2 ? 'selected' : '' }}>Deux repas (2)</option>
+                        </select>
                     </div>
                 </div>
             </div>

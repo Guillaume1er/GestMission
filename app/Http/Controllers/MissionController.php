@@ -362,6 +362,9 @@ class MissionController extends Controller
         $detailMission->lieuMission_id = $request->lieuMission_id;
         $detailMission->statut = $request->statut;
 
+        $user = auth()->user();
+        $detailMission->validateur = $user->name;
+
         // Calculer le nombre de jours entre dateRetour et dateDepart
         $dateDepart = \Carbon\Carbon::parse($request->dateDepart);
         $dateRetour = \Carbon\Carbon::parse($request->dateRetour);
@@ -373,7 +376,7 @@ class MissionController extends Controller
 
         $detailMission->montantNuite =  $detailMission->coutNuite * $detailMission->nbrNuit;
 
-        $detailMission->nbrRepas = $detailMission->nbrJour - 1;
+        $detailMission->nbrRepas = $detailMission->lieuxMission->nombreRepas ?? 0;
 
         $detailMission->coutRepas = $detailMission->personnel->indice->montantRepas;
 
@@ -385,7 +388,7 @@ class MissionController extends Controller
 
         $detailMission->montantReste = $detailMission->montantMission - $detailMission->montantAvance;
 
-        //  dd($detailMission->personnel->indice->montantNuite);
+        //  dd($detailMission->nbrRepas);
 
         $detailMission->save();
 
@@ -450,7 +453,7 @@ class MissionController extends Controller
 
         // Récupérer l'utilisateur connecté
         $user = auth()->user();
-        $detailMission_personnel->traiteurMission = $user->name; 
+        $detailMission_personnel->traiteurMission = $user->name;
 
         // Mettre à jour la date annuler traitement à null
         $detailMission_personnel->dateAnnulerTraitement = null;
@@ -462,17 +465,18 @@ class MissionController extends Controller
         // Rediriger avec un message de succès
         return redirect()->back()->with('success', 'Le traitement a été effectué avec succès.');
     }
-    
-    public function traitementMissionAnnuler($id)
+
+    public function AnnulerValidation($id)
     {
         // Récupérer les personnels à partir des détails de la mission
         $detailMission_personnel = Detailmission::where('personnel_id', $id)->firstOrFail();
 
         // Mettre à jour la date de traitement avec la date actuelle
-        $detailMission_personnel->dateAnnulerTraitement = now();
+        $detailMission_personnel->dateAnnulerValidation = now();
 
         // Mettre à jour la date de traitement à null
-        $detailMission_personnel->dateTraitementMission = null;
+        $detailMission_personnel->dateValidation = null;
+        $detailMission_personnel->statut = "non traité";
 
         // Récupérer l'utilisateur connecté
         $user = auth()->user();
@@ -482,7 +486,31 @@ class MissionController extends Controller
         $detailMission_personnel->save();
 
         // Rediriger avec un message de succès
-        return redirect()->back()->with('success', 'Le traitement a été annulé avec succès.');
+        return redirect()->back()->with('success', 'La validation a été annulé avec succès.');
     }
-    
+
+    public function showVehicules($mission_id)
+    {
+        $mission = Mission::findOrFail($mission_id);
+        // Récupère les détails de mission pour une mission spécifique, y compris les véhicules associés
+        $detailMissions = DetailMission::with('vehicule')
+            ->where('mission_id', $mission_id)
+            ->get();
+
+        // Initialiser un tableau pour les plaques d'immatriculation
+        $vehicules = [];
+
+        // Parcourir les détails de mission et récupérer les plaques d'immatriculation des véhicules
+        foreach ($detailMissions as $detailMission) {
+            if ($detailMission->vehicule) { // Vérifie si un véhicule est attribué
+                $vehicules[] = $detailMission->vehicule->plaqueVehicule;
+            }
+        }
+
+        // Retirer les doublons
+        $vehicules = array_unique($vehicules);
+       
+
+        return view('mission.deplacement', compact('vehicules', 'mission'));
+    }
 }

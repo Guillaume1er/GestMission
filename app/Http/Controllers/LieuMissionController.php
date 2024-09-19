@@ -59,6 +59,7 @@ class LieuMissionController extends Controller
             'departement_id' => ['required', 'max:255'],
             'commune' => ['string', 'max:255'],
             'distance' => ['integer'],
+            'nombreRepas' => ['integer', 'required'],
         ]);
 
         $lieumission = new Lieumission();
@@ -67,6 +68,7 @@ class LieuMissionController extends Controller
         $lieumission->commune = $request->commune;
         $lieumission->distance = $request->distance;
         $lieumission->nuite = $request->nuite;
+        $lieumission->nombreRepas = $request->nombreRepas;
 
         if($lieumission->nuite) {
             $lieumission->nuite = true;
@@ -101,6 +103,13 @@ class LieuMissionController extends Controller
         $lieumission->commune = $request->commune;
         $lieumission->distance = $request->distance;
         $lieumission->nuite = $request->nuite;
+        $lieumission->nombreRepas = $request->nombreRepas;
+
+        if($lieumission->nuite) {
+            $lieumission->nuite = true ;
+        } else {
+            $lieumission->nuite = false ;
+        }
 
         $lieumission->update();
 

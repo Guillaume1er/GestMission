@@ -52,24 +52,18 @@
                         <td>{{ $personnel->personnel->nomPrenomsPersonnel }}</td>
                         <td>{{ date('d/m/Y', strtotime($personnel->dateDepart)) }}</td>
                         <td>{{ date('d/m/Y', strtotime($personnel->dateRetour)) }}</td>
-                        <td class="text-center">{{ $personnel->nbrNuit }}</td>
+                        <td class="text-center">{{ $personnel->lieuMission->nuite ?? '' }}</td>
                         <td>{{ number_format($personnel->montantNuite, 0, ',', ' ') }} FCFA</td>
-                        <td class="text-center">{{ $personnel->nbrRepas }}</td>
+                        <td class="text-center">{{ $personnel->lieuMission->nombreRepas ?? '' }}</td>
                         <td>{{ number_format($personnel->montantRepas, 0, ',', ' ') }} FCFA</td>
                         <td>{{ number_format($personnel->montantMission, 0, ',', ' ') }} FCFA</td>
-
-                        {{-- <td>
-                            <span class="btn-sm status-btn">
-                                
-                            </span>
-                        </td> --}}
                         <td>
                             <a class="btn btn-sm btn-icon {{ $personnel->dateTraitementMission !== null ? 'btn-success' : 'btn-warning' }}"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="{{ $personnel->dateTraitementMission !== null ? 'Cliquez pour annuler' : 'Cliquer pour traiter' }}"
+                                title="{{ $personnel->dateTraitementMission !== null ? 'Traitement fait' : 'Cliquer pour traiter' }}"
                                 aria-label=""
-                                onclick="return confirm('{{ $personnel->dateTraitementMission == '' ? 'Voulez-vous vraiment valider le traitement ?' : 'Voulez-vous vraiment annuler le traitement ?' }}')"
-                                href="{{ $personnel->dateTraitementMission == '' ? route('traitement-mission-personnel', $personnel->personnel_id) : route('traitement-mission-personnel-annuler', $personnel->personnel_id)}}">
+                                onclick="{{ $personnel->dateTraitementMission === null ? 'return confirm(\'Cette action est irréversible. Voulez-vous vraiment valider le traitement ?\')' : '' }}"
+                                href="{{ $personnel->dateTraitementMission !== null ? 'javascript:void(0)' : route('traitement-mission-personnel', $personnel->personnel_id) }}">
 
                                 <span class="btn-inner">
                                     @if ($personnel->dateTraitementMission !== null && $personnel->dateAnnulerTraitement == null)

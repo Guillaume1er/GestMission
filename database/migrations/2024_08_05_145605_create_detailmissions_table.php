@@ -34,11 +34,11 @@ return new class extends Migration
             $table->date('dateDernierPayement')->nullable();
             $table->boolean('payementJustifie')->nullable();
             $table->string('etat')->default('non demarrer');
-            $table->string('statut')->default('non validé');
+            $table->string('statut')->default('non traité');
             $table->date('dateValidation')->nullable();
             $table->string('validateur')->nullable();
             $table->string('annulateurTraitement')->nullable();
-            $table->date('dateAnnulerTraitement')->nullable();
+            $table->date('dateAnnulerValidation')->nullable();
             $table->string('traiteurMission')->nullable();
             $table->integer('volumeCarburant')->nullable();
             $table->integer('distanceVehiculeMission')->nullable();
