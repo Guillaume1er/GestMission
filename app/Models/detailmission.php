@@ -52,6 +52,11 @@ class Detailmission extends Model
     }
 
     public function vehicule() {
-        return $this->belongsTo(Vehicule::class);
+        return $this->belongsTo(Vehicule::class, 'vehicule_id');
+    }
+
+    public function itineraire()
+    {
+        return $this->hasMany(Itineraire::class, 'detailmission_id');
     }
 }

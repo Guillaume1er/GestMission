@@ -11,7 +11,7 @@ class LieuMissionController extends Controller
 {
     public function index()
     {
-        $lieumissions = Lieumission::all();
+        $lieumissions = Lieumission::orderBy('created_at','desc')->get();
         $departements = Departement::all();
         $villes = Ville::all();
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('adresse');
             $table->string('fonction');
-            $table->integer('numIfu')->nullable();
+            $table->string('numIfu')->nullable();
 
             $table->foreignId('rang_id')
                 ->references('id')

@@ -7,7 +7,7 @@
             <div class="header-title">
                 <h4 class="card-title">Liste des indices</h4>
             </div>
-            <div class="">
+            <div class="mb-2">
                 <a type="button" class="btn btn-primary" href="{{ route('show-indice') }}">
                     <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"

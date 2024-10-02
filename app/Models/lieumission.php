@@ -17,7 +17,7 @@ class Lieumission extends Model
     ];
 
     public function detailMission() {
-        return $this->hasMany(Detailmission::class, 'detailMission_id');
+        return $this->hasMany(Detailmission::class, 'lieuMission_id');
     }
 
     
@@ -28,5 +28,12 @@ class Lieumission extends Model
     public function departement() {
         return $this->belongsTo(Departement::class);
     }
-
+    
+    public function itineraire()
+    {
+        return $this->hasMany(Itineraire::class, 'lieumission_id');
+    }
 }
+
+
+

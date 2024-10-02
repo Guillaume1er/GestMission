@@ -50,7 +50,7 @@
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="contact" class="form-label">Contact</label>
-                        <input type="tel" required class="form-control" name="contact" value="{{ old('contact') }}">
+                        <input type="string" required class="form-control" name="contact" value="{{ old('contact') }}">
                     </div>
                 </div>
             </div>
@@ -99,6 +99,12 @@
                     <div class="mb-3">
                         <label for="numIfu" class="form-label">Numéro Ifu</label>
                         <input type="text" class="form-control" name="numIfu" value="{{ old('numIfu') }}">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="fonction" class="form-label">Fonction</label>
+                        <input type="text" class="form-control" name="fonction" value="{{ old('fonction') }}">
                     </div>
                 </div>
             </div>

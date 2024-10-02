@@ -88,7 +88,7 @@
                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             aria-label="Position: activate to sort column ascending" style="width: 388.266px;">Actions
                         </th>
-                    </tr>
+                    </tr> 
                 </thead>
                 <tbody>
                     @foreach ($missions as $mission)
@@ -117,10 +117,17 @@
                                         </svg>
                                     </span>
                                 </a>
-                                <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" data-original-title="Traitement" aria-label="Traitement"
-                                    data-bs-original-title="Traitement"
-                                    href="{{ route('traitement-mission', $mission->id) }}">
+                                <a class="btn btn-sm btn-icon btn-primary {{ $mission->hasNullDateValidation ? 'disabled' : '' }}" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Traitement" 
+                                    aria-label="Traitement"
+                                    @if ($mission->hasNullDateValidation) 
+                                        onclick="event.preventDefault();" 
+                                    @else 
+                                        href="{{ route('traitement-mission', $mission->id) }}" 
+                                    @endif
+                                >
                                     <span class="btn-inner">
                                         <!-- Icône de traitement -->
                                         <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
@@ -144,6 +151,7 @@
                                         </svg>
                                     </span>
                                 </a>
+                                
                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
                                     data-bs-placement="top" data-original-title="Deplacement"
                                     aria-label="Déplacement" data-bs-original-title="Deplacement" href="{{ route('show-vehicules', ['mission_id' => $mission->id]) }}">

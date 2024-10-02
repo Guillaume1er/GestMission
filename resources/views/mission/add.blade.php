@@ -18,7 +18,7 @@
 
         <form method="POST" action="{{ route('create-mission') }}">
             @csrf
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="exerciceBudgetaire_id" class="form-label">Exercice budgetaire</label>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="nomMission" class="form-label">Nom mission</label>
@@ -54,13 +54,14 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="objetMission" class="form-label">Objet mission</label>
-                        <textarea class="form-control" required rows="4" value="{{ old('objetMission') }}" name="objetMission"></textarea>
+                        <label for="observationMission" class="form-label">Observation mission</label>
+                        <input type="text" class="form-control" name="observationMission"
+                            value="{{ old('observationMission') }}" />
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-lg-6" hidden>
                     <div class="mb-3">
                         <label for="dateMission" class="form-label">Date mission</label>
@@ -123,7 +124,7 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="row">
+            <div class="row mb-4">
                 {{-- <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="autorisateur3" class="form-label">Autorisateur 3</label>
@@ -133,13 +134,43 @@
                 </div> --}}
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="observationMission" class="form-label">Observation mission</label>
-                        <input type="text" class="form-control" name="observationMission"
-                            value="{{ old('observationMission') }}" />
+                        <label for="objetMission" class="form-label">Objet mission</label>
+                        <textarea class="form-control" required rows="6" value="{{ old('objetMission') }}" name="objetMission"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="personnel_id" class="form-label">Personnel</label>
+                        <select id="personnel_id" name="personnel_id[]" required class="form-control form-select mb-2">
+                            <option value="">Sélectionner un personnel</option>
+                            @foreach ($personnels as $personnel)
+                                <option value="{{ $personnel->id }}"
+                                    data-rang="{{ $personnel->rang->nomRang ?? 'Non défini' }}"
+                                    data-indice="{{ $personnel->indice->code ?? 'Non défini' }}">
+                                    {{ $personnel->nomPrenomsPersonnel }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <table class="table table-bordered table-sm" id="personnelTable"
+                            style="font-size: 0.8rem; max-width: 600px; margin: 0 auto;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40%; padding: 0.2rem;">Nom et Prénom</th>
+                                    <th style="width: 20%; padding: 0.2rem;">Indice</th>
+                                    <th style="width: 20%; padding: 0.2rem;">Rang</th>
+                                    <th style="width: 20%; padding: 0.2rem;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-lg-6" hidden>
                     <div class="mb-3">
                         <label for="etatMission" class="form-label">Etat mission</label>
@@ -213,43 +244,8 @@
                 </div>               
             </div> --}}
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="personnel_id" class="form-label">Personnel</label>
-                        <select id="personnel_id" name="personnel_id[]" required class="form-control form-select mb-2">
-                            <option value="">Sélectionner un personnel</option>
-                            @foreach ($personnels as $personnel)
-                                <option value="{{ $personnel->id }}"
-                                    data-rang="{{ $personnel->rang->nomRang ?? 'Non défini' }}"
-                                    data-indice="{{ $personnel->indice->code ?? 'Non défini' }}">
-                                    {{ $personnel->nomPrenomsPersonnel }}
-                                </option>
-                            @endforeach
-                        </select>
-
-                        <table class="table table-bordered table-sm" id="personnelTable"
-                            style="font-size: 0.8rem; max-width: 600px; margin: 0 auto;">
-                            <thead>
-                                <tr>
-                                    <th style="width: 40%; padding: 0.2rem;">Nom et Prénom</th>
-                                    <th style="width: 20%; padding: 0.2rem;">Indice</th>
-                                    <th style="width: 20%; padding: 0.2rem;">Rang</th>
-                                    <th style="width: 20%; padding: 0.2rem;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-
-            </div>
-
             <div class="text-end">
-                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
         </form>
     </div>

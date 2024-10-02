@@ -49,7 +49,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignId('lieuMission_id')
+            $table->foreignId('lieuMission_id')->nullable()
                 ->references('id')
                 ->on('lieumissions')
                 ->onUpdate('cascade')

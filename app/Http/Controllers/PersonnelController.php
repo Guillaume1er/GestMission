@@ -46,15 +46,16 @@ class PersonnelController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         $validated = $request->validate([
             'nomPrenomsPersonnel' => ['required', 'string'],
             'numeroMatricule' => ['required', 'string'],
             'civilite' =>  ['required', 'string'],
-            'contact' =>  ['required', 'string', 'max:20'],
+            'contact' =>  ['required', 'string', 'max:12'],
             'email' =>  ['required', 'email'],
             'adresse' => ['required', 'string'],
-            'numIfu' => ['nullable', 'string'],
+            'fonction' => ['required', 'string'],
+            'numIfu' => ['nullable ', 'min:13'],
             'rang_id' => ['required', 'exists:rangs,id'],
             'indice_id' =>  ['required', 'exists:indices,id'],
 
@@ -74,6 +75,7 @@ class PersonnelController extends Controller
         $personnel->contact = $request->contact;
         $personnel->email = $request->email;
         $personnel->adresse = $request->adresse;
+        $personnel->fonction = $request->fonction;
         $personnel->numIfu = $request->numIfu;
         $personnel->rang_id = $request->rang_id;
         $personnel->indice_id = $request->indice_id;
@@ -97,7 +99,7 @@ class PersonnelController extends Controller
             'contact' =>  ['required', 'string', 'max:20'],
             'email' =>  ['required', 'email'],
             'adresse' => ['required', 'string'],
-            'numIfu' => ['nullable', 'string'],
+            'numIfu' => ['nullable', 'min:13'],
             'rang_id' => ['required', 'exists:rangs,id'],
             'indice_id' =>  ['required', 'exists:indices,id'],
         ]);

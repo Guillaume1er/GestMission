@@ -17,6 +17,8 @@ use App\Http\Controllers\typeinterventionController;
 use App\Http\Controllers\TypevehiculeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehiculeController;
+use App\Http\Controllers\ItineraireController;
+use App\Http\Controllers\SystemeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -218,16 +220,31 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::get('/consulter-detail-mission/{id}', [missionController::class, 'detailMission'])->name('details-mission');
     Route::post('/update/{id}', [missionController::class, 'update'])->name('update-mission');
     Route::get('/delete/{id}', [missionController::class, 'delete'])->name('delete-mission');
+    
     Route::get('/traitement/{id}', [missionController::class, 'traitement'])->name('traitement-mission');
+    Route::get('/traitement-personnel/{id}', [MissionController::class, 'traitementMission'])->name('traitement-mission-personnel');
+    
     Route::get('/validation/{id}', [missionController::class, 'validation'])->name('validation-mission');
     Route::get('/detail/{id}', [MissionController::class, 'showValidationForm'])->name('detail-mission');
     Route::post('/validation/{id}', [MissionController::class, 'validateMission'])->name('validateMission');
-    Route::get('/traitement-personnel/{id}', [MissionController::class, 'traitementMission'])->name('traitement-mission-personnel');
     Route::get('/validation-personnel-annuler/{id}', [MissionController::class, 'AnnulerValidation'])->name('validation-mission-personnel-annuler');
     Route::get('/show_details/{id}', [MissionController::class, 'showValidatedDetails'])->name('show-validated-details');
+
     Route::get('/deplacement/{mission_id}', [MissionController::class, 'showVehicules'])->name('show-vehicules');
+    Route::get('mission/{mission_id}/vehicule/{vehicule_id}', [MissionController::class, 'showItineraire'])->name('mission.itineraire.show');
+    Route::post('/itineraire', [MissionController::class, 'storeItineraire'])->name('mission.itineraire.store');
 
 
+    // CREUD SYSTEME
+    Route::get('/systeme', [SystemeController::class, 'index'])->name('systeme.index');
+    Route::post('/systeme', [SystemeController::class, 'store'])->name('systeme.store');
+    Route::get('/systemeshow', [SystemeController::class, 'show'])->name('mission.systemeshow');
+});
+
+
+Route::middleware('auth')->prefix('itineraire')->group(function () {
+    Route::get('/itineraire', [ItineraireController::class, 'index'])->name('itineraire.index');
+    Route::post('/store', [ItineraireController::class, 'store'])->name('itineraire.store');
 });
 
 Route::middleware('auth')->group(function () {

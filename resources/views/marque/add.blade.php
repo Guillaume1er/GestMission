@@ -3,7 +3,7 @@
 @section('content')
     <div class="card-body container">
         <div class="header-title">
-            <h4 class="card-title">Ajouter une marque</h4>
+            <h4 class="card-title">Ajouter une marque de véhicule</h4>
         </div> <br>
 
         @if ($errors->any())

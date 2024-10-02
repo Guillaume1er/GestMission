@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('plaqueVehicule');
             $table->integer('kilometrageDepart')->nullable();
             $table->string('responsableVehicule');
-            $table->integer('contactResponsable');
+            $table->string('contactResponsable');
             $table->string('etatVehicule');
             $table->boolean('autorisationSortie')->default(false);
             $table->date('dateAutorisation')->nullable();

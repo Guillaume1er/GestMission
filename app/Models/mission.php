@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Detailmission;
+
 
 class Mission extends Model
 {
@@ -50,8 +52,20 @@ class Mission extends Model
     public function vehiculeMission() {
         return $this->belongsTo(Vehiculemission::class);
     }
+    
+    public function itineraire()
+    {
+        return $this->hasMany(Itineraire::class, 'mission_id');
+    }
 
-
+    // Dans le modèle Mission
+    public function hasNullDateValidation()
+    {
+        // Vérifie si au moins une entrée dans `detailMission` a `dateValidation` à null
+        return $this->detailMission->contains(function ($detailMission) {
+            return is_null($detailMission->dateValidation) && is_null($detailMission->dateAnnulerValidation);
+        });
+    }
 
     protected static function booted()
     {

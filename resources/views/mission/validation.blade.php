@@ -53,39 +53,38 @@
                         <td>{{ date('d/m/Y', strtotime($personnel->dateRetour)) }}</td>
                         <td>{{ $personnel->lieuMission->commune ?? '' }}</td>
                         <td>
-                            @if ($personnel->statut === "validé")
+                            @if ($personnel->statut === 'validé')
                                 <span class="btn-sm status-btn">Validée</span>
-                            @elseif ($personnel->statut === "non validé")
-                                <span class="btn-sm status-btn">Non validée</span>
                             @else
-                                <span class="btn-sm status-btn">Non Traitée</span>
+                                <span class="btn-sm status-btn">Non validé</span>
                             @endif
 
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-icon {{ $personnel->statut == 'validé' ? 'btn-success' : ($personnel->statut == 'non traité' ? 'btn-primary' : 'btn-danger') }}"
+                            <a class="btn btn-sm btn-icon {{ $personnel->statut == 'validé' ? 'btn-success' : 'btn-danger' }}"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="{{ $personnel->statut == 'validé' ? 'Cliquez pour annuler' : 'Cliquez pour valider' }}"
                                 aria-label=""
                                 href="{{ $personnel->statut === 'validé' ? route('validation-mission-personnel-annuler', $personnel->personnel_id) : route('detail-mission', $personnel->personnel_id) }}">
-                            
+
                                 <span class="btn-inner">
                                     @if ($personnel->statut == 'validé')
                                         <!-- Icône d'autorisation -->
-                                        <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <!-- First validation checkmark -->
-                                            <path d="M10 12.5L4.5 7L6.086 5.414L10 9.328L17.914 1.414L19.5 3L10 12.5Z" fill="currentColor" />
-                                            
-                                            <!-- Second validation checkmark placed below the first one -->
-                                            <path d="M10 22.5L4.5 17L6.086 15.414L10 19.328L17.914 11.414L19.5 13L10 22.5Z" fill="currentColor" />
-                                        </svg>
-                                          
-                                    @else
-                                        <!-- Icône de désautorisation -->
-                                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 17.5L4.5 12L6.086 10.414L10 14.328L17.914 6.414L19.5 8L10 17.5Z "
+                                            <path d="M10 12.5L4.5 7L6.086 5.414L10 9.328L17.914 1.414L19.5 3L10 12.5Z"
                                                 fill="currentColor" />
+
+                                            <!-- Second validation checkmark placed below the first one -->
+                                            <path d="M10 22.5L4.5 17L6.086 15.414L10 19.328L17.914 11.414L19.5 13L10 22.5Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    @else
+                                        <!-- Icône de désautorisation (X) -->
+                                        <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" />
                                         </svg>
                                     @endif
                                 </span>

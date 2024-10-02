@@ -54,4 +54,13 @@ class Vehicule extends Model
     public function detailMission() {
         return $this->hasMany(Detailmission::class);
     }
+
+    public function itineraire()
+    {
+        return $this->hasMany(Itineraire::class, 'vehicule_id');
+    }
+    public function system()
+    {
+        return $this->hasMany(SystemLog::class, 'vehicule_id');
+    }
 }

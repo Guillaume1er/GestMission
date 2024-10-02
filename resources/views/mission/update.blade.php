@@ -68,10 +68,12 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="objetMission" class="form-label">Objet mission</label>
-                        <textarea class="form-control" required rows="4" value="{{ old('objetMission') }}" name="objetMission">{{ old('objetMission', $mission->objetMission ?? '') }}</textarea>
+                        <label for="dateFinMission" class="form-label">Date fin mission</label>
+                        <input required type="date" required class="form-control" name="dateFinMission"
+                            value="{{ old('dateFinMission', $mission->dateFinMission ?? '')}}">
                     </div>
                 </div>
+               
             </div>
 
             <div class="row">
@@ -88,30 +90,6 @@
                             value="{{ old('dateDebutMission', $mission->dateDebutMission ?? '') }}">
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="mb-3">
-                        <label for="dateFinMission" class="form-label">Date fin mission</label>
-                        <input required type="date" required class="form-control" name="dateFinMission"
-                            value="{{ old('dateFinMission', $mission->dateFinMission ?? '')}}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6" hidden>
-                    <div class="mb-3">
-                        <label for="etatMission" class="form-label">Etat mission</label>
-                        <select class="form-select" required name="etatMission" id="etatMission">
-                            <option>Sélectionner l'état de la mission</option>
-                            <option value="non démarrer" selected>Non démarré</option>
-                            <option value="valider">Validé</option>
-                            <option value="cloturer">Cloturé</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="personnel_id" class="form-label">Personnel</label>
@@ -153,6 +131,31 @@
 
                     </div>
                 </div>
+               
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6" hidden>
+                    <div class="mb-3">
+                        <label for="etatMission" class="form-label">Etat mission</label>
+                        <select class="form-select" required name="etatMission" id="etatMission">
+                            <option>Sélectionner l'état de la mission</option>
+                            <option value="non démarrer" selected>Non démarré</option>
+                            <option value="valider">Validé</option>
+                            <option value="cloturer">Cloturé</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="objetMission" class="form-label">Objet mission</label>
+                        <textarea class="form-control" required rows="4" value="{{ old('objetMission') }}" name="objetMission">{{ old('objetMission', $mission->objetMission ?? '') }}</textarea>
+                    </div>
+                </div>
+                
             </div>
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Enregistrer</button>

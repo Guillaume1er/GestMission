@@ -47,7 +47,7 @@ class VehiculeController extends Controller
             'plaqueVehicule' => ['required', 'string'],
             'kilometrageDepart' => ['required', 'integer'],
             'responsableVehicule' =>  ['required', 'string'],
-            'contactResponsable' =>  ['required', 'string'],
+            'contactResponsable' =>  ['required', 'integer'],
             'etatVehicule' =>  ['required', 'string'],
             // 'autorisationSortie' => ['nullable', 'boolean'],
              'dateAutorisation' => ['nullable'],

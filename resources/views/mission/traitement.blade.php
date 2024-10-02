@@ -48,11 +48,13 @@
             </thead>
             <tbody>
                 @foreach ($detailMission_personnel as $personnel)
+
+                {{-- @dd($personnel) --}}
                     <tr>
                         <td>{{ $personnel->personnel->nomPrenomsPersonnel }}</td>
                         <td>{{ date('d/m/Y', strtotime($personnel->dateDepart)) }}</td>
                         <td>{{ date('d/m/Y', strtotime($personnel->dateRetour)) }}</td>
-                        <td class="text-center">{{ $personnel->lieuMission->nuite ?? '' }}</td>
+                        <td class="text-center">{{ $personnel->nbrNuit }}</td>
                         <td>{{ number_format($personnel->montantNuite, 0, ',', ' ') }} FCFA</td>
                         <td class="text-center">{{ $personnel->lieuMission->nombreRepas ?? '' }}</td>
                         <td>{{ number_format($personnel->montantRepas, 0, ',', ' ') }} FCFA</td>
@@ -89,7 +91,6 @@
                                 </span>
                             </a>
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>

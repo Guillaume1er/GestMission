@@ -1,7 +1,7 @@
 @extends('layouts.dashboard_sans_sta')
 
 @section('content')
-    <div class="card-body">
+    <div class="card-body container">
         <div class="header-title">
             <h4 class="card-title">Ajouter un vehicule</h4>
         </div> <br>
@@ -48,7 +48,7 @@
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="dateAcquisition" class="form-label">Date d'acquisition du véhicule</label>
-                        <input type="date" class="form-control" id="dateAcquisition" name="dateAcquisition">
+                        <input type="date" class="form-control" id="dateAcquisition" name="dateAcquisition" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -69,7 +69,7 @@
                 <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="kilometrageDepart" class="form-label">Kilométrage de départ</label>
-                        <input type="number"  class="form-control" id="kilometrageDepart" name="kilometrageDepart">
+                        <input type="number" class="form-control" id="kilometrageDepart" name="kilometrageDepart">
                     </div>
                 </div>
             </div>
@@ -112,19 +112,19 @@
             </div>
 
             <div class="row">
-                  {{-- <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <div class="mb-3">
                         <label for="dateAutorisation" class="form-label">Date d'autorisation du véhicule</label>
                         <input type="text" class="form-control" id="dateAutorisation" name="dateAutorisation">
                     </div> --}}
-                </div>  
-                <div class="col-lg-6" >
-                    <div class="mb-3">
-                        <input type="hidden" class="form-control"  value="{{ now() }}"
-                            name="dateEnregistrementVehicule" >
-                    </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mb-3">
+                    <input type="hidden" class="form-control" value="{{ now() }}"
+                        name="dateEnregistrementVehicule">
                 </div>
             </div>
+
 
             <div class="row">
                 <div class="col-lg-6">
@@ -142,7 +142,7 @@
                         <textarea class="form-control" id="motifDesautorisation" rows="4" name="motifDesautorisation"></textarea>
                     </div>
                 </div> --}}
-            </div> 
+            </div>
 
             {{-- <div class="row">
                 <div class="col-lg-6">
