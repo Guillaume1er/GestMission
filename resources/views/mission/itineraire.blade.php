@@ -94,7 +94,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label class="form-label">Distance Véhicule:</label>
-                    <p class="form-control-plaintext distanceVehiculeMission">{{ $distanceVehiculeMission }} km</p>
+                    <p class="form-control-plaintext distanceVehiculeMission">0 km</p>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Volume:</label>
@@ -102,11 +102,11 @@
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">cout carburant unité:</label>
-                    <p class="form-control-plaintext"></p>
+                    <p class="form-control-plaintext">{{ $systeme->prix_essence_litre }}</p>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Montant carburant:</label>
-                    <p class="form-control-plaintext"></p>
+                    <p class="form-control-plaintext montantCarburant">0 FCFA</p>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
 
             tableBody.appendChild(newRow);
         });
-        let consommationVehiculeKm = {{ $systemes->first()->consommation_vehicule_km }};
+       
         function calculateTotal(element) {
             const row = element.closest('tr');
             const distanceInput = row.querySelector('input[name="distance_Km[]"]');
@@ -164,10 +164,24 @@
             });
 
             document.querySelector('.distanceVehiculeMission').textContent = total + ' km';
-            // Calcul du volume d'essence consommé
-            const volumeEssence = distanceVehiculeMission * consommationVehicule;
-            document.querySelector('.form-control-plaintext.volumeCarburant').textContent = volumeCarburant.toFixed(2) + ' L';
-        }
+            
+          // Récupérer la consommation du véhicule
+           consommationVehicule = {{ $systeme->consommation_vehicule_km }};
+           prixEssenceLitre = {{ $systeme->prix_essence_litre }}; 
+        
+           // Calculer le volume d'essence consommé
+            const volumeCarburant = total * consommationVehicule;
+
+           // Afficher le volume d'essence dans l'interface
+           document.querySelector('.form-control-plaintext.volumeCarburant').textContent = volumeCarburant.toFixed(2) + ' L';
+
+
+           
+         // Calcul du montant total du carburant
+        const montantCarburant = volumeCarburant * prixEssenceLitre;
+        document.querySelector('.form-control-plaintext.montantCarburant').textContent = montantCarburant.toFixed(2) + ' FCFA';
+    }
+        
 
         function removeRow(button) {
             const row = button.closest('tr');

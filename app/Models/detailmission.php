@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Event\Telemetry\System;
 
 class Detailmission extends Model
 {
@@ -35,7 +36,15 @@ class Detailmission extends Model
         'lieuMission_id',
         'personnel_id',
         'vehicule_id', 
-        'statut',      
+        'statut', 
+        'dateValidation',
+        'validateur',
+        'annulateurTraitement',
+        'dateAnnulerValidation',
+        'traiteurMission',
+        'volumeCarburant',
+        'distanceVehiculeMission',
+        'montant_carburant',     
     ];
 
 
@@ -58,5 +67,11 @@ class Detailmission extends Model
     public function itineraire()
     {
         return $this->hasMany(Itineraire::class, 'detailmission_id');
+    }
+
+    
+    public function system()
+    {
+        return $this->hasMany(Systeme::class, 'detailmission_id');
     }
 }

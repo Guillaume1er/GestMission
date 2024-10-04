@@ -233,6 +233,8 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::get('/deplacement/{mission_id}', [MissionController::class, 'showVehicules'])->name('show-vehicules');
     Route::get('mission/{mission_id}/vehicule/{vehicule_id}', [MissionController::class, 'showItineraire'])->name('mission.itineraire.show');
     Route::post('/itineraire', [MissionController::class, 'storeItineraire'])->name('mission.itineraire.store');
+    Route::put('mission/{mission_id}/vehicule/{vehicule_id}/itineraire', [MissionController::class, 'updateItineraire'])->name('mission.itineraire.update');
+
 
 
     // CREUD SYSTEME

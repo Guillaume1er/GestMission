@@ -42,6 +42,7 @@ return new class extends Migration
             $table->string('traiteurMission')->nullable();
             $table->integer('volumeCarburant')->nullable();
             $table->integer('distanceVehiculeMission')->nullable();
+            $table->decimal('montant_carburant')->nullable();
 
             $table->foreignId('mission_id')
                 ->references('id')

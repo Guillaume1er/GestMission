@@ -23,8 +23,8 @@
                     <td>{{ $vehicule['dateDepart'] }}</td>
                     <td>{{ $vehicule['dateRetour'] }}</td>
                     <td>{{ $vehicule['lieuMission'] }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $vehicule['distanceVehiculeMission'] }} km</td>
+                    <td>{{ $vehicule['volumeCarburant'] }} L</td>
                     {{-- @dd($vehicules) --}}
                     <td>
                         <a href="{{ route('mission.itineraire.show', ['mission_id' => $mission->id, 'vehicule_id' => $vehicule['id']]) }}" class="btn btn-primary">

@@ -262,7 +262,7 @@ public function store(Request $request)
     }
 
 
-    public function validation($id)
+    public function    validation($id)
     {
         // dd($id);
         $personnels = Personnel::all();
@@ -336,7 +336,7 @@ public function store(Request $request)
 
 
     public function validateMission(Request $request, $id)
-{
+    {
     // Règles de validation variables en fonction de l'action
     if ($request->action === 'invalidate') {
         // Champs optionnels pour l'invalidation
@@ -530,8 +530,8 @@ public function store(Request $request)
                         'dateDepart' => $detailMission->dateDepart,
                         'dateRetour' => $detailMission->dateRetour,
                         'lieuMission' => $detailMission->lieuMission->commune ?? 'Non spécifié',
-
-
+                        'distanceVehiculeMission' => $detailMission->distanceVehiculeMission,
+                        'volumeCarburant' => $detailMission->volumeCarburant,
 
 
 
@@ -552,8 +552,8 @@ public function store(Request $request)
     public function showItineraire($mission_id, $vehicule_id,  $mode = 'edit')
     {
         // Récupérer la mission
-        $systemes = Systeme::all();
         $mission = Mission::findOrFail($mission_id);
+        $systeme = Systeme::first(); 
 
         // Récupérer le détail de mission avec le véhicule associé et le statut "validé"
         $detailMission = DetailMission::with('vehicule', 'lieuMission')
@@ -579,7 +579,11 @@ public function store(Request $request)
         $distance = $lieuMission ? $lieuMission->distance : 'Non spécifiée';
         // Récupérer la distance totale du véhicule
         $distanceVehiculeMission = $detailMission->distanceVehiculeMission;
+        $volumeCarburant = $detailMission->volumeCarburant;
 
+        // Récupère les informations du premier enregistrement dans systeme
+       
+        $consommationVehicule = $systeme->consommation_vehicule_km;
 
         $mission = Mission::find($mission_id);
 
@@ -588,23 +592,32 @@ public function store(Request $request)
         // Mode 'view' pour afficher les informations
         $mode = session('mode', 'edit');
 
-        // $volumeCarburant = $systemes->consommation_vehicule_km * $distance;
+       
         // Retourner la vue avec les données nécessaires
-        return view('mission.itineraire', compact('detailMission', 'plaqueVehicule', 'mission', 'lieuMission', 'distance', 'commune', 'mode', 'itineraireEnregistres', 'distanceVehiculeMission', 'systemes'));
+        return view('mission.itineraire', compact('detailMission', 'plaqueVehicule', 'mission', 'lieuMission', 'distance', 'commune', 'mode', 'itineraireEnregistres', 'distanceVehiculeMission', 'consommationVehicule','systeme', 'distanceVehiculeMission', 'volumeCarburant'));
     }
 
     public function storeItineraire(Request $request)
     {
+        // dd( $request->all());
+        // Validation des entrées
         $request->validate([
             'depart.*' => 'required|string',
             'arrive.*' => 'required|string',
             'allerRetour.*' => 'nullable|boolean',
             'distance_Km.*' => 'required|numeric',
+        
         ]);
-
-        // Obtenir l'identifiant de la mission
+    
+        // Obtenir l'identifiant de la mission et du véhicule
         $missionId = $request->input('mission_id');
-
+        $vehiculeId = $request->input('vehicule_id');
+    
+        // Récupérer les données système pour la consommation de carburant et le prix de l'essence
+        $systeme = Systeme::find(1);
+        $consommationVehicule = $systeme->consommation_vehicule_km; // Consommation de carburant par km
+        $prixEssence = $systeme->prix_essence_litre;
+    
         // Calculer la distance totale
         $totalDistance = 0;
         foreach ($request->input('distance_Km') as $index => $distance) {
@@ -612,17 +625,20 @@ public function store(Request $request)
             $distanceTotal = $isAllerRetour ? $distance * 2 : $distance;
             $totalDistance += $distanceTotal;
         }
-
-
+    
         // Calculer le volume d'essence total pour cette mission
-        $consommationVehicule = Systeme::find(1)->consommation_vehicule_km; 
-        $volumeCarburant = $distanceTotal * $consommationVehicule;
-
-        // Enregistrer le volume d'essence dans le DetailMission
-        $detailMission = DetailMission::where('mission_id', $request->mission_id)->first();
+        $volumeCarburant = $totalDistance * $consommationVehicule;
+    
+        // Calculer le montant du carburant 
+        $montantCarburant = $volumeCarburant * $prixEssence;
+    
+        // Enregistrer le volume d'essence et le montant de carburant dans le DetailMission
+        $detailMission = DetailMission::where('mission_id', $missionId)->first();
+        $detailMission->distanceVehiculeMission = $totalDistance;
         $detailMission->volumeCarburant = $volumeCarburant;
+        $detailMission->montant_carburant = $montantCarburant;
         $detailMission->save();
-
+    
         // Enregistrer chaque itinéraire
         foreach ($request->input('depart') as $index => $depart) {
             Itineraire::create([
@@ -631,15 +647,22 @@ public function store(Request $request)
                 'arrive' => $request->input('arrive')[$index],
                 'allerRetour' => $request->input('allerRetour')[$index] ?? 0,
                 'distance_km' => $request->input('distance_Km')[$index],
-                'distance_total_km' => $isAllerRetour ? $distance * 2 : $distance, // Assurez-vous que cette valeur est correcte
+                'distance_total_km' => $isAllerRetour ? $distance * 2 : $distance,
             ]);
         }
+              // Mettre à jour la distanceVehiculeMission, le volume de carburant et le montant de carburant pour le véhicule sélectionné
+               DetailMission::where('mission_id', $missionId)
+                ->where('vehicule_id', $vehiculeId)  
+                 ->whereNotNull('dateTraitementMission') 
+                ->where('statut', 'validé') 
+                ->update([
+                 'distanceVehiculeMission' => $totalDistance,
+                  'volumeCarburant' => $volumeCarburant,
+                  'montant_carburant' => $montantCarburant,
+     ]);
 
-        // Mettre à jour la distanceVehiculeMission dans detail_mission
-        DetailMission::where('mission_id', $missionId)
-            ->update(['distanceVehiculeMission' => $totalDistance]);
-
-        return redirect()->route('mission.itineraire.show', [$missionId])
-            ->with('success', 'Itinéraire enregistré avec succès !');
+ 
+        return back()->with('success', 'Itinéraire enregistré avec succès !');
     }
+    
 }

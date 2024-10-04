@@ -17,15 +17,24 @@ return new class extends Migration
             $table->string('arrive');
             $table->boolean('allerRetour')->default(false);
             $table->float('distance_km');
-            $table->float('distance_total_km')->nullable();
-            $table->float('volume_essence_l');
-            $table->float('cout_carburant');
-            $table->float('montant_carburant');
-        
-            // Foreign keys
-            $table->foreignId('vehicule_id')->constrained('vehicules');
-            $table->foreignId('lieumission_id')->constrained('lieumission');
-            $table->foreignId('mission_id')->constrained('mission');
+            $table->float('distance_total_km');
+            $table->foreignId('vehicule_id')->nullable()
+            ->references('id')
+            ->on('vehicules')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreignId('lieumission_id')->nullable()
+            ->references('id')
+            ->on('lieumissions')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreignId('mission_id')->nullable()
+            ->references('id')
+            ->on('missions')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         
             $table->timestamps();
         });
