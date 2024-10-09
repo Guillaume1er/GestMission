@@ -32,4 +32,8 @@ class Personnel extends Model
     public function detailMission() {
         return $this->hasMany(Detailmission::class);
     }
+
+    public function missions() {
+        return $this->hasMany(Detailmission::class, 'personnel_id');
+    }
 }

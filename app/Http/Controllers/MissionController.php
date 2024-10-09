@@ -262,7 +262,7 @@ public function store(Request $request)
     }
 
 
-    public function    validation($id)
+    public function validation($id)
     {
         // dd($id);
         $personnels = Personnel::all();
@@ -321,8 +321,10 @@ public function store(Request $request)
     }
 
 
-    public function showValidationForm($id)
+    public function showValidationForm($id, $mission_id)
     {
+        $mission_id = $mission_id;
+        // dd($mission_id);
         $lieux_mission  = Lieumission::all();
 
         $detailMission = Personnel::find($id);
@@ -331,65 +333,78 @@ public function store(Request $request)
 
         $vehicules = Vehicule::all();
 
-        return view('mission.detail', compact('detailMission', 'vehicules', 'lieux_mission'));
+        return view('mission.detail', compact('detailMission', 'vehicules', 'lieux_mission', 'mission_id'));
     }
 
 
-    public function validateMission(Request $request, $id)
-    {
-    // Règles de validation variables en fonction de l'action
-    if ($request->action === 'invalidate') {
-        // Champs optionnels pour l'invalidation
-        $validatedData = $request->validate([
-            'refOm' => 'nullable|string',
-            'dateDepart' => 'nullable|date',
-            'dateRetour' => 'nullable|date',
-            'moyenDeDeplacement' => 'nullable|string',
-            'vehicule_id' => 'nullable|exists:vehicules,id',
-            'lieuMission_id' => 'nullable',
-        ]);
-    } else {
-        // Champs requis pour la validation
-        $validatedData = $request->validate([
-            'refOm' => 'required|string',
-            'dateDepart' => 'required|date',
-            'dateRetour' => 'required|date|after_or_equal:dateDepart',
-            'moyenDeDeplacement' => 'required|string',
-            'vehicule_id' => 'nullable|exists:vehicules,id',
-            'lieuMission_id' => 'required',
-        ]);
-    }
+    public function validateMission(Request $request, $id) {
 
-    $detailMission = Detailmission::where('personnel_id', $id)->firstOrFail();
-    $mission_id = $detailMission->mission_id;
+        $personnel = Personnel::findOrFail($id);
 
-    if ($request->action === 'invalidate') {
-        // Seulement mettre à jour la date et le statut pour l'invalidation
-        $detailMission->dateAnnulerValidation = now();
-        $detailMission->statut = 'non validé';
-    } else {
-        // Mise à jour complète pour la validation
-        $detailMission->refOm = $request->refOm;
-        $detailMission->dateDepart = $request->dateDepart;
-        $detailMission->dateRetour = $request->dateRetour;
-        $detailMission->moyenDeDeplacement = $request->moyenDeDeplacement;
-        $detailMission->vehicule_id = $request->vehicule_id;
-        $detailMission->lieuMission_id = $request->lieuMission_id;
-        $detailMission->statut = 'validé';
+        $mission_id = $request->detailMission_id;
 
-        // Calculs associés aux jours, nuits, repas, etc.
-        $dateDepart = \Carbon\Carbon::parse($request->dateDepart);
-        $dateRetour = \Carbon\Carbon::parse($request->dateRetour);
+        // Récupère le premier détail de mission correspondant à ce personnel
+        $detailMission = $personnel->missions()->first();
+        $detailMission_id = $detailMission->id;
 
-        $detailMission->nbrJour = $dateRetour->diffInDays($dateDepart);
-        $detailMission->nbrNuit = $detailMission->nbrJour - 1;
-        $detailMission->coutNuite = $detailMission->personnel->indice->montantNuite;
-        $detailMission->montantNuite =  $detailMission->coutNuite * $detailMission->nbrNuit;
-        $detailMission->nbrRepas = $detailMission->lieuxMission->nombreRepas ?? 1;
-        $detailMission->coutRepas = $detailMission->personnel->indice->montantRepas;
-        $detailMission->montantRepas = $detailMission->coutRepas * $detailMission->nbrRepas;
-        $detailMission->montantMission = $detailMission->montantNuite + $detailMission->montantRepas;
-        $detailMission->montantReste = $detailMission->montantMission - $detailMission->montantAvance;
+        $personnel = Personnel::findOrFail($id);
+
+        // Récupère directement le premier détail de mission correspondant au personnel
+        $detailMission = $personnel->missions()->where('personnel_id', $id)
+                                                ->where('mission_id', $mission_id)
+                                                ->firstOrFail();  
+        // dd($detailMission);
+        
+            // Règles de validation variables en fonction de l'action
+        if ($request->action === 'invalidate') {
+            // Champs optionnels pour l'invalidation
+            $validatedData = $request->validate([
+                'refOm' => 'nullable|string',
+                'dateDepart' => 'nullable|date',
+                'dateRetour' => 'nullable|date',
+                'moyenDeDeplacement' => 'nullable|string',
+                'vehicule_id' => 'nullable|exists:vehicules,id',
+                'lieuMission_id' => 'nullable',
+            ]);
+        } else {
+            // Champs requis pour la validation
+            $validatedData = $request->validate([
+                'refOm' => 'required|string',
+                'dateDepart' => 'required|date',
+                'dateRetour' => 'required|date|after_or_equal:dateDepart',
+                'moyenDeDeplacement' => 'required|string',
+                'vehicule_id' => 'nullable|exists:vehicules,id',
+                'lieuMission_id' => 'required',
+            ]);
+        }
+
+        if ($request->action === 'invalidate') {
+            // Seulement mettre à jour la date et le statut pour l'invalidation
+            $detailMission->dateAnnulerValidation = now();
+            $detailMission->statut = 'non validé';
+        } else {
+            // Mise à jour complète pour la validation
+            $detailMission->refOm = $request->refOm;
+            $detailMission->dateDepart = $request->dateDepart;
+            $detailMission->dateRetour = $request->dateRetour;
+            $detailMission->moyenDeDeplacement = $request->moyenDeDeplacement;
+            $detailMission->vehicule_id = $request->vehicule_id;
+            $detailMission->lieuMission_id = $request->lieuMission_id;
+            $detailMission->statut = 'validé';
+
+            // Calculs associés aux jours, nuits, repas, etc.
+            $dateDepart = \Carbon\Carbon::parse($request->dateDepart);
+            $dateRetour = \Carbon\Carbon::parse($request->dateRetour);
+
+            $detailMission->nbrJour = $dateRetour->diffInDays($dateDepart);
+            $detailMission->nbrNuit = $detailMission->nbrJour - 1;
+            $detailMission->coutNuite = $detailMission->personnel->indice->montantNuite;
+            $detailMission->montantNuite =  $detailMission->coutNuite * $detailMission->nbrNuit;
+            $detailMission->nbrRepas = $detailMission->lieuxMission->nombreRepas ?? 1;
+            $detailMission->coutRepas = $detailMission->personnel->indice->montantRepas;
+            $detailMission->montantRepas = $detailMission->coutRepas * $detailMission->nbrRepas;
+            $detailMission->montantMission = $detailMission->montantNuite + $detailMission->montantRepas;
+            $detailMission->montantReste = $detailMission->montantMission - $detailMission->montantAvance;
     }
 
     // Enregistrer la validation ou l'invalidation
@@ -554,6 +569,7 @@ public function store(Request $request)
         // Récupérer la mission
         $mission = Mission::findOrFail($mission_id);
         $systeme = Systeme::first(); 
+        $vehicule = Vehicule::findOrFail($vehicule_id);
 
         // Récupérer le détail de mission avec le véhicule associé et le statut "validé"
         $detailMission = DetailMission::with('vehicule', 'lieuMission')
@@ -594,24 +610,25 @@ public function store(Request $request)
 
        
         // Retourner la vue avec les données nécessaires
-        return view('mission.itineraire', compact('detailMission', 'plaqueVehicule', 'mission', 'lieuMission', 'distance', 'commune', 'mode', 'itineraireEnregistres', 'distanceVehiculeMission', 'consommationVehicule','systeme', 'distanceVehiculeMission', 'volumeCarburant'));
+        return view('mission.itineraire', compact('detailMission', 'plaqueVehicule', 'mission', 'lieuMission', 'distance', 'commune', 'mode', 'itineraireEnregistres', 'distanceVehiculeMission', 'consommationVehicule','systeme', 'distanceVehiculeMission', 'volumeCarburant', 'vehicule'));
     }
 
     public function storeItineraire(Request $request)
     {
-        // dd( $request->all());
         // Validation des entrées
         $request->validate([
             'depart.*' => 'required|string',
             'arrive.*' => 'required|string',
             'allerRetour.*' => 'nullable|boolean',
             'distance_Km.*' => 'required|numeric',
-        
+            'lieuMission_id' => 'required|integer', 
+            'vehicule_id' => 'required|integer', 
         ]);
     
         // Obtenir l'identifiant de la mission et du véhicule
         $missionId = $request->input('mission_id');
         $vehiculeId = $request->input('vehicule_id');
+        $lieuMissionId = $request->input('lieuMission_id');
     
         // Récupérer les données système pour la consommation de carburant et le prix de l'essence
         $systeme = Systeme::find(1);
@@ -632,14 +649,21 @@ public function store(Request $request)
         // Calculer le montant du carburant 
         $montantCarburant = $volumeCarburant * $prixEssence;
     
-        // Enregistrer le volume d'essence et le montant de carburant dans le DetailMission
-        $detailMission = DetailMission::where('mission_id', $missionId)->first();
-        $detailMission->distanceVehiculeMission = $totalDistance;
-        $detailMission->volumeCarburant = $volumeCarburant;
-        $detailMission->montant_carburant = $montantCarburant;
-        $detailMission->save();
+        // Enregistrer le volume d'essence et le montant de carburant dans le DetailMission pour le véhicule sélectionné
+        $detailMission = DetailMission::where('mission_id', $missionId)
+            ->where('vehicule_id', $vehiculeId)
+            ->first();
     
-        // Enregistrer chaque itinéraire
+        // Vérifiez si le détail de la mission existe pour le véhicule
+        if ($detailMission) {
+            // Mettez à jour les champs requis dans le DetailMission
+            $detailMission->distanceVehiculeMission = $totalDistance;
+            $detailMission->volumeCarburant = $volumeCarburant;
+            $detailMission->montant_carburant = $montantCarburant;
+            $detailMission->save(); // Enregistrez les changements
+        }
+    
+    
         foreach ($request->input('depart') as $index => $depart) {
             Itineraire::create([
                 'mission_id' => $missionId,
@@ -647,22 +671,24 @@ public function store(Request $request)
                 'arrive' => $request->input('arrive')[$index],
                 'allerRetour' => $request->input('allerRetour')[$index] ?? 0,
                 'distance_km' => $request->input('distance_Km')[$index],
-                'distance_total_km' => $isAllerRetour ? $distance * 2 : $distance,
+                'distance_total_km' => ($request->input('allerRetour')[$index] ?? false) ? $request->input('distance_Km')[$index] * 2 : $request->input('distance_Km')[$index],
+                'vehicule_id' => $vehiculeId,
+                'lieuMission_id' =>  $lieuMissionId,
             ]);
         }
-              // Mettre à jour la distanceVehiculeMission, le volume de carburant et le montant de carburant pour le véhicule sélectionné
-               DetailMission::where('mission_id', $missionId)
-                ->where('vehicule_id', $vehiculeId)  
-                 ->whereNotNull('dateTraitementMission') 
-                ->where('statut', 'validé') 
-                ->update([
-                 'distanceVehiculeMission' => $totalDistance,
-                  'volumeCarburant' => $volumeCarburant,
-                  'montant_carburant' => $montantCarburant,
-     ]);
-
- 
-        return back()->with('success', 'Itinéraire enregistré avec succès !');
+    
+        // Enregistrer l'itinéraire terminé avec succès
+        return redirect()->back()->with('success', 'Les informations de l\'itinéraire et de la mission ont été enregistrées avec succès.');
     }
+
+    public function showItineraires($vehiculeId)
+{
+    // Récupérer tous les itinéraires associés au véhicule sélectionné
+    $itineraireList = Itineraire::where('vehicule_id', $vehiculeId)->get();
+
+    // Retourner la vue avec la liste des itinéraires
+    return view('itineraire.index', compact('itineraireList'));
+}
+
     
 }

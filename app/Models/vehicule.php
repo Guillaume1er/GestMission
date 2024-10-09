@@ -61,6 +61,6 @@ class Vehicule extends Model
     }
     public function system()
     {
-        return $this->hasMany(SystemLog::class, 'vehicule_id');
+        return $this->hasMany(Systeme::class, 'vehicule_id');
     }
 }

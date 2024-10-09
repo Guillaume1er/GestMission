@@ -41,6 +41,8 @@
                 <form action="{{ route('mission.itineraire.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="mission_id" value="{{ $mission->id }}">
+                    <input type="hidden" name="lieuMission_id" value="{{ $lieuMission->id }}">
+                    <input type="hidden" name="vehicule_id" value="{{ $vehicule->id }}">
 
 
                     <table class="table" id="itineraireTable">

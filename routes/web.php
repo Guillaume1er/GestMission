@@ -225,7 +225,7 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::get('/traitement-personnel/{id}', [MissionController::class, 'traitementMission'])->name('traitement-mission-personnel');
     
     Route::get('/validation/{id}', [missionController::class, 'validation'])->name('validation-mission');
-    Route::get('/detail/{id}', [MissionController::class, 'showValidationForm'])->name('detail-mission');
+    Route::get('/detail/{id}/{mission_id}', [MissionController::class, 'showValidationForm'])->name('detail-mission');
     Route::post('/validation/{id}', [MissionController::class, 'validateMission'])->name('validateMission');
     Route::get('/validation-personnel-annuler/{id}', [MissionController::class, 'AnnulerValidation'])->name('validation-mission-personnel-annuler');
     Route::get('/show_details/{id}', [MissionController::class, 'showValidatedDetails'])->name('show-validated-details');
@@ -234,6 +234,7 @@ Route::middleware('auth')->prefix('mission')->group(function () {
     Route::get('mission/{mission_id}/vehicule/{vehicule_id}', [MissionController::class, 'showItineraire'])->name('mission.itineraire.show');
     Route::post('/itineraire', [MissionController::class, 'storeItineraire'])->name('mission.itineraire.store');
     Route::put('mission/{mission_id}/vehicule/{vehicule_id}/itineraire', [MissionController::class, 'updateItineraire'])->name('mission.itineraire.update');
+    Route::get('view/{vehicule_id}', [MissionController::class, 'showItineraires'])->name('itineraire.view');
 
 
 

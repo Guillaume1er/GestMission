@@ -92,6 +92,7 @@
                 </thead>
                 <tbody>
                     @foreach ($missions as $mission)
+                    
                         <tr class="odd">
                             <td class="sorting_1">{{ $loop->index + 1 }}</td>
                             <td>{{ $mission->exerciceBudgetaire->exerciceBudgetaire ?? 'Rang non défini' }}</td>
@@ -152,7 +153,8 @@
                                     </span>
                                 </a>
                                 
-                                <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip"
+                                <a class="btn btn-sm btn-icon btn-primary {{ $mission->hasNullDateValidation ? 'disabled' : '' }}" 
+                                   data-bs-toggle="tooltip"
                                     data-bs-placement="top" data-original-title="Deplacement"
                                     aria-label="Déplacement" data-bs-original-title="Deplacement" href="{{ route('show-vehicules', ['mission_id' => $mission->id]) }}">
                                     <span class="btn-inner">

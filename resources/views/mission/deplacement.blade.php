@@ -33,6 +33,18 @@
                         
 
                     </td>
+                    {{-- <td>
+                        @if($itineraireExist) 
+                            <a href="{{ route('mission.itineraire.show', ['mission_id' => $mission->id, 'vehicule_id' => $vehicule->['id']]) }}" class="btn btn-primary">
+                                Itinéraire
+                            </a>
+                        @else
+                            <a href="{{ route('mission.view', ['mission_id' => $mission->id]) }}" class="btn btn-secondary">
+                                Voir Mission
+                            </a>
+                        @endif
+                    </td>
+                     --}}
                 </tr>
                 @endforeach
             </tbody>

@@ -15,7 +15,7 @@ class Itineraire extends Model
         'distance_km',
         'distance_total_km',
         'vehicule_id',
-        'lieumission_id',
+        'lieuMission_id',
         'mission_id',
     ];
 

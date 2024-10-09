@@ -34,8 +34,8 @@
         <form action="{{ route('validateMission', $detailMission->id) }}" method="POST">
             @csrf
 
-            <!-- Nom du Personnel affiché automatiquement -->
-
+            <input type="hidden" name="detailMission_id" value="{{ $mission_id }}">
+            
             <div class="row mb-4">
                 <div class="col-lg-6">
                     <label class="form-label" class="form-label" for="nom_personnel">Nom du Personnel :</label>
@@ -98,6 +98,7 @@
                             @endforeach
                     </select>
                 </div>
+
             </div><br>
 
             <div class="text-end row">

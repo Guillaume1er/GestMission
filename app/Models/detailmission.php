@@ -49,7 +49,7 @@ class Detailmission extends Model
 
 
     public function personnel() {
-        return $this->belongsTo(Personnel::class);
+        return $this->belongsTo(Personnel::class, 'personnel_id');
     }
     
     public function mission() {
@@ -74,4 +74,5 @@ class Detailmission extends Model
     {
         return $this->hasMany(Systeme::class, 'detailmission_id');
     }
+
 }

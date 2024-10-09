@@ -30,6 +30,7 @@
             </div>
         @endif
 
+        {{-- @dd($detailMission_personnel[0]->mission_id); --}}
         <table class="table table-bordered table-sm" id="personnelTable">
             <thead>
                 <tr>
@@ -43,6 +44,7 @@
                     <th style="width: 60%; padding: 0.2rem;">Statut</th>
                 </tr>
             </thead>
+            {{-- @dd($mission->id); --}}
             <tbody>
                 @foreach ($detailMission_personnel as $personnel)
                     <tr>
@@ -55,17 +57,23 @@
                         <td>
                             @if ($personnel->statut === 'validé')
                                 <span class="btn-sm status-btn">Validée</span>
-                            @else
+                            @elseif ($personnel->statut === 'non_validé')
                                 <span class="btn-sm status-btn">Non validé</span>
+                            @else
+                                <span class="btn-sm status-btn">Non traité</span>
                             @endif
-
                         </td>
                         <td>
                             <a class="btn btn-sm btn-icon {{ $personnel->statut == 'validé' ? 'btn-success' : 'btn-danger' }}"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="{{ $personnel->statut == 'validé' ? 'Cliquez pour annuler' : 'Cliquez pour valider' }}"
                                 aria-label=""
-                                href="{{ $personnel->statut === 'validé' ? route('validation-mission-personnel-annuler', $personnel->personnel_id) : route('detail-mission', $personnel->personnel_id) }}">
+                                href="{{ $personnel->statut === 'validé' 
+                                    ? route('validation-mission-personnel-annuler', $personnel->personnel_id) 
+                                    : ($personnel->statut === 'Non traité' 
+                                        ? route('detail-mission', ['id' => $personnel->personnel_id, 'mission_id' => $mission->id]) 
+                                        : route('detail-mission', ['id' => $personnel->personnel_id, 'mission_id' => $mission->id])) }}"
+                            >
 
                                 <span class="btn-inner">
                                     @if ($personnel->statut == 'validé')
