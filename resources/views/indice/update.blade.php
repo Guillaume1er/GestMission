@@ -1,6 +1,16 @@
 @extends('layouts.dashboard_sans_sta')
 
 @section('content')
+<div class="mb-4 mt-4 ms-4">
+    <a href="{{ url()->previous() }}" class="btn btn-primary d-inline-flex align-items-center">
+        <svg class="icon-32 me-2" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        Retour
+    </a>
+</div>
+
     <div class="card-body container">
         <div class="header-title">
             <h4 class="card-title">Modifier l'indice</h4>
@@ -41,14 +51,14 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="montantNuite" class="form-label">Montant nuité</label>
-                        <input type="number" required class="form-control" value="{{ $indice->montantNuite }}" name="montantNuite">
+                        <label for="montantNuite" class="form-label">Montant nuité (F CFA)</label>
+                        <input type="number" required class="form-control" value = "{{ number_format($indice->montantNuite, 0, ',', '') }}" name="montantNuite">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="montantRepas" class="form-label">Montant Repas</label>
-                        <input type="number" required class="form-control" value="{{ $indice->montantRepas }}" name="montantRepas">
+                        <label for="montantRepas" class="form-label">Montant Repas (F CFA)</label>
+                        <input type="number" required class="form-control" value="{{ number_format($indice->montantRepas, 0, ',', '') }}" name="montantRepas">
                     </div>
                 </div>
               

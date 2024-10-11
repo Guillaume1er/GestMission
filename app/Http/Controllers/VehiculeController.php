@@ -44,7 +44,7 @@ class VehiculeController extends Controller
     public function store(Request $request) {
         //   dd($request->all());
         $validated = $request->validate([
-            'plaqueVehicule' => ['required', 'string'],
+            'plaqueVehicule' => ['required', 'string', 'unique:vehicules,plaqueVehicule'],
             'kilometrageDepart' => ['required', 'integer'],
             'responsableVehicule' =>  ['required', 'string'],
             'contactResponsable' =>  ['required', 'integer'],
@@ -52,7 +52,7 @@ class VehiculeController extends Controller
             // 'autorisationSortie' => ['nullable', 'boolean'],
              'dateAutorisation' => ['nullable'],
             // 'dateEnregistrementVehicule' => ['date'],                
-            'immatriculation' =>  ['required', 'string'],
+            'immatriculation' =>  ['required', 'string', 'unique:vehicules,immatriculation'],
             'vehiculePool' => ['nullable' , 'boolean'],
              'motifDesautorisation' => ['nullable' , 'string'],
              'dateDesautorisation' =>  ['nullable'],
@@ -112,7 +112,7 @@ class VehiculeController extends Controller
         // dd($request->all());   
 
         $validated = $request->validate([
-           'plaqueVehicule' => ['required', 'string'],
+           'plaqueVehicule' => ['required', 'string', 'unique:vehicules,plaqueVehicule'],
             'kilometrageDepart' => ['required', 'integer'],
             'responsableVehicule' =>  ['required', 'string'],
             'contactResponsable' =>  ['required', 'string'],

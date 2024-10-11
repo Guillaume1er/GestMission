@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('lieumissions', function (Blueprint $table) {
             $table->id();
-            $table->string('commune');
+            $table->string('commune')->unique();
             $table->string('distance');
             $table->boolean('nuite');
             $table->integer('nombreRepas')->default('1');

@@ -56,10 +56,9 @@ class LieuMissionController extends Controller
         //  dd($request->all());
 
         $validated = $request->validate([
-            'departement_id' => ['required', 'max:255'],
-            'commune' => ['string', 'max:255'],
+            'departement_id' => ['required', 'integer'],
+            'commune' => ['string', 'max:255', 'unique:lieumissions,commune'],
             'distance' => ['integer'],
-            'nombreRepas' => ['integer', 'required'],
         ]);
 
         $lieumission = new Lieumission();
@@ -85,13 +84,13 @@ class LieuMissionController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-
+        
         $validated = $request->validate([
-            'departement_id' => ['required', 'max:255'],
-            'commune' => ['string', 'max:255'],
+            'departement_id' => ['required', 'integer'],
+            'commune' => ['string', 'max:255', 'unique:lieumissions,commune'],
             'distance' => ['integer'],
         ]);
-
+        
         $lieumission = Lieumission::find($id);
 
         if (!$lieumission) {

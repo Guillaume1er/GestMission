@@ -49,7 +49,7 @@ class PersonnelController extends Controller
         // dd($request->all());
         $validated = $request->validate([
             'nomPrenomsPersonnel' => ['required', 'string'],
-            'numeroMatricule' => ['required', 'string'],
+            'numeroMatricule' => ['required', 'string', 'unique:personnels,numeroMatricule'],
             'civilite' =>  ['required', 'string'],
             'contact' =>  ['required', 'string', 'max:12'],
             'email' =>  ['required', 'email'],
@@ -58,8 +58,6 @@ class PersonnelController extends Controller
             'numIfu' => ['nullable ', 'min:13'],
             'rang_id' => ['required', 'exists:rangs,id'],
             'indice_id' =>  ['required', 'exists:indices,id'],
-
-
         ]);
 
         // if ($request->validate->fails()) {
@@ -94,7 +92,7 @@ class PersonnelController extends Controller
 
         $validated = $request->validate([
             'nomPrenomsPersonnel' => ['required', 'string'],
-            'numeroMatricule' => ['required', 'string'],
+            'numeroMatricule' => ['required', 'string', 'unique:personnels,numeroMatricule'],
             'civilite' =>  ['required', 'string'],
             'contact' =>  ['required', 'string', 'max:20'],
             'email' =>  ['required', 'email'],

@@ -40,6 +40,7 @@ class MissionController extends Controller
         return view('mission.add', compact('organisateurs', 'exerciceBudgetaires', 'personnels'));
     }
 
+
     public function consulter(Request $request, $id)
     {
         $organisateurs = Organisateur::all();
@@ -80,77 +81,74 @@ class MissionController extends Controller
 
 
 
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'nomMission' => ['required', 'string'],
-        'objetMission' => ['required', 'string'],
-        'dateMission' =>  ['required', 'date'],
-        'dateDebutMission' =>  ['required', 'date'],
-        'dateFinMission' =>  ['required', 'date'],
-        'observationMission' =>  ['string'],
-        'etatMission' =>  ['string'],
-        'nbrVehicule' =>  ['numeric'],
-        'nbrTotalNuite' =>  ['numeric'],
-        'nbrTotalRepas' =>  ['numeric'],
-        'montantTotalNuite' =>  ['numeric'],
-        'montantTotalRepas' =>  ['numeric'],
-        'montantTotalMission' =>  ['numeric'],
-        'personnel_ids.*' => ['exists:personnels,id'],
-        'exerciceBudgetaire_id' => ['required'],
-        'organisateur_id' => ['required'],
-    ]);
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nomMission' => ['required', 'string'],
+            'objetMission' => ['required', 'string'],
+            'dateMission' =>  ['required', 'date'],
+            'dateDebutMission' =>  ['required', 'date'],
+            'dateFinMission' =>  ['required', 'date', 'after_or_equal:dateDebutMission'],
+            'observationMission' =>  ['string'],
+            'etatMission' =>  ['string'],
+            'nbrVehicule' =>  ['numeric'],
+            'nbrTotalNuite' =>  ['numeric'],
+            'nbrTotalRepas' =>  ['numeric'],
+            'montantTotalNuite' =>  ['numeric'],
+            'montantTotalRepas' =>  ['numeric'],
+            'montantTotalMission' =>  ['numeric'],
+            'personnel_ids.*' => ['exists:personnels,id'],
+            'exerciceBudgetaire_id' => ['required'],
+            'organisateur_id' => ['required'],
+        ]);
 
-    try {
-        // Démarre une transaction
-        DB::beginTransaction();
+        try {
+            // Démarre une transaction
+            DB::beginTransaction();
+    
+            $mission = new Mission();
+            $mission->nomMission = $request->nomMission;
+            $mission->objetMission = $request->objetMission;
+            $mission->dateMission = $request->dateMission;
+            $mission->dateDebutMission = $request->dateDebutMission;
+            $mission->dateFinMission = $request->dateFinMission;
+            $mission->autorisateur1 = $request->autorisateur1;
+            $mission->autorisateur2 = $request->autorisateur2;
+            $mission->autorisateur3 = $request->autorisateur3;
+            $mission->observationMission = $request->observationMission;
+            $mission->etatMission = $request->etatMission;
+            $mission->nbrVehicule = $request->nbrVehicule;
+            $mission->nbrTotalNuite = $request->nbrTotalNuite;
+            $mission->nbrTotalRepas = $request->nbrTotalRepas;
+            $mission->montantTotalNuite = $request->montantTotalNuite;
+            $mission->montantTotalRepas = $request->montantTotalRepas;
+            $mission->montantTotalMission = $request->montantTotalMission;
+            $mission->organisateur_id = $request->organisateur_id;
+            $mission->exerciceBudgetaire_id = $request->exerciceBudgetaire_id;
+            $mission->save();
 
-        $mission = new Mission();
-        $mission->nomMission = $request->nomMission;
-        $mission->objetMission = $request->objetMission;
-        $mission->dateMission = $request->dateMission;
-        $mission->dateDebutMission = $request->dateDebutMission;
-        $mission->dateFinMission = $request->dateFinMission;
-        $mission->autorisateur1 = $request->autorisateur1;
-        $mission->autorisateur2 = $request->autorisateur2;
-        $mission->autorisateur3 = $request->autorisateur3;
-        $mission->observationMission = $request->observationMission;
-        $mission->etatMission = $request->etatMission;
-        $mission->nbrVehicule = $request->nbrVehicule;
-        $mission->nbrTotalNuite = $request->nbrTotalNuite;
-        $mission->nbrTotalRepas = $request->nbrTotalRepas;
-        $mission->montantTotalNuite = $request->montantTotalNuite;
-        $mission->montantTotalRepas = $request->montantTotalRepas;
-        $mission->montantTotalMission = $request->montantTotalMission;
-        $mission->organisateur_id = $request->organisateur_id;
-        $mission->exerciceBudgetaire_id = $request->exerciceBudgetaire_id;
-        $mission->save();
+            // Enregistrement des personnels associés à la mission
+            $personnelIds = $request->input('personnel_ids', []);
 
-        // Enregistrement des personnels associés à la mission
-        $personnelIds = $request->input('personnel_ids', []);
+            foreach ($personnelIds as $personnelId) {
+                $detailMission = new Detailmission();
+                $detailMission->mission_id = $mission->id;
+                $detailMission->personnel_id = $personnelId;
+                $detailMission->save(); // Enregistre chaque détail de la mission
+            }
 
-        foreach ($personnelIds as $personnelId) {
-            $detailMission = new Detailmission();
-            $detailMission->mission_id = $mission->id;
-            $detailMission->personnel_id = $personnelId;
-            $detailMission->save(); // Enregistre chaque détail de la mission
+            // Si tout se passe bien, valide la transaction
+            DB::commit();
+
+            return redirect()->route('missions')->with('success', 'Mission créée avec succès');
+        } catch (\Exception $e) {
+            // En cas d'erreur, annule la transaction
+            DB::rollBack();
+
+            // Retourne une erreur avec le message approprié
+            return redirect()->back()->withErrors('Une erreur est survenue lors de la création de la mission !!! Veuillez réessayer.');
         }
-
-        // Si tout se passe bien, valide la transaction
-        DB::commit();
-
-        return redirect()->route('missions')->with('success', 'Mission créée avec succès');
-    } catch (\Exception $e) {
-        // En cas d'erreur, annule la transaction
-        DB::rollBack();
-
-        // Retourne une erreur avec le message approprié
-        return redirect()->back()->withErrors('Une erreur est survenue lors de la création de la mission !!! Veuillez réessayer.');
     }
-}
-
-
-
 
 
     public function update(Request $request, $id)
@@ -162,7 +160,7 @@ public function store(Request $request)
             'objetMission' => ['required', 'string'],
             'dateMission' =>  ['required', 'date'],
             'dateDebutMission' =>  ['required', 'date'],
-            'dateFinMission' =>  ['required', 'date'],
+            'dateFinMission' =>  ['required', 'date', 'after_or_equal:dateDebutMission'],
             // 'imputation' => ['required', 'string'],
             // 'previsionBBudgetaire' => ['required', 'number'],
             'observationMission' =>  ['string'],
@@ -245,7 +243,6 @@ public function store(Request $request)
         return redirect()->route('missions')
             ->with('success', 'Mission modifiée avec succès.');
     }
-
 
 
     public function delete($id)
@@ -331,14 +328,14 @@ public function store(Request $request)
         // dd($detailMission);
 
 
-        $vehicules = Vehicule::all();
+        $vehicules = Vehicule::where('autorisationSortie', '!=', 0)->get();
 
         return view('mission.detail', compact('detailMission', 'vehicules', 'lieux_mission', 'mission_id'));
     }
 
 
     public function validateMission(Request $request, $id) {
-
+        dd($request->all());
         $personnel = Personnel::findOrFail($id);
 
         $mission_id = $request->detailMission_id;

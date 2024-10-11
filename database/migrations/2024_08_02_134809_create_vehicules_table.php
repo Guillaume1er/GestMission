@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('autorisationSortie')->default(false);
             $table->date('dateAutorisation')->nullable();
             $table->timestamp('dateEnregistrementVehicule')->nullable();
-            $table->string('immatriculation'); 
+            $table->string('immatriculation')->unique();
             $table->boolean('vehiculePool') ->default(false);
             $table->longText('motifDesautorisation')->nullable();
             $table->date('dateDesautorisation')->nullable();

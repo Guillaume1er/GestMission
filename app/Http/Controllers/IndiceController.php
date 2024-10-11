@@ -35,7 +35,7 @@ class IndiceController extends Controller
         // dd($request->all());
 
         $validated = $request->validate([
-            'code' => ['required', 'max:255'],
+            'code' => ['required', 'max:255', 'unique:indices,code'],
             'montantNuite' => ['numeric' ],
             'montantRepas' => ['numeric'],
         ]);
@@ -58,7 +58,7 @@ class IndiceController extends Controller
         //dd($request->all());
 
         $validated = $request->validate([
-            'code' => ['required', 'max:255'],
+            'code' => ['required', 'max:255', 'unique:indices,code'],
             'montantNuite' => ['numeric', ],
             'montantRepas' => ['numeric'],
         ]);
