@@ -39,7 +39,7 @@
             </div>
         @endif
 
-        @dd($detailMission);
+        {{-- @dd($detailMission); --}}
         
         <form action="{{ route('validateMission', $detailMission->id) }}" method="POST">
             @csrf

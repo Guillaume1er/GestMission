@@ -335,22 +335,19 @@ class MissionController extends Controller
 
 
     public function validateMission(Request $request, $id) {
-        dd($request->all());
-        $personnel = Personnel::findOrFail($id);
+        // dd($request->all());
 
         $mission_id = $request->detailMission_id;
 
-        // Récupère le premier détail de mission correspondant à ce personnel
-        $detailMission = $personnel->missions()->first();
-        $detailMission_id = $detailMission->id;
-
-        $personnel = Personnel::findOrFail($id);
-
         // Récupère directement le premier détail de mission correspondant au personnel
-        $detailMission = $personnel->missions()->where('personnel_id', $id)
+        $detailMission = Detailmission::where('personnel_id', $id)->firstOrFail()
                                                 ->where('mission_id', $mission_id)
-                                                ->firstOrFail();  
-        // dd($detailMission);
+                                                ->firstOrFail();
+
+        // $detailMission = $personnel->missions()->where('personnel_id', $id)
+        //                                         ->where('mission_id', $mission_id)
+        //                                         ->firstOrFail();  
+        // dd($mission_id);
         
             // Règles de validation variables en fonction de l'action
         if ($request->action === 'invalidate') {
@@ -387,6 +384,7 @@ class MissionController extends Controller
             $detailMission->moyenDeDeplacement = $request->moyenDeDeplacement;
             $detailMission->vehicule_id = $request->vehicule_id;
             $detailMission->lieuMission_id = $request->lieuMission_id;
+            $detailMission->dateValidation = now();
             $detailMission->statut = 'validé';
 
             // Calculs associés aux jours, nuits, repas, etc.
@@ -413,7 +411,6 @@ class MissionController extends Controller
 
     return redirect()->route('validation-mission', $mission_id)->with('success', $message);
 }
-
 
 
     public function showValidatedDetails($id)

@@ -65,11 +65,11 @@
                         <td>{{ $personnel->lieuMission->commune ?? '' }}</td>
                         <td>
                             @if ($personnel->statut === 'validé')
-                                <span class="btn-sm status-btn">Validée</span>
-                            @elseif ($personnel->statut === 'non_validé')
-                                <span class="btn-sm status-btn">Non validé</span>
+                                <p class="h5"><span class="badge bg-success">Validé</span></p>
+                            @elseif ($personnel->statut === 'non validé')
+                                <p class="h5"><span class="badge bg-danger">Non validé</span></p>
                             @else
-                                <span class="btn-sm status-btn">Non traité</span>
+                                <p class="h5"><span class="badge bg-primary">Non traité</span></p>
                             @endif
                         </td>
                         <td>
